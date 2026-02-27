@@ -59,6 +59,90 @@
         }
         .tldr ul { margin-left: 20px; }
         .tldr li { color: #d1d5db; }
+
+        /* ─── Flowchart ─── */
+        .flowchart {
+            margin: 28px 0 32px;
+        }
+        .flow-step {
+            display: flex;
+            gap: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            background: var(--bg-primary);
+            position: relative;
+        }
+        .flow-step.flow-you {
+            border-left: 4px solid var(--accent);
+            background: var(--accent-bg);
+        }
+        .flow-step.flow-automated {
+            border-left: 4px solid var(--green);
+            background: var(--green-bg);
+        }
+        .flow-number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.3em;
+            color: var(--text-tertiary);
+            min-width: 32px;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .flow-content {
+            flex: 1;
+        }
+        .flow-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+        .flow-you .flow-label { color: var(--accent); }
+        .flow-automated .flow-label { color: var(--green); }
+        .flow-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.0em;
+            margin-bottom: 8px;
+        }
+        .flow-desc {
+            font-size: 0.92em;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        .flow-desc a { color: var(--accent); }
+        .flow-arrow {
+            display: flex;
+            justify-content: center;
+            padding: 6px 0;
+        }
+        .flow-arrow::after {
+            content: '\2193';
+            font-size: 1.3em;
+            color: var(--text-tertiary);
+        }
+        .flow-substeps {
+            margin: 12px 0 8px 20px;
+        }
+        .flow-substeps li {
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            line-height: 1.65;
+        }
+        .review-template {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 12px 0 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88em;
+            line-height: 1.8;
+        }
     </style>
 </head>
 <body>
@@ -147,16 +231,140 @@
 
     <p>That's it. No admin, no typesetting, no chasing authors. GitHub handles the workflow. AI handles the initial checks.</p>
 
-    <h2>How It Works</h2>
+    <h2>How It Works — The Full Review Process</h2>
+
+    <p>Below is the complete journey of a paper, from submission to publication. As an editor, you only need to worry about <strong>Steps 4–7</strong> — everything before that is automated or handled by the author. But we're showing you the whole picture so you understand the context.</p>
+
+    <!-- ─── Visual Flowchart ─── -->
+    <div class="flowchart">
+        <div class="flow-step flow-automated">
+            <div class="flow-number">1</div>
+            <div class="flow-content">
+                <div class="flow-label">Author</div>
+                <div class="flow-title">Author Submits a Paper</div>
+                <div class="flow-desc">The author creates a GitHub repository with their paper, code, data, and a process log. They then open a submission issue on our <a href="https://github.com/ai-driven-energy-research/submissions/issues/new/choose">submissions page</a>.</div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-automated">
+            <div class="flow-number">2</div>
+            <div class="flow-content">
+                <div class="flow-label">Automated</div>
+                <div class="flow-title">Reproducibility Check (CI)</div>
+                <div class="flow-desc">An automated pipeline clones the author's repo, installs dependencies, and runs their code. It checks: Does the code run? Does it produce the claimed results? This happens automatically — you don't need to do anything.</div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-automated">
+            <div class="flow-number">3</div>
+            <div class="flow-content">
+                <div class="flow-label">Automated</div>
+                <div class="flow-title">AI Reviewer Agent</div>
+                <div class="flow-desc">An AI agent reads the paper and generates a preliminary review — checking structure, methodology, and flagging potential issues. This report will be posted as a comment on the submission issue for you to read.</div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">4</div>
+            <div class="flow-content">
+                <div class="flow-label">You</div>
+                <div class="flow-title">You Get Notified</div>
+                <div class="flow-desc">The editor-in-chief assigns you to review a paper. You'll receive a GitHub notification email with a link to the submission issue. The issue page contains: the paper link, the author's repo, the CI results, and the AI review.</div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">5</div>
+            <div class="flow-content">
+                <div class="flow-label">You</div>
+                <div class="flow-title">Read the Paper &amp; Review Materials</div>
+                <div class="flow-desc">
+                    Here's what to do, step by step:
+                    <ol class="flow-substeps">
+                        <li><strong>Open the submission issue</strong> — click the link in the email you received. This is a page on GitHub that looks like a forum thread.</li>
+                        <li><strong>Read the AI review</strong> — scroll down to the comments. The AI agent will have posted its assessment. This gives you a head start — it highlights strengths, weaknesses, and things to look out for.</li>
+                        <li><strong>Check the CI results</strong> — near the top of the issue, you'll see a green checkmark (code ran successfully) or a red X (code failed). If it's a red X, the paper already has a reproducibility problem.</li>
+                        <li><strong>Read the paper</strong> — the submission issue contains a link to the author's repository. Go there and open the PDF in the <code>paper/</code> folder. Read it like you would any journal paper.</li>
+                        <li><strong>Browse the code and data</strong> — look through the <code>code/</code> and <code>data/</code> folders. You don't need to understand every line, but check that it looks reasonable and matches what the paper claims.</li>
+                        <li><strong>Check the process log</strong> — open the <code>process-log/</code> folder. This documents how the research was done, including any AI tools used. Is it detailed enough that someone could follow the same path?</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">6</div>
+            <div class="flow-content">
+                <div class="flow-label">You</div>
+                <div class="flow-title">Try Running the Code (Optional but Encouraged)</div>
+                <div class="flow-desc">
+                    The CI already ran the code automatically, but if you want to verify it yourself:
+                    <ol class="flow-substeps">
+                        <li>Open a terminal on your computer</li>
+                        <li>Type: <code>git clone &lt;repo-url&gt;</code> (copy the URL from the author's GitHub page — click the green "Code" button)</li>
+                        <li>Follow the instructions in <code>code/README.md</code> to install dependencies</li>
+                        <li>Run: <code>bash results/reproduce.sh</code></li>
+                        <li>Check if the generated figures match the ones in the paper</li>
+                    </ol>
+                    <em>New to Git?</em> Don't worry — you can also just browse the code on GitHub in your web browser without cloning anything. The CI results already tell you whether the code runs.
+                </div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">7</div>
+            <div class="flow-content">
+                <div class="flow-label">You</div>
+                <div class="flow-title">Post Your Review</div>
+                <div class="flow-desc">
+                    Go back to the submission issue on GitHub and write a comment with your review. Use this structure:
+                    <div class="review-template">
+                        <strong>## Review — [Your Name]</strong><br><br>
+                        <strong>### Summary</strong><br>
+                        2-3 sentences: what is this paper about, and what's your overall impression?<br><br>
+                        <strong>### Research Quality</strong><br>
+                        - Is the contribution novel?<br>
+                        - Is the methodology sound?<br>
+                        - Do the results support the claims?<br>
+                        - Is it well-written?<br><br>
+                        <strong>### Reproducibility</strong><br>
+                        - Did the CI pass? (green checkmark = yes)<br>
+                        - If you ran the code yourself, did it work?<br>
+                        - Do the outputs match the paper?<br><br>
+                        <strong>### Process Log</strong><br>
+                        Is the research process well-documented?<br><br>
+                        <strong>### Recommendation</strong><br>
+                        Pick one: <strong>Accept</strong> / <strong>Minor revision</strong> / <strong>Major revision</strong> / <strong>Reject</strong><br><br>
+                        <strong>### AI Disclosure</strong><br>
+                        Did you use any AI tools to help with this review? If so, which ones?
+                    </div>
+                    That's it — just a comment on the issue. No forms, no separate system, no login to a review portal.
+                </div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-automated">
+            <div class="flow-number">8</div>
+            <div class="flow-content">
+                <div class="flow-label">Editor-in-Chief</div>
+                <div class="flow-title">Decision &amp; Publication</div>
+                <div class="flow-desc">The editor-in-chief reads all reviews and makes a final decision. If accepted, the paper is archived in the <a href="https://github.com/ai-driven-energy-research">AIDER GitHub organisation</a> and assigned a DOI via Zenodo. The paper is now permanently published and citable.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─── New to GitHub? ─── -->
+    <h2>New to GitHub?</h2>
+
+    <p>You don't need to be a GitHub expert. Here's the minimum you need:</p>
 
     <ol>
-        <li>Author creates a GitHub repo from our <a href="https://github.com/ai-driven-energy-research/paper-template">template</a> (paper + code + data + process log)</li>
-        <li>Author opens a <a href="https://github.com/ai-driven-energy-research/submissions/issues/new/choose">submission issue</a></li>
-        <li>Automated CI verifies the code runs and structure is complete</li>
-        <li>AI reviewer agent produces an initial assessment</li>
-        <li>Human reviewers evaluate and make the final call</li>
-        <li>Accepted paper is archived in the <a href="https://github.com/ai-driven-energy-research">AIDER org</a> with a Zenodo DOI</li>
+        <li><strong>Create a free account</strong> at <a href="https://github.com/signup">github.com/signup</a> — use your academic email</li>
+        <li><strong>Tell us your username</strong> so we can add you to the <a href="https://github.com/ai-driven-energy-research">AIDER organisation</a> — this lets you get assigned to reviews</li>
+        <li><strong>Turn on email notifications</strong> — go to <a href="https://github.com/settings/notifications">Settings &rarr; Notifications</a> and make sure "Email" is checked. This is how you'll know when a paper is assigned to you.</li>
     </ol>
+
+    <p>That's all the setup. When it's time to review, everything happens on a single GitHub page (the submission issue). You read, you comment — same as leaving a reply on any website.</p>
 
     <div class="tldr">
         <h3>TL;DR</h3>
