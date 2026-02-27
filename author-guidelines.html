@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Guidelines — AIDER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">
+    <div class="header-inner">
+        <div class="header-label">AIDER</div>
+        <h1>Author Guidelines</h1>
+        <p class="subtitle">Everything you need to prepare and submit your research to AI-Driven Energy Research.</p>
+    </div>
+</div>
+
+<div class="nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#principles">Principles</a>
+    <a href="index.html#scope">Scope</a>
+    <a href="author-guidelines.html" class="highlight">Author Guidelines</a>
+    <a href="reviewer-guidelines.html">Reviewer Guidelines</a>
+    <a href="ethics.html">Ethics</a>
+</div>
+
+<div class="section">
+    <div class="container">
+
+        <h2>Overview</h2>
+        <p class="section-lead">AIDER accepts original research at the intersection of artificial intelligence and energy systems. Every submission must be a complete, executable research package.</p>
+
+        <h2>Manuscript Preparation</h2>
+
+        <h3>Format</h3>
+        <p>Manuscripts must be submitted as source files (LaTeX or Markdown), not compiled PDFs. Place all manuscript files in the <code>paper/</code> directory of your repository. There is no strict page limit, but clarity and conciseness are expected.</p>
+
+        <h3>Structure</h3>
+        <p>Papers should follow standard academic structure: Abstract, Introduction, Methodology, Results, Discussion, Conclusion, References. Variations are acceptable where the research warrants it.</p>
+
+        <h3>Language</h3>
+        <p>All submissions must be in English. AI-assisted writing is permitted and must be disclosed in the process log.</p>
+
+        <h2>Repository Requirements</h2>
+
+        <p>Start by creating a repository from the <a href="https://github.com/ai-driven-energy-research/paper-template">AIDER paper template</a>. Your repository must contain:</p>
+
+        <h3>Code (<code>code/</code>)</h3>
+        <ul>
+            <li>All source code required to reproduce every result in the paper</li>
+            <li>A <code>README.md</code> with clear setup and execution instructions</li>
+            <li>Dependency management via <code>requirements.txt</code>, <code>environment.yml</code>, <code>pyproject.toml</code>, or <code>Dockerfile</code></li>
+            <li>Code must execute without errors on a clean environment</li>
+        </ul>
+
+        <h3>Data (<code>data/</code>)</h3>
+        <ul>
+            <li>All data necessary to reproduce results</li>
+            <li>If data exceeds GitHub's file size limits, host on Zenodo or HuggingFace Datasets with a persistent DOI</li>
+            <li>A <code>README.md</code> describing data format, source, collection method, and license</li>
+            <li>Synthetic or generated data must include the generation script</li>
+        </ul>
+
+        <h3>Process Log (<code>process-log/</code>)</h3>
+        <p>This is what makes AIDER unique. You must document how the paper was produced:</p>
+        <ul>
+            <li><strong>AI sessions</strong> (<code>process-log/ai-sessions/</code>): Full transcripts or logs of any AI agent sessions used during research — including prompts, outputs, and tool use. Accepted formats: text logs, JSON exports, JSONL conversation dumps, or screenshots with descriptions</li>
+            <li><strong>Human decisions</strong> (<code>process-log/human-decisions/</code>): A timestamped log of significant human decisions — parameter choices, methodology pivots, manual corrections, data cleaning decisions. Can be a simple Markdown file with dated entries</li>
+            <li><strong>Overview</strong> (<code>process-log/README.md</code>): A narrative summary of the research workflow — which stages used AI, which were manual, and how human and AI contributions interacted</li>
+        </ul>
+
+        <h3>Reproducibility Script (<code>results/reproduce.sh</code>)</h3>
+        <ul>
+            <li>A single script that regenerates all key figures and tables from the paper</li>
+            <li>Must exit with code 0 on success</li>
+            <li>Random seeds must be fixed for deterministic output</li>
+            <li>Execution time should be documented in the script header (the CI allows up to 60 minutes)</li>
+        </ul>
+
+        <h3>Reproducibility Checklist (<code>REPRODUCIBILITY.md</code>)</h3>
+        <p>Complete every item in the provided checklist before submitting. Incomplete checklists will result in desk rejection.</p>
+
+        <h2>AI Disclosure</h2>
+
+        <p>AIDER encourages the use of AI tools throughout the research process. All AI use must be documented:</p>
+        <ul>
+            <li>Name and version of each AI tool used (e.g., Claude 3.5 Sonnet, GPT-4, GitHub Copilot)</li>
+            <li>How each tool was used (writing, coding, analysis, literature review, etc.)</li>
+            <li>Session logs in <code>process-log/ai-sessions/</code></li>
+        </ul>
+        <p>Failure to disclose AI use when evidence of it is found during review will result in rejection.</p>
+
+        <h2>Licensing</h2>
+        <ul>
+            <li><strong>Paper:</strong> CC-BY 4.0 — authors retain copyright, anyone may reuse with attribution</li>
+            <li><strong>Code:</strong> MIT or Apache 2.0 (author's choice)</li>
+            <li><strong>Data:</strong> CC0 (public domain) or CC-BY 4.0</li>
+        </ul>
+
+        <h2>How to Submit</h2>
+        <ol>
+            <li>Create your repository from the <a href="https://github.com/ai-driven-energy-research/paper-template">paper template</a></li>
+            <li>Populate all required directories and complete the reproducibility checklist</li>
+            <li>Open a <a href="https://github.com/ai-driven-energy-research/submissions/issues/new/choose">submission issue</a></li>
+            <li>Fill in the submission form with your repository link and details</li>
+            <li>The automated reproducibility pipeline will run within minutes</li>
+            <li>An editor will assign reviewers once the automated check passes</li>
+        </ol>
+
+        <h2>After Submission</h2>
+        <ul>
+            <li><strong>Automated check:</strong> The CI pipeline verifies repository structure, installs dependencies, and runs <code>reproduce.sh</code>. If this fails, you will be asked to fix issues before human review begins.</li>
+            <li><strong>Review:</strong> Two reviewers (AI-assisted + human editor) will assess methodology and reproducibility. Reviews are posted publicly on your repository.</li>
+            <li><strong>Revision:</strong> If revisions are requested, update your repository and comment on the submission issue. There is no limit on revision rounds.</li>
+            <li><strong>Acceptance:</strong> Your repository is forked into the AIDER GitHub organisation and assigned a Zenodo DOI.</li>
+        </ul>
+
+    </div>
+</div>
+
+<div class="footer">
+    <p>AIDER — AI-Driven Energy Research &copy; 2026. All content CC-BY 4.0.</p>
+    <p style="margin-top:8px;">
+        <a href="https://github.com/ai-driven-energy-research">GitHub</a>
+        <a href="mailto:jianou.jiang@eng.ox.ac.uk">Contact</a>
+    </p>
+</div>
+
+</body>
+</html>
