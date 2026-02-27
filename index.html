@@ -4,308 +4,680 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AIDER — AI-Driven Energy Research</title>
+    <meta name="description" content="AI-Driven Energy Research (AIDER) is a diamond open-access journal requiring full code, data, and research process transparency for every publication.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fb;
+            --bg-dark: #0a0f1a;
+            --bg-dark-secondary: #111827;
+            --text-primary: #111827;
+            --text-secondary: #4b5563;
+            --text-tertiary: #6b7280;
+            --accent: #2563eb;
+            --accent-light: #3b82f6;
+            --accent-bg: #eff6ff;
+            --border: #e5e7eb;
+            --border-light: #f3f4f6;
+            --green: #059669;
+            --green-bg: #ecfdf5;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            color: #1a1a1a;
-            background: #fafafa;
-            line-height: 1.7;
+            font-family: 'Source Serif 4', 'Georgia', serif;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            line-height: 1.75;
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
         }
+
+        /* ─── Header ─── */
         .header {
-            background: #0d1117;
-            color: #f0f0f0;
-            padding: 60px 20px;
+            background: var(--bg-dark);
+            color: #f9fafb;
+            padding: 80px 24px 70px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .header h1 {
-            font-size: 2.4em;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            margin-bottom: 10px;
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.12) 0%, transparent 70%);
+            pointer-events: none;
         }
-        .header h1 span { color: #58a6ff; }
-        .header .tagline {
-            font-size: 1.1em;
-            color: #8b949e;
-            font-style: italic;
-            max-width: 600px;
+        .header-inner {
+            position: relative;
+            max-width: 700px;
             margin: 0 auto;
         }
+        .header-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent-light);
+            margin-bottom: 16px;
+        }
+        .header h1 {
+            font-family: 'Source Serif 4', serif;
+            font-size: 2.8em;
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+        }
+        .header .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05em;
+            font-weight: 300;
+            color: #9ca3af;
+            line-height: 1.7;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        /* ─── Nav ─── */
         .nav {
-            background: #161b22;
-            padding: 12px 20px;
+            background: var(--bg-dark-secondary);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            padding: 14px 24px;
             text-align: center;
             position: sticky;
             top: 0;
             z-index: 100;
+            backdrop-filter: blur(12px);
         }
         .nav a {
-            color: #8b949e;
+            font-family: 'Inter', sans-serif;
+            color: #9ca3af;
             text-decoration: none;
-            margin: 0 18px;
-            font-size: 0.95em;
-            font-family: -apple-system, 'Segoe UI', sans-serif;
+            margin: 0 16px;
+            font-size: 0.82em;
+            font-weight: 500;
+            letter-spacing: 0.02em;
             transition: color 0.2s;
         }
-        .nav a:hover { color: #58a6ff; }
+        .nav a:hover { color: #ffffff; }
+        .nav a.highlight { color: var(--accent-light); }
+
+        /* ─── Layout ─── */
         .container {
-            max-width: 800px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 0 24px;
         }
+        .section { padding: 64px 0; }
+        .section + .section { border-top: 1px solid var(--border); }
+        .section-alt { background: var(--bg-secondary); }
+
+        /* ─── Typography ─── */
         h2 {
-            font-size: 1.6em;
-            font-weight: 400;
-            margin: 50px 0 20px 0;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #d0d7de;
+            font-family: 'Source Serif 4', serif;
+            font-size: 1.75em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            line-height: 1.3;
+        }
+        .section-lead {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.92em;
+            color: var(--text-tertiary);
+            margin-bottom: 32px;
+            line-height: 1.6;
         }
         h3 {
-            font-size: 1.2em;
+            font-family: 'Inter', sans-serif;
+            font-size: 1.0em;
             font-weight: 600;
-            margin: 30px 0 12px 0;
-            font-family: -apple-system, 'Segoe UI', sans-serif;
+            margin: 36px 0 12px 0;
+            color: var(--text-primary);
         }
         p { margin-bottom: 16px; }
-        .manifesto-item {
-            background: #f6f8fa;
-            border-left: 3px solid #58a6ff;
-            padding: 16px 20px;
-            margin: 16px 0;
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        /* ─── Principle cards ─── */
+        .principle {
+            display: flex;
+            gap: 16px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-light);
         }
-        .manifesto-item strong {
+        .principle:last-child { border-bottom: none; }
+        .principle-number {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            font-weight: 700;
+            color: var(--accent);
+            background: var(--accent-bg);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .principle-text strong {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
             display: block;
-            font-family: -apple-system, 'Segoe UI', sans-serif;
             margin-bottom: 4px;
         }
-        .manifesto-item em { color: #57606a; }
-        ul { margin: 12px 0 12px 24px; }
-        li { margin-bottom: 8px; }
-        .cta {
-            background: #0d1117;
-            color: #f0f0f0;
-            padding: 40px 20px;
-            text-align: center;
-            margin-top: 60px;
+        .principle-text span {
+            font-size: 0.92em;
+            color: var(--text-secondary);
         }
-        .cta a {
-            display: inline-block;
-            background: #238636;
-            color: white;
-            padding: 12px 32px;
-            text-decoration: none;
-            border-radius: 6px;
-            font-family: -apple-system, 'Segoe UI', sans-serif;
-            font-size: 1em;
-            margin-top: 16px;
-            transition: background 0.2s;
-        }
-        .cta a:hover { background: #2ea043; }
+
+        /* ─── Scope grid ─── */
         .scope-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 16px 0;
+            gap: 10px;
+            margin-top: 24px;
         }
         .scope-item {
-            background: #f6f8fa;
-            padding: 12px 16px;
-            border-radius: 6px;
-            font-family: -apple-system, 'Segoe UI', sans-serif;
-            font-size: 0.95em;
-        }
-        .process-diagram {
-            background: #f6f8fa;
-            border: 1px solid #d0d7de;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88em;
+            font-weight: 400;
+            color: var(--text-secondary);
+            padding: 14px 18px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 20px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            line-height: 2;
-            text-align: center;
-            margin: 20px 0;
         }
+
+        /* ─── Requirement list ─── */
+        .req-list { list-style: none; margin: 0; padding: 0; }
+        .req-list li {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .req-list li:last-child { border-bottom: none; }
+        .req-tag {
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent);
+            background: var(--accent-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            margin-top: 1px;
+        }
+        .req-tag.required {
+            color: #b45309;
+            background: #fffbeb;
+        }
+
+        /* ─── Pipeline ─── */
+        .pipeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin: 28px 0;
+        }
+        .pipeline-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
+        }
+        .pipeline-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            width: 28px;
+        }
+        .pipeline-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            flex-shrink: 0;
+        }
+        .pipeline-line {
+            width: 2px;
+            flex-grow: 1;
+            background: var(--border);
+            min-height: 20px;
+        }
+        .pipeline-step:last-child .pipeline-line { display: none; }
+        .pipeline-content {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            padding-top: 0;
+        }
+        .pipeline-content strong { font-weight: 600; display: block; margin-bottom: 2px; }
+        .pipeline-content span { color: var(--text-secondary); font-size: 0.92em; }
+
+        /* ─── Automated review ─── */
+        .auto-review-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin: 28px 0;
+        }
+        .auto-review-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .auto-review-card .icon {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            background: var(--accent-bg);
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        .auto-review-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .auto-review-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82em;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* ─── Board ─── */
         .board-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin: 20px 0;
+            margin-top: 24px;
         }
         .board-member {
-            background: #f6f8fa;
-            padding: 16px;
-            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-primary);
         }
         .board-member .name {
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-family: -apple-system, 'Segoe UI', sans-serif;
+            font-size: 0.95em;
+            margin-bottom: 4px;
         }
-        .board-member .role { color: #57606a; font-size: 0.9em; }
+        .board-member .affiliation {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82em;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .board-member .board-role {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--green);
+            margin-bottom: 8px;
+        }
+
+        /* ─── Papers ─── */
+        .papers-empty {
+            text-align: center;
+            padding: 48px 24px;
+            border: 1px dashed var(--border);
+            border-radius: 10px;
+            margin-top: 24px;
+        }
+        .papers-empty p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9em;
+            color: var(--text-tertiary);
+            margin: 0;
+        }
+
+        /* ─── CTA ─── */
+        .cta {
+            background: var(--bg-dark);
+            color: #f9fafb;
+            padding: 64px 24px;
+            text-align: center;
+        }
+        .cta h2 {
+            color: #f9fafb;
+            margin-bottom: 12px;
+            font-size: 1.5em;
+        }
+        .cta p {
+            font-family: 'Inter', sans-serif;
+            color: #9ca3af;
+            font-size: 0.95em;
+            margin-bottom: 24px;
+        }
+        .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn {
+            font-family: 'Inter', sans-serif;
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-size: 0.9em;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #ffffff;
+        }
+        .btn-primary:hover { background: #1d4ed8; text-decoration: none; }
+        .btn-secondary {
+            background: rgba(255,255,255,0.08);
+            color: #d1d5db;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .btn-secondary:hover { background: rgba(255,255,255,0.14); text-decoration: none; }
+
+        /* ─── Footer ─── */
         .footer {
             text-align: center;
-            padding: 30px 20px;
-            color: #57606a;
-            font-size: 0.9em;
-            border-top: 1px solid #d0d7de;
+            padding: 32px 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8em;
+            color: var(--text-tertiary);
+            border-top: 1px solid var(--border);
         }
-        code {
-            background: #eff1f3;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-size: 0.9em;
-        }
-        @media (max-width: 600px) {
-            .scope-grid, .board-grid { grid-template-columns: 1fr; }
-            .header h1 { font-size: 1.8em; }
+        .footer a { color: var(--text-tertiary); margin: 0 8px; }
+        .footer a:hover { color: var(--text-primary); }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 640px) {
+            .header h1 { font-size: 2em; }
+            .scope-grid { grid-template-columns: 1fr; }
+            .auto-review-grid { grid-template-columns: 1fr; }
+            .board-grid { grid-template-columns: 1fr; }
+            .nav a { margin: 0 8px; font-size: 0.75em; }
+            body { font-size: 16px; }
         }
     </style>
 </head>
 <body>
 
+<!-- ─── Header ─── -->
 <div class="header">
-    <h1><span>AIDER</span> — AI-Driven Energy Research</h1>
-    <p class="tagline">An open-access, open-source, open-process journal. No paywalls. No fees. Every paper is reproducible and immediately usable.</p>
+    <div class="header-inner">
+        <div class="header-label">Diamond Open Access</div>
+        <h1>AI-Driven Energy Research</h1>
+        <p class="subtitle">A peer-reviewed journal where every paper ships with executable code, open data, and a full record of the research process — including AI.</p>
+    </div>
 </div>
 
 <div class="nav">
-    <a href="#manifesto">Manifesto</a>
+    <a href="#principles">Principles</a>
     <a href="#scope">Scope</a>
-    <a href="#submit">Submit</a>
+    <a href="#requirements">Requirements</a>
     <a href="#review">Review</a>
     <a href="#papers">Papers</a>
     <a href="#board">Board</a>
-    <a href="join.html" style="color:#58a6ff;">Join Us</a>
+    <a href="join.html" class="highlight">Join</a>
 </div>
 
-<div class="container">
+<!-- ─── Principles ─── -->
+<div class="section">
+    <div class="container">
+        <h2 id="principles">Founding Principles</h2>
+        <p class="section-lead">AIDER is built on five commitments that define every aspect of the journal.</p>
 
-    <h2 id="manifesto">The AIDER Manifesto</h2>
-
-    <p>Academic publishing is broken. Papers sit behind paywalls. Results cannot be reproduced. Code is never shared. The process of research is hidden. AIDER exists to fix this.</p>
-
-    <div class="manifesto-item">
-        <strong>"Open process, not just open access."</strong>
-        <em>We don't just share the paper. We share how it was made — every AI session, every human decision, every iteration.</em>
-    </div>
-
-    <div class="manifesto-item">
-        <strong>"AI is a collaborator, not a secret."</strong>
-        <em>Using AI to write, code, or analyse is encouraged and must be disclosed. There is no shame in working with AI — it is the future of research.</em>
-    </div>
-
-    <div class="manifesto-item">
-        <strong>"If it can't be reproduced, it doesn't count."</strong>
-        <em>Code must run. Data must be available. Results must match. This is not optional.</em>
-    </div>
-
-    <div class="manifesto-item">
-        <strong>"A paper should be a living product."</strong>
-        <em>Published papers live on GitHub. They can be forked, improved, and extended by anyone.</em>
-    </div>
-
-    <div class="manifesto-item">
-        <strong>"Free as in freedom, free as in beer."</strong>
-        <em>No paywalls. No author charges. No money changes hands. Ever. Science belongs to everyone.</em>
-    </div>
-
-    <h2 id="scope">Scope</h2>
-
-    <p>AIDER publishes research at the intersection of artificial intelligence and energy systems. We welcome work that uses AI as a core methodological tool — not just a keyword.</p>
-
-    <div class="scope-grid">
-        <div class="scope-item">Machine learning for CFD</div>
-        <div class="scope-item">AI-driven grid optimisation</div>
-        <div class="scope-item">Reinforcement learning for energy control</div>
-        <div class="scope-item">Generative models for materials discovery</div>
-        <div class="scope-item">LLM-assisted research workflows</div>
-        <div class="scope-item">Autonomous energy system design</div>
-        <div class="scope-item">Physics-informed neural networks</div>
-        <div class="scope-item">AI for renewable energy forecasting</div>
-    </div>
-
-    <h2 id="submit">How to Submit</h2>
-
-    <h3>What You Must Provide</h3>
-    <p>Every submission to AIDER includes five components — the paper is only one of them:</p>
-    <ul>
-        <li><strong>Paper manuscript</strong> — LaTeX or Markdown</li>
-        <li><strong>Code repository</strong> — all source code to reproduce every result, with setup instructions and dependency management</li>
-        <li><strong>Data</strong> — included in the repo or hosted on Zenodo / HuggingFace with a DOI</li>
-        <li><strong>Research process log</strong> — AI agent logs, prompts, session transcripts, and a timestamped record of all human decisions</li>
-        <li><strong>Reproducibility checklist</strong> — confirming code runs, data is available, and results match</li>
-    </ul>
-
-    <h3>Submission Process</h3>
-    <div class="process-diagram">
-        Fork <a href="https://github.com/ai-driven-energy-research/paper-template">paper-template</a><br>
-        &#8595;<br>
-        Fill in your paper, code, data, and process log<br>
-        &#8595;<br>
-        Open an Issue on <a href="https://github.com/ai-driven-energy-research/submissions">submissions</a><br>
-        &#8595;<br>
-        Public peer review on your repo<br>
-        &#8595;<br>
-        Accepted paper forked into AIDER org
-    </div>
-
-    <h3>Licensing</h3>
-    <ul>
-        <li>Papers: CC-BY 4.0 (authors retain copyright)</li>
-        <li>Code: MIT or Apache 2.0 (author's choice)</li>
-        <li>Data: CC0 or CC-BY 4.0</li>
-    </ul>
-
-    <h2 id="review">Review Process</h2>
-
-    <p>All reviews are <strong>open and signed</strong> — reviewer names are published alongside their reviews. We believe accountability produces better science.</p>
-
-    <h3>Two-Track Review</h3>
-    <ul>
-        <li><strong>Track A: Scientific merit</strong> — Is the research sound, novel, and well-presented?</li>
-        <li><strong>Track B: Reproducibility</strong> — Can a reviewer clone the repo, run the code, and get the claimed results? <em>This is a hard gate. If the code does not run, the paper is not accepted.</em></li>
-    </ul>
-
-    <p>AI-assisted review is allowed and encouraged — reviewers must disclose their use of AI tools. Review artifacts are published alongside the paper.</p>
-
-    <h2 id="papers">Published Papers</h2>
-
-    <p><em>Founding papers coming soon. AIDER is currently preparing its first issue.</em></p>
-
-    <!--
-    Template for published papers:
-    <div class="manifesto-item">
-        <strong>Paper Title</strong>
-        <em>Author(s) — 2026</em><br>
-        <a href="#">Paper</a> | <a href="#">Code</a> | <a href="#">Data</a> | <a href="#">Process Log</a>
-    </div>
-    -->
-
-    <h2 id="board">Editorial Board</h2>
-
-    <div class="board-grid">
-        <div class="board-member">
-            <div class="name">Jianou Jiang</div>
-            <div class="role">Founding Editor<br>DPhil candidate, Engineering Science<br>University of Oxford</div>
+        <div class="principle">
+            <div class="principle-number">1</div>
+            <div class="principle-text">
+                <strong>Open process, not just open access</strong>
+                <span>We publish the complete research pipeline — every AI agent session, every human decision, every intermediate result. The process of discovery is as valuable as the outcome.</span>
+            </div>
         </div>
-        <div class="board-member">
-            <div class="name">Raul Adriaensen</div>
-            <div class="role">Editorial Board Member<br>PhD candidate, Earth Science and Engineering<br>Imperial College London</div>
+        <div class="principle">
+            <div class="principle-number">2</div>
+            <div class="principle-text">
+                <strong>AI is a collaborator, not a secret</strong>
+                <span>Using AI to write, code, analyse, and review is expected and must be documented. Research produced with AI agents is first-class scholarship here.</span>
+            </div>
+        </div>
+        <div class="principle">
+            <div class="principle-number">3</div>
+            <div class="principle-text">
+                <strong>If it can't be executed, it doesn't count</strong>
+                <span>Every paper must include code that runs, data that downloads, and a script that regenerates the published results. Automated verification is part of the review.</span>
+            </div>
+        </div>
+        <div class="principle">
+            <div class="principle-number">4</div>
+            <div class="principle-text">
+                <strong>A paper is a living repository</strong>
+                <span>Published work lives on GitHub. It can be forked, extended, corrected, and built upon by anyone. Research does not end at publication — it begins there.</span>
+            </div>
+        </div>
+        <div class="principle">
+            <div class="principle-number">5</div>
+            <div class="principle-text">
+                <strong>Zero barriers to entry</strong>
+                <span>No publication fees. No subscription fees. No institutional access required. Diamond open access — funded by nothing, owned by the community.</span>
+            </div>
         </div>
     </div>
-
 </div>
 
+<!-- ─── Scope ─── -->
+<div class="section section-alt">
+    <div class="container">
+        <h2 id="scope">Scope</h2>
+        <p class="section-lead">Research at the intersection of artificial intelligence and energy systems, where AI is a core methodological tool — not an afterthought.</p>
+
+        <div class="scope-grid">
+            <div class="scope-item">Machine learning for computational fluid dynamics</div>
+            <div class="scope-item">AI-driven power grid optimisation</div>
+            <div class="scope-item">Reinforcement learning for energy system control</div>
+            <div class="scope-item">Generative models for materials discovery</div>
+            <div class="scope-item">LLM-assisted and autonomous research workflows</div>
+            <div class="scope-item">Autonomous energy system design</div>
+            <div class="scope-item">Physics-informed neural networks for energy</div>
+            <div class="scope-item">AI for renewable energy forecasting</div>
+        </div>
+    </div>
+</div>
+
+<!-- ─── Requirements ─── -->
+<div class="section">
+    <div class="container">
+        <h2 id="requirements">Submission Requirements</h2>
+        <p class="section-lead">Every submission to AIDER is a complete, executable research package — not just a PDF.</p>
+
+        <ul class="req-list">
+            <li>
+                <span class="req-tag required">Required</span>
+                <div><strong>Paper manuscript</strong> — LaTeX or Markdown, submitted as source</div>
+            </li>
+            <li>
+                <span class="req-tag required">Required</span>
+                <div><strong>Code repository</strong> — all source code, with dependency management, setup instructions, and a working entry point</div>
+            </li>
+            <li>
+                <span class="req-tag required">Required</span>
+                <div><strong>Data</strong> — in-repo or hosted on Zenodo / HuggingFace with a persistent DOI</div>
+            </li>
+            <li>
+                <span class="req-tag required">Required</span>
+                <div><strong>Research process log</strong> — AI agent transcripts, session logs, prompts, and a timestamped record of all human decisions and interventions</div>
+            </li>
+            <li>
+                <span class="req-tag required">Required</span>
+                <div><strong>Reproducibility script</strong> — a single command (<code style="font-size:0.85em; background:#f3f4f6; padding:2px 5px; border-radius:3px;">bash reproduce.sh</code>) that regenerates all published figures and tables</div>
+            </li>
+        </ul>
+
+        <h3>Submission Pipeline</h3>
+        <div class="pipeline">
+            <div class="pipeline-step">
+                <div class="pipeline-indicator"><div class="pipeline-dot"></div><div class="pipeline-line"></div></div>
+                <div class="pipeline-content">
+                    <strong>Create repository from template</strong>
+                    <span>Fork <a href="https://github.com/ai-driven-energy-research/paper-template">paper-template</a> and populate with your manuscript, code, data, and process log</span>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-indicator"><div class="pipeline-dot"></div><div class="pipeline-line"></div></div>
+                <div class="pipeline-content">
+                    <strong>Submit via GitHub Issue</strong>
+                    <span>Open a <a href="https://github.com/ai-driven-energy-research/submissions/issues/new/choose">submission issue</a> with your repository link and completed checklist</span>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-indicator"><div class="pipeline-dot"></div><div class="pipeline-line"></div></div>
+                <div class="pipeline-content">
+                    <strong>Automated verification</strong>
+                    <span>CI pipeline clones your repo, installs dependencies, and executes <code style="font-size:0.85em; background:#f3f4f6; padding:2px 5px; border-radius:3px;">reproduce.sh</code> to validate reproducibility</span>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-indicator"><div class="pipeline-dot"></div><div class="pipeline-line"></div></div>
+                <div class="pipeline-content">
+                    <strong>AI-assisted peer review</strong>
+                    <span>AI reviewers evaluate methodology, statistical validity, and code quality. Human editors verify and make the final decision</span>
+                </div>
+            </div>
+            <div class="pipeline-step">
+                <div class="pipeline-indicator"><div class="pipeline-dot"></div></div>
+                <div class="pipeline-content">
+                    <strong>Publication</strong>
+                    <span>Accepted repository is archived in the AIDER GitHub organisation with a Zenodo DOI</span>
+                </div>
+            </div>
+        </div>
+
+        <h3>Licensing</h3>
+        <ul style="font-family:'Inter',sans-serif; font-size:0.9em; color:var(--text-secondary);">
+            <li>Papers: CC-BY 4.0 (authors retain copyright)</li>
+            <li>Code: MIT or Apache 2.0 (author's choice)</li>
+            <li>Data: CC0 or CC-BY 4.0</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── Automated Review ─── -->
+<div class="section section-alt">
+    <div class="container">
+        <h2 id="review">Automated Review, Evaluation & Correction</h2>
+        <p class="section-lead">AIDER aims to make the full review lifecycle — from initial assessment to post-publication correction — as automated as possible. Human editors supervise; AI agents do the heavy lifting.</p>
+
+        <div class="auto-review-grid">
+            <div class="auto-review-card">
+                <div class="icon">Review</div>
+                <h4>Automated Assessment</h4>
+                <p>AI agents evaluate submissions for methodological rigour, statistical validity, code quality, and consistency between claims and results.</p>
+            </div>
+            <div class="auto-review-card">
+                <div class="icon">Verify</div>
+                <h4>Automated Verification</h4>
+                <p>CI pipelines clone the repository, install dependencies, execute <code style="font-size:0.85em;">reproduce.sh</code>, and compare generated outputs against published figures and tables.</p>
+            </div>
+            <div class="auto-review-card">
+                <div class="icon">Correct</div>
+                <h4>Continuous Correction</h4>
+                <p>After publication, automated checks detect dependency breakage, data drift, and newly reported issues. Corrections are proposed as pull requests on the living repository.</p>
+            </div>
+        </div>
+
+        <h3>Transparency</h3>
+        <p style="font-family:'Inter',sans-serif; font-size:0.9em; color:var(--text-secondary);">All reviews — automated and human — are published alongside the paper. Reviewer identities are disclosed. AI review agents' prompts and outputs are versioned and publicly available. Nothing is hidden.</p>
+
+        <h3>Human Oversight</h3>
+        <p style="font-family:'Inter',sans-serif; font-size:0.9em; color:var(--text-secondary);">Editors make all accept/reject decisions. Automated review augments human judgement — it does not replace editorial responsibility. Authors may respond to and dispute any automated finding.</p>
+    </div>
+</div>
+
+<!-- ─── Papers ─── -->
+<div class="section">
+    <div class="container">
+        <h2 id="papers">Published Papers</h2>
+        <p class="section-lead">Each paper is a GitHub repository containing the manuscript, executable code, data, and complete research process log.</p>
+
+        <div class="papers-empty">
+            <p>Founding issue in preparation.<br>First papers expected Q2 2026.</p>
+        </div>
+
+        <!--
+        Template for published papers:
+        <div class="board-member" style="margin-top:12px;">
+            <div class="board-role">Vol. 1, 2026</div>
+            <div class="name">Paper Title</div>
+            <div class="affiliation">Author(s) — Institution</div>
+            <div style="margin-top:8px; font-family:'Inter',sans-serif; font-size:0.82em;">
+                <a href="#">Repository</a> · <a href="#">PDF</a> · <a href="#">Process Log</a> · <a href="#">DOI</a>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
+
+<!-- ─── Board ─── -->
+<div class="section section-alt">
+    <div class="container">
+        <h2 id="board">Editorial Board</h2>
+        <p class="section-lead">Founding members. <a href="join.html">Join us</a> if you believe in open, reproducible, AI-driven research.</p>
+
+        <div class="board-grid">
+            <div class="board-member">
+                <div class="board-role">Founding Editor</div>
+                <div class="name">Jianou Jiang</div>
+                <div class="affiliation">DPhil candidate, Engineering Science<br>University of Oxford</div>
+            </div>
+            <div class="board-member">
+                <div class="board-role">Editorial Board</div>
+                <div class="name">Raul Adriaensen</div>
+                <div class="affiliation">PhD candidate, Earth Science and Engineering<br>Imperial College London</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ─── CTA ─── -->
 <div class="cta">
-    <h2 style="border:none; color:#f0f0f0; margin:0 0 10px 0;">Ready to publish open, reproducible, AI-driven research?</h2>
-    <p style="color:#8b949e;">Fork the template. Share your code. Show your process.</p>
-    <a href="https://github.com/ai-driven-energy-research/paper-template">Start a Submission</a>
+    <h2>Submit your research</h2>
+    <p>Fork the template. Open-source your code. Document your process. Publish for free.</p>
+    <div class="cta-buttons">
+        <a href="https://github.com/ai-driven-energy-research/paper-template" class="btn btn-primary">Start a Submission</a>
+        <a href="join.html" class="btn btn-secondary">Join the Editorial Board</a>
+    </div>
 </div>
 
+<!-- ─── Footer ─── -->
 <div class="footer">
     <p>AIDER — AI-Driven Energy Research &copy; 2026. All content CC-BY 4.0.</p>
-    <p>
+    <p style="margin-top:8px;">
         <a href="https://github.com/ai-driven-energy-research">GitHub</a>
+        <a href="mailto:jianou.jiang@eng.ox.ac.uk">Contact</a>
     </p>
 </div>
 
