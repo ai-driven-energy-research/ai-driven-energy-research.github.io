@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIDER — AI-Driven Energy Research</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #1a1a1a;
+            background: #fafafa;
+            line-height: 1.7;
+        }
+        .header {
+            background: #0d1117;
+            color: #f0f0f0;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.4em;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 10px;
+        }
+        .header h1 span { color: #58a6ff; }
+        .header .tagline {
+            font-size: 1.1em;
+            color: #8b949e;
+            font-style: italic;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .nav {
+            background: #161b22;
+            padding: 12px 20px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav a {
+            color: #8b949e;
+            text-decoration: none;
+            margin: 0 18px;
+            font-size: 0.95em;
+            font-family: -apple-system, 'Segoe UI', sans-serif;
+            transition: color 0.2s;
+        }
+        .nav a:hover { color: #58a6ff; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h2 {
+            font-size: 1.6em;
+            font-weight: 400;
+            margin: 50px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #d0d7de;
+        }
+        h3 {
+            font-size: 1.2em;
+            font-weight: 600;
+            margin: 30px 0 12px 0;
+            font-family: -apple-system, 'Segoe UI', sans-serif;
+        }
+        p { margin-bottom: 16px; }
+        .manifesto-item {
+            background: #f6f8fa;
+            border-left: 3px solid #58a6ff;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .manifesto-item strong {
+            display: block;
+            font-family: -apple-system, 'Segoe UI', sans-serif;
+            margin-bottom: 4px;
+        }
+        .manifesto-item em { color: #57606a; }
+        ul { margin: 12px 0 12px 24px; }
+        li { margin-bottom: 8px; }
+        .cta {
+            background: #0d1117;
+            color: #f0f0f0;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .cta a {
+            display: inline-block;
+            background: #238636;
+            color: white;
+            padding: 12px 32px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-family: -apple-system, 'Segoe UI', sans-serif;
+            font-size: 1em;
+            margin-top: 16px;
+            transition: background 0.2s;
+        }
+        .cta a:hover { background: #2ea043; }
+        .scope-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        .scope-item {
+            background: #f6f8fa;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-family: -apple-system, 'Segoe UI', sans-serif;
+            font-size: 0.95em;
+        }
+        .process-diagram {
+            background: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 8px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 2;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .board-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .board-member {
+            background: #f6f8fa;
+            padding: 16px;
+            border-radius: 6px;
+        }
+        .board-member .name {
+            font-weight: 600;
+            font-family: -apple-system, 'Segoe UI', sans-serif;
+        }
+        .board-member .role { color: #57606a; font-size: 0.9em; }
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #57606a;
+            font-size: 0.9em;
+            border-top: 1px solid #d0d7de;
+        }
+        code {
+            background: #eff1f3;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        @media (max-width: 600px) {
+            .scope-grid, .board-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1><span>AIDER</span> — AI-Driven Energy Research</h1>
+    <p class="tagline">An open-access, open-source, open-process journal. No paywalls. No fees. Every paper is reproducible and immediately usable.</p>
+</div>
+
+<div class="nav">
+    <a href="#manifesto">Manifesto</a>
+    <a href="#scope">Scope</a>
+    <a href="#submit">Submit</a>
+    <a href="#review">Review</a>
+    <a href="#papers">Papers</a>
+    <a href="#board">Board</a>
+</div>
+
+<div class="container">
+
+    <h2 id="manifesto">The AIDER Manifesto</h2>
+
+    <p>Academic publishing is broken. Papers sit behind paywalls. Results cannot be reproduced. Code is never shared. The process of research is hidden. AIDER exists to fix this.</p>
+
+    <div class="manifesto-item">
+        <strong>"Open process, not just open access."</strong>
+        <em>We don't just share the paper. We share how it was made — every AI session, every human decision, every iteration.</em>
+    </div>
+
+    <div class="manifesto-item">
+        <strong>"AI is a collaborator, not a secret."</strong>
+        <em>Using AI to write, code, or analyse is encouraged and must be disclosed. There is no shame in working with AI — it is the future of research.</em>
+    </div>
+
+    <div class="manifesto-item">
+        <strong>"If it can't be reproduced, it doesn't count."</strong>
+        <em>Code must run. Data must be available. Results must match. This is not optional.</em>
+    </div>
+
+    <div class="manifesto-item">
+        <strong>"A paper should be a living product."</strong>
+        <em>Published papers live on GitHub. They can be forked, improved, and extended by anyone.</em>
+    </div>
+
+    <div class="manifesto-item">
+        <strong>"Free as in freedom, free as in beer."</strong>
+        <em>No paywalls. No author charges. No money changes hands. Ever. Science belongs to everyone.</em>
+    </div>
+
+    <h2 id="scope">Scope</h2>
+
+    <p>AIDER publishes research at the intersection of artificial intelligence and energy systems. We welcome work that uses AI as a core methodological tool — not just a keyword.</p>
+
+    <div class="scope-grid">
+        <div class="scope-item">Machine learning for CFD</div>
+        <div class="scope-item">AI-driven grid optimisation</div>
+        <div class="scope-item">Reinforcement learning for energy control</div>
+        <div class="scope-item">Generative models for materials discovery</div>
+        <div class="scope-item">LLM-assisted research workflows</div>
+        <div class="scope-item">Autonomous energy system design</div>
+        <div class="scope-item">Physics-informed neural networks</div>
+        <div class="scope-item">AI for renewable energy forecasting</div>
+    </div>
+
+    <h2 id="submit">How to Submit</h2>
+
+    <h3>What You Must Provide</h3>
+    <p>Every submission to AIDER includes five components — the paper is only one of them:</p>
+    <ul>
+        <li><strong>Paper manuscript</strong> — LaTeX or Markdown</li>
+        <li><strong>Code repository</strong> — all source code to reproduce every result, with setup instructions and dependency management</li>
+        <li><strong>Data</strong> — included in the repo or hosted on Zenodo / HuggingFace with a DOI</li>
+        <li><strong>Research process log</strong> — AI agent logs, prompts, session transcripts, and a timestamped record of all human decisions</li>
+        <li><strong>Reproducibility checklist</strong> — confirming code runs, data is available, and results match</li>
+    </ul>
+
+    <h3>Submission Process</h3>
+    <div class="process-diagram">
+        Fork <a href="https://github.com/ai-driven-energy-research/paper-template">paper-template</a><br>
+        &#8595;<br>
+        Fill in your paper, code, data, and process log<br>
+        &#8595;<br>
+        Open an Issue on <a href="https://github.com/ai-driven-energy-research/submissions">submissions</a><br>
+        &#8595;<br>
+        Public peer review on your repo<br>
+        &#8595;<br>
+        Accepted paper forked into AIDER org
+    </div>
+
+    <h3>Licensing</h3>
+    <ul>
+        <li>Papers: CC-BY 4.0 (authors retain copyright)</li>
+        <li>Code: MIT or Apache 2.0 (author's choice)</li>
+        <li>Data: CC0 or CC-BY 4.0</li>
+    </ul>
+
+    <h2 id="review">Review Process</h2>
+
+    <p>All reviews are <strong>open and signed</strong> — reviewer names are published alongside their reviews. We believe accountability produces better science.</p>
+
+    <h3>Two-Track Review</h3>
+    <ul>
+        <li><strong>Track A: Scientific merit</strong> — Is the research sound, novel, and well-presented?</li>
+        <li><strong>Track B: Reproducibility</strong> — Can a reviewer clone the repo, run the code, and get the claimed results? <em>This is a hard gate. If the code does not run, the paper is not accepted.</em></li>
+    </ul>
+
+    <p>AI-assisted review is allowed and encouraged — reviewers must disclose their use of AI tools. Review artifacts are published alongside the paper.</p>
+
+    <h2 id="papers">Published Papers</h2>
+
+    <p><em>Founding papers coming soon. AIDER is currently preparing its first issue.</em></p>
+
+    <!--
+    Template for published papers:
+    <div class="manifesto-item">
+        <strong>Paper Title</strong>
+        <em>Author(s) — 2026</em><br>
+        <a href="#">Paper</a> | <a href="#">Code</a> | <a href="#">Data</a> | <a href="#">Process Log</a>
+    </div>
+    -->
+
+    <h2 id="board">Editorial Board</h2>
+
+    <div class="board-grid">
+        <div class="board-member">
+            <div class="name">Jianou Jiang</div>
+            <div class="role">Founding Editor<br>DPhil candidate, Engineering Science<br>University of Oxford</div>
+        </div>
+        <div class="board-member">
+            <div class="name">To be announced</div>
+            <div class="role">Editorial Board Member<br><br><em>Recruiting — <a href="mailto:jianou.jiang@eng.ox.ac.uk">get in touch</a></em></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="cta">
+    <h2 style="border:none; color:#f0f0f0; margin:0 0 10px 0;">Ready to publish open, reproducible, AI-driven research?</h2>
+    <p style="color:#8b949e;">Fork the template. Share your code. Show your process.</p>
+    <a href="https://github.com/ai-driven-energy-research/paper-template">Start a Submission</a>
+</div>
+
+<div class="footer">
+    <p>AIDER — AI-Driven Energy Research &copy; 2026. All content CC-BY 4.0.</p>
+    <p>
+        <a href="https://github.com/ai-driven-energy-research">GitHub</a>
+    </p>
+</div>
+
+</body>
+</html>
