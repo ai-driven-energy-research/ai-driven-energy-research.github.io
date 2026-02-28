@@ -231,10 +231,82 @@ code {
     margin-bottom: 8px;
 }
 
+/* ─── Tool Comparison Table ─── */
+.tool-table-wrapper {
+    overflow-x: auto;
+    margin: 24px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+}
+.tool-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82em;
+    line-height: 1.5;
+}
+.tool-table th {
+    background: var(--bg-dark);
+    color: #f9fafb;
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+.tool-table td {
+    padding: 12px 14px;
+    border-top: 1px solid var(--border);
+    vertical-align: top;
+}
+.tool-table .col-center {
+    text-align: center;
+}
+.tool-table .row-recommended { background: var(--green-bg); }
+.tool-table .row-acceptable { background: var(--bg-secondary); }
+.tool-table .row-not-recommended { background: #fef2f2; }
+.tool-table .tick {
+    color: var(--green);
+    font-weight: 700;
+    font-size: 1.2em;
+}
+.tool-table .cross {
+    color: #dc2626;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+.tool-table .maybe {
+    color: #d97706;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+.badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 0.85em;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.badge-recommended {
+    background: #dcfce7;
+    color: #166534;
+}
+.badge-acceptable {
+    background: #fef3c7;
+    color: #92400e;
+}
+.badge-not-recommended {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 640px) {
     .header h1 { font-size: 2em; }
     .board-grid { grid-template-columns: 1fr; }
     .nav a { margin: 0 8px; font-size: 0.75em; }
     body { font-size: 16px; }
+    .tool-table { font-size: 0.75em; }
+    .tool-table th, .tool-table td { padding: 8px 10px; }
 }

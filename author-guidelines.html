@@ -94,6 +94,79 @@
         </ul>
         <p>Failure to disclose AI use when evidence of it is found during review will result in rejection.</p>
 
+        <h2>Recommended AI Workflows</h2>
+
+        <p>Not all AI workflows are equal. AIDER requires that your research process is <strong>documented and reproducible</strong> — this means we care about <em>how</em> you use AI, not just <em>which model</em> you use. The table below shows which types of AI tools produce the kind of process records we need.</p>
+
+        <p>We do not recommend any specific model or provider. Use whichever model works best for your research domain. For guidance on model capabilities, consult public benchmarks such as <a href="https://lmarena.ai/">Chatbot Arena</a>, <a href="https://aider.chat/docs/leaderboards/">Aider Code Editing Leaderboard</a>, or <a href="https://www.swebench.com/">SWE-bench</a>.</p>
+
+        <div class="tool-table-wrapper">
+        <table class="tool-table">
+            <thead>
+                <tr>
+                    <th>Tool Type</th>
+                    <th>Examples</th>
+                    <th class="col-center">Rating</th>
+                    <th class="col-center">Auto Logs</th>
+                    <th class="col-center">Edits Files Directly</th>
+                    <th class="col-center">Process Reproducibility</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-recommended">
+                    <td><strong>CLI agents</strong></td>
+                    <td>Claude Code, Aider, Codex CLI, Copilot CLI</td>
+                    <td class="col-center"><span class="badge badge-recommended">Recommended</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td>Session transcripts are saved automatically. The agent reads, writes, and runs code inside your repo. The full development history is captured.</td>
+                </tr>
+                <tr class="row-recommended">
+                    <td><strong>API / programmatic</strong></td>
+                    <td>Any model via API, LangChain, custom scripts</td>
+                    <td class="col-center"><span class="badge badge-recommended">Recommended</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td>You control the pipeline. Prompts and responses can be logged programmatically. Ideal for batch experiments and systematic analysis.</td>
+                </tr>
+                <tr class="row-acceptable">
+                    <td><strong>AI-native IDEs</strong></td>
+                    <td>Cursor, Windsurf, GitHub Copilot in VS Code</td>
+                    <td class="col-center"><span class="badge badge-acceptable">Acceptable</span></td>
+                    <td class="col-center"><span class="maybe">~</span></td>
+                    <td class="col-center"><span class="tick">&#10003;</span></td>
+                    <td class="col-center"><span class="maybe">~</span></td>
+                    <td>Edits files directly and some keep chat logs, but logging completeness varies. Export your chat history and include it in your process log.</td>
+                </tr>
+                <tr class="row-acceptable">
+                    <td><strong>Desktop apps</strong></td>
+                    <td>Claude Desktop, ChatGPT Desktop</td>
+                    <td class="col-center"><span class="badge badge-acceptable">Acceptable</span></td>
+                    <td class="col-center"><span class="maybe">~</span></td>
+                    <td class="col-center"><span class="maybe">~</span></td>
+                    <td class="col-center"><span class="maybe">~</span></td>
+                    <td>Some can access files on your computer, which is better than web. But process logging is limited. Export conversations and include them manually.</td>
+                </tr>
+                <tr class="row-not-recommended">
+                    <td><strong>Web chat interfaces</strong></td>
+                    <td>ChatGPT web, Claude web, Gemini web</td>
+                    <td class="col-center"><span class="badge badge-not-recommended">Not Recommended</span></td>
+                    <td class="col-center"><span class="cross">&#10007;</span></td>
+                    <td class="col-center"><span class="cross">&#10007;</span></td>
+                    <td class="col-center"><span class="cross">&#10007;</span></td>
+                    <td>Requires manual copy-paste between browser and your codebase. Slow, error-prone, and produces no automatic record. The development process is effectively lost.</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3>Why This Matters</h3>
+        <p>AIDER's core principle is that <strong>the research process is part of the contribution</strong>. When you use a CLI agent or API, the full conversation — every prompt, every code edit, every error and fix — is captured automatically. This is exactly the kind of process log that makes research reproducible and verifiable.</p>
+        <p>When you copy-paste between a web chat and your editor, that record is lost. You'd have to manually reconstruct it, which is tedious, incomplete, and defeats the purpose. We're not banning web chat — but if you use it, you're creating extra work for yourself and a weaker submission.</p>
+
         <h2>Licensing</h2>
         <ul>
             <li><strong>Paper:</strong> CC-BY 4.0 — authors retain copyright, anyone may reuse with attribution</li>
