@@ -95,6 +95,9 @@
             top: 0;
             z-index: 100;
             backdrop-filter: blur(12px);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
         }
         .nav a {
             font-family: 'Inter', sans-serif;
@@ -419,7 +422,8 @@
             .scope-grid { grid-template-columns: 1fr; }
             .auto-review-grid { grid-template-columns: 1fr; }
             .board-grid { grid-template-columns: 1fr; }
-            .nav a { margin: 0 8px; font-size: 0.75em; }
+            .nav { gap: 4px 0; padding: 10px 16px; }
+            .nav a { margin: 4px 6px; font-size: 0.72em; line-height: 1.8; }
             body { font-size: 16px; }
         }
     </style>
@@ -438,10 +442,11 @@
 <div class="nav">
     <a href="#principles">Principles</a>
     <a href="#scope">Scope</a>
-    <a href="#board">Board</a>
     <a href="author-guidelines.html">Author Guidelines</a>
+    <a href="collaborative-research.html">Collaborate</a>
     <a href="reviewer-guidelines.html">Reviewer Guidelines</a>
     <a href="ethics.html">Ethics</a>
+    <a href="research-roadmap.html">Roadmap</a>
     <a href="join.html" class="highlight">Join</a>
 </div>
 
@@ -638,6 +643,36 @@
             </div>
         </div>
         -->
+    </div>
+</div>
+
+<!-- ─── Research Roadmap Teaser ─── -->
+<div class="section">
+    <div class="container">
+        <h2 id="roadmap">Research Gaps &amp; Opportunities</h2>
+        <p class="section-lead">The AIDER editorial committee maintains a living roadmap of research gaps at the AI + energy intersection. Here are three high-impact opportunities.</p>
+
+        <div class="auto-review-grid">
+            <div class="auto-review-card">
+                <div class="icon" style="color:#1e40af; background:#dbeafe;">Emerging</div>
+                <h4>Foundation Models for Energy Systems</h4>
+                <p>Pre-trained models for time series, sensor data, and multi-physics. No established benchmarks exist. A single foundation model serving wind forecasting, load prediction, and fault detection remains untested.</p>
+            </div>
+            <div class="auto-review-card">
+                <div class="icon" style="color:#1e40af; background:#dbeafe;">Emerging</div>
+                <h4>LLM-Assisted Research Workflows</h4>
+                <p>Researchers are using AI agents to write code and run experiments, but almost no published work documents the full AI-human interaction with reproducible process logs.</p>
+            </div>
+            <div class="auto-review-card">
+                <div class="icon" style="color:#92400e; background:#fef3c7;">Active Gap</div>
+                <h4>Reproducibility Tooling &amp; Benchmarks</h4>
+                <p>Most AI + energy papers lack working code. The field needs standardised benchmark datasets, containerised environments, and shared evaluation metrics.</p>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top:24px;">
+            <a href="research-roadmap.html" class="btn btn-primary" style="background:var(--accent); color:#fff; padding:12px 28px; border-radius:8px; font-family:'Inter',sans-serif; font-size:0.9em; font-weight:500; text-decoration:none;">View Full Roadmap</a>
+        </p>
     </div>
 </div>
 

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Research Guide — AIDER</title>
+    <meta name="description" content="How teams of multiple researchers use AI agents together and submit collaborative work to AIDER.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .highlight-box {
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .highlight-box strong {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95em;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .highlight-box span {
+            font-size: 0.92em;
+            color: var(--text-secondary);
+        }
+
+        /* ─── Flowchart (reused from join.html) ─── */
+        .flowchart { margin: 28px 0 32px; }
+        .flow-step {
+            display: flex;
+            gap: 16px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 20px;
+            background: var(--bg-primary);
+            position: relative;
+        }
+        .flow-step.flow-you {
+            border-left: 4px solid var(--accent);
+            background: var(--accent-bg);
+        }
+        .flow-step.flow-automated {
+            border-left: 4px solid var(--green);
+            background: var(--green-bg);
+        }
+        .flow-number {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 1.3em;
+            color: var(--text-tertiary);
+            min-width: 32px;
+            text-align: center;
+            line-height: 1.4;
+        }
+        .flow-content { flex: 1; }
+        .flow-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 4px;
+        }
+        .flow-you .flow-label { color: var(--accent); }
+        .flow-automated .flow-label { color: var(--green); }
+        .flow-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.0em;
+            margin-bottom: 8px;
+        }
+        .flow-desc {
+            font-size: 0.92em;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        .flow-desc a { color: var(--accent); }
+        .flow-arrow {
+            display: flex;
+            justify-content: center;
+            padding: 6px 0;
+        }
+        .flow-arrow::after {
+            content: '\2193';
+            font-size: 1.3em;
+            color: var(--text-tertiary);
+        }
+
+        /* ─── Directory tree ─── */
+        .dir-tree {
+            background: var(--bg-dark);
+            color: #e5e7eb;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.8;
+            padding: 24px 28px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .dir-tree .comment {
+            color: #6b7280;
+        }
+
+        /* ─── Scenario table ─── */
+        .scenario-table-wrapper {
+            overflow-x: auto;
+            margin: 24px 0;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+        .scenario-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82em;
+            line-height: 1.5;
+        }
+        .scenario-table th {
+            background: var(--bg-dark);
+            color: #f9fafb;
+            padding: 12px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+        .scenario-table td {
+            padding: 12px 14px;
+            border-top: 1px solid var(--border);
+            vertical-align: top;
+        }
+        .scenario-table tbody tr:nth-child(odd) { background: var(--bg-secondary); }
+
+        /* ─── Git quick reference ─── */
+        .git-ref {
+            background: var(--bg-dark);
+            color: #f9fafb;
+            border-radius: 10px;
+            padding: 28px;
+            margin: 28px 0;
+        }
+        .git-ref h3 {
+            font-family: 'Inter', sans-serif;
+            color: var(--accent-light);
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        .git-ref code {
+            background: rgba(255,255,255,0.08);
+            color: #93c5fd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.88em;
+        }
+        .git-ref .cmd-row {
+            display: flex;
+            gap: 16px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.88em;
+            align-items: baseline;
+        }
+        .git-ref .cmd-row:last-child { border-bottom: none; }
+        .git-ref .cmd-label {
+            color: #9ca3af;
+            min-width: 180px;
+            flex-shrink: 0;
+        }
+
+        /* ─── TL;DR (reused from join.html) ─── */
+        .tldr {
+            background: var(--bg-dark);
+            color: #f9fafb;
+            border-radius: 10px;
+            padding: 28px;
+            margin: 32px 0;
+        }
+        .tldr h3 {
+            font-family: 'Inter', sans-serif;
+            color: var(--accent-light);
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        .tldr ul { margin-left: 20px; }
+        .tldr li { color: #d1d5db; }
+
+        @media (max-width: 640px) {
+            .git-ref .cmd-row { flex-direction: column; gap: 4px; }
+            .git-ref .cmd-label { min-width: auto; }
+            .scenario-table { font-size: 0.75em; }
+            .scenario-table th, .scenario-table td { padding: 8px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-inner">
+        <div class="header-label">AIDER</div>
+        <h1>Collaborative Research Guide</h1>
+        <p class="subtitle">How teams of multiple researchers use AI agents together and submit to AIDER.</p>
+    </div>
+</div>
+
+<div class="nav">
+    <a href="index.html">Home</a>
+    <a href="index.html#principles">Principles</a>
+    <a href="index.html#scope">Scope</a>
+    <a href="author-guidelines.html">Author Guidelines</a>
+    <a href="collaborative-research.html" class="highlight">Collaborate</a>
+    <a href="reviewer-guidelines.html">Reviewer Guidelines</a>
+    <a href="ethics.html">Ethics</a>
+    <a href="research-roadmap.html">Roadmap</a>
+    <a href="join.html">Join</a>
+</div>
+
+<div class="section">
+    <div class="container">
+
+    <div class="tldr">
+        <h3>TL;DR</h3>
+        <ul>
+            <li>One person forks the paper template — everyone else clones it</li>
+            <li>Each person works on their own branch, then opens a pull request to merge</li>
+            <li>Each person keeps their own AI session logs in a personal folder</li>
+            <li>Before submitting, merge everything to <code style="background:rgba(255,255,255,0.08); color:#93c5fd; padding:2px 6px; border-radius:3px;">main</code>, run <code style="background:rgba(255,255,255,0.08); color:#93c5fd; padding:2px 6px; border-radius:3px;">reproduce.sh</code>, and one person opens the submission issue</li>
+        </ul>
+    </div>
+
+    <h2>Setting Up a Team Repository</h2>
+
+    <p>One team member (the "repo owner") creates the shared repository. Everyone else clones it and works from there.</p>
+
+    <ol>
+        <li><strong>Fork the template.</strong> The repo owner goes to the <a href="https://github.com/ai-driven-energy-research/paper-template">AIDER paper template</a> and clicks "Use this template" to create a new repository.</li>
+        <li><strong>Add collaborators.</strong> Go to Settings &rarr; Collaborators &rarr; Add people. Add each team member by their GitHub username. They'll receive an invitation email.</li>
+        <li><strong>Agree on branches.</strong> Decide who works on what. A simple convention: one branch per person or per task (e.g., <code>alice/methodology</code>, <code>bob/data-pipeline</code>). The <code>main</code> branch is for finished, merged work only.</li>
+        <li><strong>Set up branch protection (optional).</strong> Go to Settings &rarr; Branches &rarr; Add rule for <code>main</code>. Require pull requests before merging. This prevents accidental pushes to main.</li>
+    </ol>
+
+    <h2>Branch-and-Merge Workflow</h2>
+
+    <p>If you've never used Git branches before, here's the idea: everyone works on their own copy of the code, then merges it back together when ready. This prevents stepping on each other's work.</p>
+
+    <div class="flowchart">
+        <div class="flow-step flow-you">
+            <div class="flow-number">1</div>
+            <div class="flow-content">
+                <div class="flow-label">Each team member</div>
+                <div class="flow-title">Create a branch</div>
+                <div class="flow-desc">Each person creates a branch for their work. This is a personal copy where you can make changes without affecting anyone else.<br><code>git checkout -b alice/methodology</code></div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">2</div>
+            <div class="flow-content">
+                <div class="flow-label">Each team member</div>
+                <div class="flow-title">Do your work</div>
+                <div class="flow-desc">Write code, run experiments, draft your section of the paper. Commit your changes regularly with descriptive messages.<br><code>git add .</code> then <code>git commit -m "Add wind speed preprocessing"</code></div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">3</div>
+            <div class="flow-content">
+                <div class="flow-label">Each team member</div>
+                <div class="flow-title">Push your branch</div>
+                <div class="flow-desc">Upload your branch to GitHub so the team can see your work.<br><code>git push origin alice/methodology</code></div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-you">
+            <div class="flow-number">4</div>
+            <div class="flow-content">
+                <div class="flow-label">Each team member</div>
+                <div class="flow-title">Open a pull request</div>
+                <div class="flow-desc">On GitHub, click "Compare & pull request" for your branch. Describe what you changed and why. This is where your team reviews each other's work before merging.</div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-automated">
+            <div class="flow-number">5</div>
+            <div class="flow-content">
+                <div class="flow-label">Team review</div>
+                <div class="flow-title">Review and discuss</div>
+                <div class="flow-desc">Other team members review the pull request. Leave comments, suggest changes, ask questions. When everyone is happy, approve the PR.</div>
+            </div>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step flow-automated">
+            <div class="flow-number">6</div>
+            <div class="flow-content">
+                <div class="flow-label">Merge</div>
+                <div class="flow-title">Merge to main</div>
+                <div class="flow-desc">Click "Merge pull request" on GitHub. Your work is now part of the shared <code>main</code> branch. Delete your feature branch to keep things tidy.</div>
+            </div>
+        </div>
+    </div>
+
+    <h2>Multiple People + Multiple AI Agents</h2>
+
+    <p>In collaborative AIDER research, each person may use a different AI agent (or the same one in different sessions). The key rule: <strong>every person's AI sessions must be logged separately and attributable</strong>.</p>
+
+    <div class="scenario-table-wrapper">
+    <table class="scenario-table">
+        <thead>
+            <tr>
+                <th>Scenario</th>
+                <th>How It Works</th>
+                <th>Process Log Approach</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Each person uses their own agent</strong></td>
+                <td>Alice uses Claude Code, Bob uses Aider, Carol uses Codex CLI. Each works on their own branch with their own agent.</td>
+                <td>Each person saves logs in <code>process-log/ai-sessions/alice/</code>, <code>.../bob/</code>, etc. Each folder contains that person's full session transcripts.</td>
+            </tr>
+            <tr>
+                <td><strong>Pair programming with AI</strong></td>
+                <td>Two people sit together (or screen-share) and use one AI agent interactively. One drives, one reviews.</td>
+                <td>Save the session in a shared folder like <code>process-log/ai-sessions/pair-alice-bob/</code>. Note in the log who was driving and who was reviewing.</td>
+            </tr>
+            <tr>
+                <td><strong>Shared API pipeline</strong></td>
+                <td>The team builds a shared script that calls an AI API (e.g., for batch analysis). The script runs programmatically.</td>
+                <td>The script itself lives in <code>code/</code>. API request/response logs go in <code>process-log/ai-sessions/pipeline/</code>. Document the pipeline design in the process log README.</td>
+            </tr>
+            <tr>
+                <td><strong>Sequential handoff</strong></td>
+                <td>Person A does data collection, hands off to Person B for modelling, hands off to Person C for analysis. Each uses their own AI agent for their stage.</td>
+                <td>Each person logs their stage separately. The process log README describes the handoff sequence and what each person was responsible for.</td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+
+    <h2>Team Process Log Structure</h2>
+
+    <p>For team submissions, the process log has a slightly expanded structure. Each person gets their own folder for AI sessions, and there's a shared decisions log:</p>
+
+    <div class="dir-tree">
+process-log/<br>
+├── README.md                    <span class="comment"># Narrative overview: who did what, workflow summary</span><br>
+├── contributions.md             <span class="comment"># Who contributed what (like a CRediT statement)</span><br>
+├── shared-decisions/            <span class="comment"># Decisions made by the team together</span><br>
+│   └── decisions.md             <span class="comment"># Timestamped log of group decisions</span><br>
+├── ai-sessions/<br>
+│   ├── alice/<br>
+│   │   ├── session-01.jsonl     <span class="comment"># Alice's first AI agent session</span><br>
+│   │   ├── session-02.jsonl     <span class="comment"># Alice's second session</span><br>
+│   │   └── README.md            <span class="comment"># What Alice used: tool, version, purpose</span><br>
+│   ├── bob/<br>
+│   │   ├── session-01.txt       <span class="comment"># Bob used a different agent/format</span><br>
+│   │   └── README.md<br>
+│   └── pipeline/<br>
+│       ├── batch-run-01.json    <span class="comment"># Shared API pipeline logs</span><br>
+│       └── README.md<br>
+└── human-decisions/<br>
+    ├── alice-decisions.md       <span class="comment"># Alice's individual research decisions</span><br>
+    └── bob-decisions.md         <span class="comment"># Bob's individual research decisions</span>
+    </div>
+
+    <h3>contributions.md</h3>
+    <p>This file maps each person to their contributions, similar to a <a href="https://credit.niso.org/">CRediT author statement</a>. Example:</p>
+
+    <div class="highlight-box">
+        <strong>Alice Chen</strong>
+        <span>Conceptualization, Methodology, Software (data preprocessing), Writing (Introduction, Methodology). AI tools: Claude Code for all coding sessions.</span>
+    </div>
+    <div class="highlight-box">
+        <strong>Bob Kumar</strong>
+        <span>Data curation, Software (model training), Visualization, Writing (Results). AI tools: Aider with GPT-4 for model development.</span>
+    </div>
+
+    <h2>Handling Merge Conflicts</h2>
+
+    <p>A <strong>merge conflict</strong> happens when two people edit the same part of the same file. Git doesn't know which version to keep, so it asks you to choose.</p>
+
+    <h3>What it looks like</h3>
+    <p>When you try to merge and there's a conflict, Git marks the file like this:</p>
+
+    <div class="dir-tree">
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD<br>
+learning_rate = 0.001<br>
+=======<br>
+learning_rate = 0.01<br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; bob/hyperparameters
+    </div>
+
+    <p>The top section is your version, the bottom is the other person's version. You need to pick one (or combine them) and delete the conflict markers.</p>
+
+    <h3>How to resolve</h3>
+    <ol>
+        <li>Open the file with conflicts</li>
+        <li>Find the <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> markers</li>
+        <li>Decide which version to keep (or write a new version that combines both)</li>
+        <li>Delete the conflict markers (<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>)</li>
+        <li>Save the file, then <code>git add</code> and <code>git commit</code></li>
+    </ol>
+
+    <h3>How to prevent conflicts</h3>
+    <ul>
+        <li><strong>Work on different files.</strong> If Alice works on <code>preprocessing.py</code> and Bob works on <code>model.py</code>, they'll never conflict.</li>
+        <li><strong>Merge often.</strong> Don't let branches diverge for weeks. Merge to main frequently and pull the latest main into your branch.</li>
+        <li><strong>Communicate.</strong> If two people need to edit the same file, coordinate who goes first.</li>
+    </ul>
+
+    <h2>Submitting as a Team</h2>
+
+    <p>When the research is complete and ready for submission:</p>
+
+    <ol>
+        <li><strong>Merge all branches to main.</strong> Every team member's work should be merged via pull requests. No open feature branches left.</li>
+        <li><strong>Fill in contributions.md.</strong> Map each author to their contributions and AI tools used.</li>
+        <li><strong>Run reproduce.sh.</strong> One person clones a fresh copy of the repo and runs <code>bash results/reproduce.sh</code>. This simulates what the AIDER CI will do. Everything must pass.</li>
+        <li><strong>Complete the reproducibility checklist.</strong> Fill in <code>REPRODUCIBILITY.md</code> together.</li>
+        <li><strong>One person opens the submission issue.</strong> Go to the <a href="https://github.com/ai-driven-energy-research/submissions/issues/new/choose">submissions page</a> and open a new issue. List all authors and link to the repository.</li>
+    </ol>
+
+    <div class="highlight-box">
+        <strong>Who opens the submission?</strong>
+        <span>It doesn't matter which team member opens the submission issue. Typically the corresponding author does it. All authors should be listed in the issue and in the repository's README.</span>
+    </div>
+
+    <div class="git-ref">
+        <h3>Git Quick Reference</h3>
+        <div class="cmd-row">
+            <span class="cmd-label">Clone the team repo</span>
+            <code>git clone https://github.com/your-team/your-paper.git</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Create a new branch</span>
+            <code>git checkout -b your-name/task-name</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">See what changed</span>
+            <code>git status</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Stage all changes</span>
+            <code>git add .</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Commit with a message</span>
+            <code>git commit -m "Add preprocessing script"</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Push your branch</span>
+            <code>git push origin your-name/task-name</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Switch to main</span>
+            <code>git checkout main</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Get latest changes</span>
+            <code>git pull origin main</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">Merge main into your branch</span>
+            <code>git merge main</code>
+        </div>
+        <div class="cmd-row">
+            <span class="cmd-label">See commit history</span>
+            <code>git log --oneline</code>
+        </div>
+    </div>
+
+    <p>Need more help with Git? GitHub has an excellent <a href="https://docs.github.com/en/get-started/quickstart/hello-world">beginner guide</a>. For the review process and how to join the editorial board, see the <a href="join.html">Join page</a>.</p>
+
+    </div>
+</div>
+
+<div class="cta">
+    <h2>Ready to start a team project?</h2>
+    <p>Fork the template, add your collaborators, and start building.</p>
+    <div class="cta-buttons">
+        <a href="https://github.com/ai-driven-energy-research/paper-template" class="btn btn-primary">Fork the Template</a>
+        <a href="author-guidelines.html" class="btn btn-secondary">Author Guidelines</a>
+    </div>
+</div>
+
+<div class="footer">
+    <p>AIDER — AI-Driven Energy Research &copy; 2026. All content CC-BY 4.0.</p>
+    <p style="margin-top:8px;">
+        <a href="https://github.com/ai-driven-energy-research">GitHub</a>
+        <a href="mailto:jianou.jiang@eng.ox.ac.uk">Contact</a>
+    </p>
+</div>
+
+</body>
+</html>

@@ -84,6 +84,10 @@ body {
     top: 0;
     z-index: 100;
     backdrop-filter: blur(12px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
 }
 .nav a {
     font-family: 'Inter', sans-serif;
@@ -319,7 +323,8 @@ code {
 @media (max-width: 640px) {
     .header h1 { font-size: 2em; }
     .board-grid { grid-template-columns: 1fr; }
-    .nav a { margin: 0 8px; font-size: 0.75em; }
+    .nav { gap: 4px 0; padding: 10px 16px; }
+    .nav a { margin: 4px 6px; font-size: 0.72em; line-height: 1.8; }
     body { font-size: 16px; }
     .tool-table { font-size: 0.75em; }
     .tool-table th, .tool-table td { padding: 8px 10px; }
