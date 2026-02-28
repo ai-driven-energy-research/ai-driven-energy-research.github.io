@@ -231,6 +231,20 @@ code {
     margin-bottom: 8px;
 }
 
+.board-member.board-agent {
+    background: var(--bg-dark);
+    border-color: rgba(255,255,255,0.08);
+}
+.board-member.board-agent .name {
+    color: #f9fafb;
+}
+.board-member.board-agent .affiliation {
+    color: #9ca3af;
+}
+.board-member .agent-role {
+    color: var(--accent-light);
+}
+
 /* ─── Tool Comparison Table ─── */
 .tool-table-wrapper {
     overflow-x: auto;
