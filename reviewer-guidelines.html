@@ -36,71 +36,74 @@
     <div class="container">
 
         <h2>Overview</h2>
-        <p class="section-lead">AIDER uses open peer review. Your name will be published alongside your review. This creates accountability and produces better, more constructive feedback.</p>
+        <p class="section-lead">AIDER uses an AI-first review pipeline. Three automated agents handle reproducibility verification, pre-screening, and claim/reference auditing. A single editor reviews the AI reports, verifies flagged items, and makes the final editorial decision. Additional human reviewers may be invited at the editor's discretion.</p>
 
         <h2>Review Principles</h2>
         <ul>
-            <li><strong>Transparency:</strong> All reviews are public and signed</li>
-            <li><strong>Constructiveness:</strong> Reviews should help authors improve their work, not just gatekeep</li>
-            <li><strong>Reproducibility first:</strong> A paper with strong methodology but non-functional code is not acceptable. Reproducibility is a hard requirement.</li>
-            <li><strong>AI use is welcome:</strong> You may use AI tools to assist your review. You must disclose this at the end of your review.</li>
+            <li><strong>Transparency:</strong> All reviews — automated and human — are public and signed</li>
+            <li><strong>AI does the heavy lifting:</strong> Automated agents check reproducibility, flag bold claims, and audit references so the editor can focus on scientific judgement</li>
+            <li><strong>Reproducibility first:</strong> A paper with strong methodology but non-functional code is not acceptable. Reproducibility is a hard requirement, verified automatically by CI</li>
+            <li><strong>One editor is sufficient:</strong> The AI pipeline provides comprehensive reports; the editor makes the final call. Additional reviewers may be invited but are not required</li>
         </ul>
 
-        <h2>Two-Track Assessment</h2>
+        <h2>Automated Review Pipeline</h2>
+        <p>Three AI agents run automatically when a submission issue is opened:</p>
 
-        <h3>Track A: Research Quality</h3>
-        <p>Evaluate the following and provide written assessment for each:</p>
+        <h3>Stage 1: Reproducibility Check</h3>
+        <p>The CI pipeline automatically:</p>
         <ul>
-            <li><strong>Novelty:</strong> Does this work make a new contribution? Is the problem well-motivated?</li>
-            <li><strong>Methodology:</strong> Are the methods appropriate and correctly applied? Are assumptions clearly stated?</li>
-            <li><strong>Results:</strong> Are claims supported by the evidence presented? Are comparisons fair? Are limitations acknowledged?</li>
-            <li><strong>Clarity:</strong> Is the paper well-written and logically structured?</li>
-            <li><strong>Relevance:</strong> Does this fall within AIDER's scope (AI + energy systems)?</li>
+            <li>Verifies the repository structure (paper/, code/, data/, process-log/, etc.)</li>
+            <li>Checks for dependency management files</li>
+            <li>Installs dependencies and executes <code>reproduce.sh</code></li>
+            <li>Reports pass/fail for each check</li>
         </ul>
 
-        <h3>Track B: Reproducibility</h3>
-        <p>This is a hard gate. You must attempt to run the code.</p>
+        <h3>Stage 2: AI Pre-Screening</h3>
+        <p>An AI agent reads the submission and generates a report covering:</p>
+        <ul>
+            <li>Paper summary and key claims</li>
+            <li>Completeness check (manuscript, code, data, process log)</li>
+            <li>Code observations (hardcoded paths, missing seeds, suspicious patterns)</li>
+            <li>Process log assessment (substantive vs. boilerplate)</li>
+            <li>Attention points for the editor</li>
+        </ul>
+
+        <h3>Stage 3: AI Deep Review</h3>
+        <p>A second AI agent performs a claim and reference audit:</p>
+        <ul>
+            <li><strong>Claim verification:</strong> Extracts bold claims ("first", "novel", "unprecedented", "outperforms") and rates each as HIGH / MEDIUM / LOW severity</li>
+            <li><strong>Reference accessibility:</strong> Resolves DOIs and flags paywalled references the editor must download to verify</li>
+            <li><strong>Missing references:</strong> Identifies .bib entries without DOIs or URLs</li>
+        </ul>
+
+        <h2>Editor's Role</h2>
+        <p>After the three automated stages complete, the editor:</p>
         <ol>
-            <li>Clone the submission repository</li>
-            <li>Follow the setup instructions in <code>code/README.md</code></li>
-            <li>Install dependencies from the provided dependency file</li>
-            <li>Execute <code>bash results/reproduce.sh</code></li>
-            <li>Compare the generated outputs with the figures and tables in the paper</li>
+            <li>Reads the AI-generated reports (pre-screening + claim audit + reference audit)</li>
+            <li>Focuses on HIGH-severity claims flagged by the deep review</li>
+            <li>Downloads and verifies any paywalled references the AI could not access</li>
+            <li>Assesses scientific merit, novelty, and methodology</li>
+            <li>Optionally invites additional human reviewers for specialised expertise</li>
+            <li>Posts the editorial decision on the submission issue</li>
         </ol>
-        <p>Report:</p>
-        <ul>
-            <li>Did the code install without errors?</li>
-            <li>Did <code>reproduce.sh</code> execute successfully?</li>
-            <li>Do the generated results match the paper's claims?</li>
-            <li>Are there any discrepancies? If so, are they within acceptable tolerance?</li>
-        </ul>
-
-        <h2>Process Log Assessment</h2>
-        <p>Check that the process log is substantive:</p>
-        <ul>
-            <li>Is the research workflow clearly documented?</li>
-            <li>If AI tools were used, are session logs provided?</li>
-            <li>Are key human decisions recorded with reasoning?</li>
-            <li>Could another researcher understand the full process from the log alone?</li>
-        </ul>
 
         <h2>Review Format</h2>
         <p>Post your review as a comment on the submission issue using this structure:</p>
 
         <div style="background:var(--bg-secondary); border:1px solid var(--border); border-radius:8px; padding:20px; margin:20px 0; font-family:'Inter',sans-serif; font-size:0.88em;">
-            <strong>## Review — [Your Name]</strong><br><br>
+            <strong>## Editorial Review — [Your Name]</strong><br><br>
             <strong>### Summary</strong><br>
             [2-3 sentence summary of the paper and your overall assessment]<br><br>
-            <strong>### Track A: Research Quality</strong><br>
+            <strong>### Research Quality</strong><br>
             - Novelty: [assessment]<br>
             - Methodology: [assessment]<br>
             - Results: [assessment]<br>
             - Clarity: [assessment]<br>
             - Relevance: [assessment]<br><br>
-            <strong>### Track B: Reproducibility</strong><br>
-            - Installation: [pass/fail, notes]<br>
-            - Execution: [pass/fail, notes]<br>
-            - Results match: [yes/no/partial, notes]<br><br>
+            <strong>### Claim Verification</strong><br>
+            [Response to AI-flagged claims — verified / unverified / concern]<br><br>
+            <strong>### Paywalled References</strong><br>
+            [For each flagged reference — verified content matches citation / discrepancy found]<br><br>
             <strong>### Process Log</strong><br>
             [Assessment of documentation completeness]<br><br>
             <strong>### Recommendation</strong><br>
@@ -111,14 +114,14 @@
 
         <h2>Decision Criteria</h2>
         <ul>
-            <li><strong>Accept:</strong> Research is sound, code runs, results match, process is documented</li>
+            <li><strong>Accept:</strong> Research is sound, code runs, results match, process is documented, claims are supported</li>
             <li><strong>Minor revision:</strong> Small issues in writing, code, or documentation that can be fixed quickly</li>
-            <li><strong>Major revision:</strong> Significant methodological concerns or reproducibility issues that require substantial work</li>
-            <li><strong>Reject:</strong> Fundamental flaws in methodology, code does not run after revision opportunity, or outside journal scope</li>
+            <li><strong>Major revision:</strong> Significant methodological concerns, unverified claims, or reproducibility issues that require substantial work</li>
+            <li><strong>Reject:</strong> Fundamental flaws in methodology, code does not run after revision opportunity, unsupported bold claims, or outside journal scope</li>
         </ul>
 
         <h2>Timeline</h2>
-        <p>Please complete your review within <strong>3 weeks</strong> of assignment. If you need more time, notify the editor. If you cannot complete the review, let us know as soon as possible so we can reassign.</p>
+        <p>The AI pipeline completes within minutes of submission. The editor should aim to post their decision within <strong>2 weeks</strong>. If additional reviewers are invited, they have <strong>3 weeks</strong> to respond.</p>
 
     </div>
 </div>
