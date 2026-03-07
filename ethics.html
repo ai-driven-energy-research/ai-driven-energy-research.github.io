@@ -89,13 +89,53 @@
             <li>Papers are licensed CC-BY 4.0; code is MIT or Apache 2.0; data is CC0 or CC-BY 4.0</li>
         </ul>
 
+        <h2>Publication Permanence</h2>
+
+        <p style="font-family:'Inter',sans-serif; font-size:0.9em; color:var(--text-secondary); background:#fef3c7; border:1px solid #f59e0b; border-radius:8px; padding:16px; margin-bottom:24px;">
+            <strong style="color:#92400e;">Important:</strong> Once a paper is accepted and published, it receives a permanent DOI and is indexed by Google Scholar, Semantic Scholar, OpenAlex, and other academic databases. <strong>Publication cannot be undone.</strong> The DOI is permanent by design — it cannot be deleted, only updated with a retraction notice. Authors should be certain of their submission before acceptance.
+        </p>
+
+        <h3>What happens at acceptance</h3>
+        <ul>
+            <li>The paper repository is forked into the <a href="https://github.com/ai-driven-energy-research">AIDER organisation</a></li>
+            <li>A release is created and archived on Zenodo with a permanent DOI</li>
+            <li>The paper is listed on the journal website</li>
+            <li>Academic search engines (Google Scholar, Semantic Scholar, OpenAlex) will index it automatically — typically within days to weeks</li>
+        </ul>
+        <p>These steps are automated and triggered immediately when the editor adds the "accepted" label. There is no draft or preview stage after acceptance.</p>
+
+        <h3>What cannot be reversed</h3>
+        <ul>
+            <li><strong>Zenodo DOI:</strong> Permanent. Cannot be deleted. The archived record persists indefinitely.</li>
+            <li><strong>Search engine indexing:</strong> Google Scholar, Semantic Scholar, and other services cache and index content independently. Removal requests are not guaranteed to be honoured. Retraction notices will eventually propagate, but the original record may remain visible.</li>
+            <li><strong>Forks and clones:</strong> Anyone may have forked or cloned the repository before a retraction. Git is distributed — copies cannot be recalled.</li>
+        </ul>
+
         <h2>Corrections and Retractions</h2>
 
         <h3>Corrections</h3>
         <p>Since AIDER papers are living GitHub repositories, corrections are handled as pull requests. Minor corrections (typos, clarifications) can be merged by the authors. Substantive corrections (methodology changes, result updates) require editor approval and a version note in the repository.</p>
 
         <h3>Retractions</h3>
-        <p>In cases of serious misconduct (data fabrication, plagiarism, undisclosed conflicts), the editorial board may retract a paper. Retracted papers remain in the repository with a prominent retraction notice. The retraction reason is publicly documented.</p>
+        <p>Retraction is a formal process reserved for serious issues. A paper may be retracted if:</p>
+        <ul>
+            <li>Data fabrication or falsification is discovered</li>
+            <li>Plagiarism is identified</li>
+            <li>Serious undisclosed conflicts of interest are found</li>
+            <li>Fundamental errors invalidate the conclusions and cannot be corrected</li>
+            <li>The author requests retraction for valid scientific reasons (e.g., discovery of a critical methodological flaw)</li>
+        </ul>
+        <p>Retraction does <strong>not</strong> delete the paper. Instead:</p>
+        <ol>
+            <li>A <code>RETRACTION.md</code> is added to the repository explaining the reason</li>
+            <li>The Zenodo record is updated with a new version marked as retracted</li>
+            <li>The journal website listing is updated with a retraction notice</li>
+            <li>The submission issue is reopened with a <code>retracted</code> label</li>
+        </ol>
+        <p>The original content remains accessible for transparency. This is consistent with international standards (COPE guidelines) and ensures the scholarly record is maintained.</p>
+
+        <h3>Withdrawal before acceptance</h3>
+        <p>Authors may withdraw a submission at any time <strong>before</strong> the editor adds the "accepted" label by commenting on the submission issue. Withdrawal before acceptance leaves no permanent record — the issue is simply closed.</p>
 
         <h2>Complaints and Appeals</h2>
         <p>Authors may appeal editorial decisions by commenting on their submission issue with additional evidence or arguments. Appeals are reviewed by an editor not involved in the original decision. For complaints about editorial conduct, contact the founding editor at <a href="mailto:jianou.jiang@eng.ox.ac.uk">jianou.jiang@eng.ox.ac.uk</a>.</p>
