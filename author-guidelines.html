@@ -102,6 +102,7 @@
                     <th>Tier</th>
                     <th class="col-center">Code</th>
                     <th class="col-center">Data</th>
+                    <th class="col-center">Process Log</th>
                     <th class="col-center">AI Verification</th>
                     <th>Review Process</th>
                 </tr>
@@ -111,6 +112,7 @@
                     <td><strong>Tier 1: Fully Open</strong></td>
                     <td class="col-center"><span class="tick">&#10003;</span> All public</td>
                     <td class="col-center"><span class="tick">&#10003;</span> All public</td>
+                    <td class="col-center"><span class="tick">&#10003;</span> Full AI sessions &amp; human decisions</td>
                     <td class="col-center"><span class="tick">&#10003;</span> End-to-end</td>
                     <td><span class="badge badge-recommended">Currently Supported</span><br>AI agents verify everything. Editor reviews AI reports.</td>
                 </tr>
@@ -118,6 +120,7 @@
                     <td><strong>Tier 2: Open Code, Large Data</strong></td>
                     <td class="col-center"><span class="tick">&#10003;</span> All public</td>
                     <td class="col-center"><span class="maybe">~</span> Reduced or hosted externally</td>
+                    <td class="col-center"><span class="tick">&#10003;</span> Full</td>
                     <td class="col-center"><span class="maybe">~</span> Partial</td>
                     <td><span class="badge badge-acceptable">Under Development</span><br>AI verifies code and post-processing. Full simulation not re-runnable.</td>
                 </tr>
@@ -125,6 +128,7 @@
                     <td><strong>Tier 3: Open Code, Restricted Data</strong></td>
                     <td class="col-center"><span class="tick">&#10003;</span> All public</td>
                     <td class="col-center"><span class="cross">&#10007;</span> Restricted (sample or synthetic provided)</td>
+                    <td class="col-center"><span class="maybe">~</span> Redacted where proprietary data appears in prompts</td>
                     <td class="col-center"><span class="maybe">~</span> Limited</td>
                     <td><span class="badge badge-acceptable">Under Development</span><br>AI verifies code on sample data. Human reviewer needed for full assessment.</td>
                 </tr>
@@ -132,6 +136,7 @@
                     <td><strong>Tier 4: Partially Open</strong></td>
                     <td class="col-center"><span class="maybe">~</span> Partial (e.g., commercial solver)</td>
                     <td class="col-center"><span class="cross">&#10007;</span> Restricted</td>
+                    <td class="col-center"><span class="cross">&#10007;</span> Summary only (methods narrative without full logs)</td>
                     <td class="col-center"><span class="cross">&#10007;</span> Very limited</td>
                     <td><span class="badge badge-not-recommended">Not Yet Supported</span><br>Requires multiple expert human reviewers.</td>
                 </tr>
