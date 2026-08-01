@@ -9,6 +9,7 @@ online meetup on 1 August 2026 (9:00–9:30 pm Beijing, UTC+8).
 ## Contents
 
 - `aider-doaj-briefing.tex` — source for the meeting document.
+- `meeting-summary.md` — curated decisions and follow-up from the meeting.
 
 The briefing includes:
 

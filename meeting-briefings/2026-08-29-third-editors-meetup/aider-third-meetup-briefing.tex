@@ -1,0 +1,299 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{charter}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{darkbg}{HTML}{0A0F1A}
+\definecolor{ink}{HTML}{111827}
+\definecolor{ink2}{HTML}{4B5563}
+\definecolor{ink3}{HTML}{6B7280}
+\definecolor{rule}{HTML}{E5E7EB}
+\definecolor{green}{HTML}{047857}
+\definecolor{amber}{HTML}{B45309}
+\definecolor{redx}{HTML}{B91C1C}
+\definecolor{accentbg}{HTML}{EFF6FF}
+\definecolor{greenbg}{HTML}{ECFDF5}
+\definecolor{amberbg}{HTML}{FFFBEB}
+\definecolor{graybg}{HTML}{F3F4F6}
+
+\hypersetup{colorlinks=true,linkcolor=accent,urlcolor=accent,citecolor=accent}
+
+\titleformat{\section}{\sffamily\large\bfseries\color{ink}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\sffamily\normalsize\bfseries\color{accent}}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{15pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{rule}\hrule height 0.4pt}
+\fancyhead[L]{\footnotesize\sffamily\color{ink3}AIDER \textbar\ AI-Driven Energy Research}
+\fancyhead[R]{\footnotesize\sffamily\color{ink3}Third Editors' Meetup \textbar\ 29 August 2026}
+\fancyfoot[C]{\footnotesize\sffamily\color{ink3}\thepage}
+
+\newcommand{\src}[1]{{\footnotesize\color{ink3}[#1]}}
+\newcommand{\passed}{\colorbox{greenbg}{\textcolor{green}{\sffamily\scriptsize\bfseries PASSED}}}
+\newcommand{\openitem}{\colorbox{amberbg}{\textcolor{amber}{\sffamily\scriptsize\bfseries OPEN}}}
+\newcommand{\blocked}{\colorbox{amberbg}{\textcolor{redx}{\sffamily\scriptsize\bfseries BLOCKER}}}
+
+\newtcolorbox{takeaway}{
+  colback=accentbg,colframe=accent,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+\newtcolorbox{solvebox}{
+  colback=greenbg,colframe=green,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+\newtcolorbox{warnbox}{
+  colback=amberbg,colframe=amber,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=2pt,topsep=2pt}
+
+\begin{document}
+
+\begin{tcolorbox}[colback=darkbg,colframe=darkbg,arc=3pt,left=18pt,right=18pt,top=14pt,bottom=14pt]
+  {\sffamily\footnotesize\color{accent}\bfseries ACTIONS \textbullet\ PARTNERSHIPS \textbullet\ EXPERIMENTS}\\[4pt]
+  {\sffamily\LARGE\bfseries\color{white} From Mandates to Partnerships}\\[5pt]
+  {\sffamily\small\color{white!75} Confirm delivery, decide bounded external work, and open the next proposal cycle.}\\[8pt]
+  {\sffamily\footnotesize\color{white!60} Third editors' online meetup \textbullet\ Saturday 29 August 2026 \textbullet\ 9:00--9:30 pm Beijing (UTC+8) \textbullet\ ISSN 2979-8639 (Online)}
+\end{tcolorbox}
+
+\vspace{4pt}
+{\small\color{ink2}This is the pre-read, ballot and note-taking paper for a \textbf{30-minute decision meeting}. It converts the 1 August transcript into a defensible record: seven motions were formally called and passed with no objections voiced; three later ideas received positive discussion but did not all receive a complete, unambiguous ballot. We will ratify that record, review evidence from the seven owners, and decide the bounded next steps. AIDER has \textbf{five fully published papers}; none is awaiting review. The meeting link will be circulated separately.}
+
+\section*{Agenda \textnormal{\footnotesize\color{ink3}(30 minutes, hard stop)}}
+\renewcommand{\arraystretch}{1.14}
+\begin{center}\small
+\begin{tabular}{@{}p{1.55cm}p{12.55cm}@{}}
+\toprule
+\textbf{Time} & \textbf{Item and intended output} \\
+\midrule
+0--2 min & Ratify the 1 August record and confirm the voting rule (\S1). \\
+2--9 min & Evidence-only progress round for V1--V7; assign any corrective follow-up (\S2). \\
+9--16 min & Vote P8: bounded JGPPS exploration and possible pilot design (\S3). \\
+16--21 min & Vote P9: external experimental-track watchlist; record the DAI 2026 status (\S4). \\
+21--24 min & Confirm owner and, if ready, vote P10: workshop or hackathon concept (\S5). \\
+24--27 min & Check the DOAJ evidence plan and next publication gates (\S6). \\
+27--30 min & Hear new proposals for the fourth-meeting ballot; read back owners and deadlines (\S7). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Ratify the 1 August Record}
+
+\begin{takeaway}
+\textbf{Voting rule accepted on 1 August.} Let $N$ be the number of eligible editors present for a vote and $A$ the number voting against. A motion \textbf{passes when $A\leq N/2$}; it fails only when \textbf{more than half} vote against. Only attendees may vote. A recused editor should be removed from $N$ for that motion.
+\end{takeaway}
+
+The recording contains recognition noise before the chair opens the meeting, so it does not support a reliable numerical attendance count. It does support the result: each of V1--V7 was called separately, nobody voiced an objection, and the chair concluded that all seven passed. \src{1}
+
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}p{0.75cm}p{7.6cm}p{2.65cm}p{3.25cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Passed motion} & \textbf{Owner} & \textbf{Recorded result} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+V1 & Create a two-tier research incubator. & Jianou Jiang & \passed\ No objection voiced. \\
+V2 & Test an institution-paid support model. & Raul Adriaensen & \passed\ No objection voiced. \\
+V3 & Build university and funder relationships. & Jianou Jiang & \passed\ No objection voiced. \\
+V4 & Build the reviewer community through personal outreach. & Raul Adriaensen & \passed\ No objection voiced. \\
+V5 & Reduce submission and reproducibility friction. & Jingda Wu & \passed\ No objection voiced. \\
+V6 & Invite reproducible extensions of senior researchers' back catalogues. & Feng Wei & \passed\ No objection voiced. \\
+V7 & Adopt a quality-first publication gate. & Raul Adriaensen & \passed\ No objection voiced. \\
+\end{longtable}}
+
+\textbf{Authority created by a pass.} The owner may perform the routine GitHub, website, process-design and exploratory-outreach work described in the original motion. The pass does \emph{not} authorise contracts, spending, fees, private-data transfer, a public endorsement, guaranteed review or publication, a new publisher of record, or a commitment by another organisation.
+
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{8.7cm}p{2.5cm}p{2.5cm}@{}}
+\toprule
+\textbf{Ratification question} & \textbf{For / against / abstain} & \textbf{Result} \\
+\midrule
+Does this section accurately record the 1 August rule and V1--V7 results? & & \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{V1--V7: Delivery Roll-call}
+
+This is not a second vote. Each owner has no more than 45 seconds: show one link or artefact, state the next deliverable, name a date, and identify any decision that must return to the board.
+
+{\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}p{0.7cm}p{3.75cm}p{4.7cm}p{2.1cm}p{2.75cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Evidence expected} & \textbf{Link or concise progress note} & \textbf{Next date} & \textbf{Blocker / board decision} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+V1 & Public distinction between incubator work and journal articles & & & \\[12pt]
+V2 & Feasibility note comparing support options; no fee launched & & & \\[12pt]
+V3 & Contact and outcome log with no promises implied & & & \\[12pt]
+V4 & External-reviewer invite list or small-session plan & & & \\[12pt]
+V5 & Tracked issue or pull request with a before/after workflow test & & & \\[12pt]
+V6 & Target list for genuinely new extensions or a workshop route & & & \\[12pt]
+V7 & Published review workflow and reviewer qualification criteria & & & \\[12pt]
+\end{longtable}}
+
+\begin{warnbox}
+\textbf{Escalation rule.} Missing evidence does not silently cancel a passed motion. Record a revised date, narrower scope, replacement owner or a rescission motion. Do not describe planned work as completed.
+\end{warnbox}
+
+\section{P8 Ballot: Explore a JGPPS Relationship}
+
+\textbf{What was discussed.} Jianou reported a positive preliminary conversation with his supervisor, Prof. Budimir Rosic, about collaboration with the Journal of the Global Power and Propulsion Society (JGPPS). JGPPS's official editorial-board page lists Prof. Rosic as a board member. Its official indexing page lists Scopus, Web of Science Core Collection's Emerging Sources Citation Index and Portico. \src{3,4} These facts establish a credible contact and journal; they do not establish institutional consent.
+
+The proposed complement is clear: AIDER can contribute a transparent GitHub-native workflow, reproducibility artefacts, structured metadata and AI-assisted preliminary checks; experienced humans must retain scientific judgement, conflicts management and final editorial control. Possible outputs include workflow mentorship, reviewer-community learning, a joint reproducibility workshop or one agent-ready demonstration.
+
+\begin{solvebox}
+\textbf{P8 motion.} Authorise Jianou Jiang to continue \textbf{non-binding exploratory discussions} with Prof. Rosic and request an introduction through the appropriate JGPPS channel. He may develop a bounded pilot options note covering: objective, parties and roles, publisher of record, DOI and content ownership, editorial independence, human-review responsibility, conflicts, confidentiality, data handling, costs and success criteria. Any pilot, contract, fee, data transfer, co-branding or public claim of partnership returns for a separate vote.
+\end{solvebox}
+
+\textbf{Not authorised:} claiming JGPPS endorsement; promising its reviewers or acceptance; implying that JGPPS indexing transfers to AIDER; changing either journal's policies; or speaking for JGPPS without written authority.
+
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{1.2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{3.2cm}@{}}
+\toprule
+\textbf{Motion} & \textbf{For} & \textbf{Against} & \textbf{Abstain} & \textbf{Result} & \textbf{Owner / return date} \\
+\midrule
+P8 & & & & & Jianou Jiang / \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{P9 Ballot: Learn from External AI Tracks}
+
+\textbf{The event shown on 1 August.} The page discussed in the meeting has been identified as the \textbf{DAI 2026 AI Paper Track}. DAI 2026 is scheduled at City University of Hong Kong from 29 November to 2 December 2026. Its AI Paper Track invites AI-led or human--AI collaborative work, requires an Agent Ready Manuscript bundle, records autonomy and reproducibility information, and uses human-governed final decisions. The track says accepted work appears in a public record rather than the main proceedings. \src{5,6}
+
+\begin{warnbox}
+\textbf{Timing correction.} The official submission deadline is \textbf{10 August 2026}, nineteen days before this meeting. A 29 August vote cannot authorise a new on-time DAI 2026 submission. The meeting should record whether an eligible submission or contact occurred before the deadline; otherwise DAI remains a learning case, not an active submission target.
+\end{warnbox}
+
+\begin{solvebox}
+\textbf{P9 motion.} Authorise Feng Wei to (a) report any valid DAI 2026 action taken before its deadline and (b) maintain a short watchlist of future credible experimental AI-for-science paper, workshop or demonstration tracks. For the best candidate, return a one-page fit assessment covering scope, deadline, archival status, review model, AI disclosure, reproducibility, fees, rights, conflicts and promotional value. A submission, expenditure or public representation of AIDER still requires author consent and any board approval applicable to that act.
+\end{solvebox}
+
+\textbf{Safeguards:} no false university sponsorship or affiliation; no duplicate publication; no submission of another person's work without consent; no treating an experimental track as equivalent to DOAJ, Scopus or Web of Science evaluation.
+
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{1.2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{3.2cm}@{}}
+\toprule
+\textbf{Motion} & \textbf{For} & \textbf{Against} & \textbf{Abstain} & \textbf{Result} & \textbf{Owner / return date} \\
+\midrule
+P9 & & & & & Feng Wei / \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{P10 Draft: A Small Workshop or Hackathon}
+
+The 1 August discussion linked practical workshops to community growth and added hackathons as a route to ideas, learning and visibility. The concept was not yet precise enough to create a spending, event-hosting or external-representation mandate. The owner should be confirmed before the chair calls a vote.
+
+\begin{takeaway}
+\textbf{P10 draft motion.} Authorise \textbf{Raul Adriaensen, subject to his confirmation as owner}, to design one small online workshop or hackathon on reproducible AI-assisted energy research. Return a one-page concept containing audience, learning outcome, format, facilitators, partner or platform, safeguarding, data and intellectual-property treatment, accessibility, cost, promotion plan and measurable success criterion. No event is announced, fee charged, sponsor named or participant data collected until the concept is approved.
+\end{takeaway}
+
+If the owner or wording is not confirmed, defer P10 without prejudice and circulate the revised text for the fourth-meeting ballot.
+
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{1.2cm}p{2cm}p{2cm}p{2cm}p{2cm}p{3.2cm}@{}}
+\toprule
+\textbf{Motion} & \textbf{For} & \textbf{Against} & \textbf{Abstain} & \textbf{Result} & \textbf{Owner / return date} \\
+\midrule
+P10 & & & & & Confirm: \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{DOAJ Checkpoint: Build Evidence, Not a Date}
+
+AIDER has an online ISSN and five fully published papers. DOAJ's current Guide to Applying says a new journal must have more than one year of publishing history \emph{or} at least ten open-access research articles, while publishing at least five research articles per year. Each article must use at least two independent reviewers, and endogeny among editors, board members and reviewers must not exceed 25 per cent in the assessment period. \src{7}
+
+\begin{warnbox}
+\textbf{Current position.} The five papers are real publications, but they do not demonstrate a compliant external-review record: the public record shows substantial overlap between authors, editors and reviewers. A partnership does not transfer another journal's indexing or waive DOAJ's independent assessment. DOAJ, Scopus and Web of Science are separate routes.
+\end{warnbox}
+
+\textbf{Evidence to review on 29 August:}
+\begin{itemize}
+  \item a pool of qualified external reviewers with expertise and conflict declarations;
+  \item a workflow that records two independent human reports and a conflict-free editor decision;
+  \item a live endogeny ledger for the relevant rolling assessment period;
+  \item accurate peer-review, licensing, fees, appeals, corrections and misconduct policies;
+  \item machine-readable article metadata, persistent identifiers and preservation evidence; and
+  \item a realistic external-author pipeline that protects quality and avoids a premature application.
+\end{itemize}
+
+\begin{center}\small
+\begin{tabular}{@{}p{5.1cm}p{2.2cm}p{3.1cm}p{3.3cm}@{}}
+\toprule
+\textbf{Evidence item} & \textbf{Status} & \textbf{Owner} & \textbf{Next date / link} \\
+\midrule
+Independent reviewer pool & & & \\[9pt]
+Two-reviewer workflow & & & \\[9pt]
+Endogeny ledger & & & \\[9pt]
+Policy and metadata audit & & & \\[9pt]
+External-author pipeline & & & \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{New Proposals for the Fourth Meetup}
+
+The final three minutes belong to editors. Give each proposal in 30 seconds: \textbf{problem; exact action; owner; first deliverable and date; authority needed; cost, risk or conflict}. Questions may clarify scope. These are recorded now and circulated before a formal vote at the fourth meetup. Positive discussion is not a ballot.
+
+{\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}p{0.85cm}p{2.25cm}p{5.2cm}p{2.8cm}p{2.9cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Proposer / owner} & \textbf{Exact proposal and first evidence} & \textbf{Boundary or risk} & \textbf{Target date} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+P11 & & & & \\[22pt]
+P12 & & & & \\[22pt]
+P13 & & & & \\[22pt]
+P14 & & & & \\[22pt]
+\end{longtable}}
+
+\begin{solvebox}
+\textbf{What must be true at 9:30 pm.} The minutes record: ratification outcome; one evidence link, next date and blocker for each V1--V7 owner; full vote totals and boundaries for every motion called; P8 and P9 owners and return dates; a clear P10 disposition; DOAJ evidence owners; and the exact wording of all new proposals for the fourth meetup.
+\end{solvebox}
+
+\section*{Sources and Verification Notes}
+
+{\footnotesize
+\begin{enumerate}
+  \item AIDER, audio transcript titled \emph{New Recording 4}, second editors' meetup, 1 August 2026. Curated summary: \href{https://github.com/ai-driven-energy-research/ai-driven-energy-research.github.io/blob/main/meeting-briefings/2026-08-01-doaj-readiness/meeting-summary.md}{meeting-summary.md}.
+  \item AIDER, \href{https://ai-driven-energy-research.github.io/aider-second-editors-meetup-pre-read-2026-08-01.pdf}{Second Editors' Meetup pre-read and ballot}, 1 August 2026.
+  \item JGPPS, \href{https://journal.gpps.global/Editorial-Board,1801.html}{Editorial Board}, accessed 1 August 2026.
+  \item JGPPS, \href{https://journal.gpps.global/Indexing-and-Archiving,1813.html}{Indexing and Archiving}, accessed 1 August 2026.
+  \item DAI 2026, \href{https://www.adai.ai/dai/2026/}{conference home page}, accessed 1 August 2026.
+  \item DAI 2026, \href{https://www.adai.ai/dai/2026/ai-paper-track.html}{AI Paper Track}, accessed 1 August 2026.
+  \item Directory of Open Access Journals, \href{https://doaj.org/apply/guide/}{Guide to Applying}, accessed 1 August 2026.
+\end{enumerate}
+}
+
+\vfill
+\begin{center}
+{\footnotesize\sffamily\color{ink3}
+AIDER \textbar\ AI-Driven Energy Research \textbar\ ISSN 2979-8639 (Online)\\
+\href{https://ai-driven-energy-research.github.io}{ai-driven-energy-research.github.io}}
+\end{center}
+
+\end{document}
