@@ -16,10 +16,10 @@ The briefing includes:
    eligible editors vote against it, plus the authority and limits created by a pass.
 2. Seven executable motions reconstructed from proposals made at the first meetup,
    with proposer/owner, boundaries, evidence and a vote-record table.
-3. A current DOAJ readiness audit and timeline. It corrects two important earlier
+3. A current DOAJ readiness audit and timeline. All five current papers are fully
+   published; none is awaiting review. The audit also corrects two important earlier
    assumptions: two independent human reviewers are required for each article, and the
-   five current editor-authored papers create 100% endogeny rather than a compliant
-   record.
+   five editor-authored papers create 100% endogeny rather than a compliant record.
 4. A proposed collaboration with the Journal of the Global Power and Propulsion Society
    (JGPPS), where Prof. Budimir Rosic is an editorial-board member. This is framed as
    mentorship and shared community activity, not transferable indexing.
