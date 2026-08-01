@@ -3,7 +3,7 @@
 LaTeX source for the pre-read and working paper prepared for AIDER's second editors'
 online meetup on 1 August 2026 (9:00–9:30 pm Beijing, UTC+8).
 
-**Published PDF:** https://ai-driven-energy-research.github.io/aider-doaj-briefing-2026-08-01.pdf
+**Published PDF:** https://ai-driven-energy-research.github.io/aider-second-editors-meetup-pre-read-2026-08-01.pdf
 (also linked from the [News page](https://ai-driven-energy-research.github.io/news.html)).
 
 ## Contents
