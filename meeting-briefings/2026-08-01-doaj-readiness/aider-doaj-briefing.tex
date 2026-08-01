@@ -3,17 +3,15 @@
 % ─────────────────────────── packages ───────────────────────────
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[a4paper,margin=2.05cm]{geometry}
 \usepackage{charter}
 \usepackage[scaled=0.92]{helvet}
 \usepackage{xcolor}
-\usepackage{eurosym}
 \usepackage{titlesec}
 \usepackage{booktabs}
 \usepackage{enumitem}
 \usepackage{array}
 \usepackage{longtable}
-\usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage[most]{tcolorbox}
 \usepackage{parskip}
@@ -35,7 +33,6 @@
 \definecolor{graybg}{HTML}{F3F4F6}
 
 \hypersetup{colorlinks=true, linkcolor=accent, urlcolor=accent, citecolor=accent}
-\renewcommand{\familydefault}{\rmdefault}
 
 % ─────────────────────────── headings ───────────────────────────
 \titleformat{\section}{\sffamily\large\bfseries\color{ink}}{\thesection}{0.6em}{}
@@ -49,20 +46,17 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\headrule}{\color{rule}\hrule height 0.4pt}
 \fancyhead[L]{\footnotesize\sffamily\color{ink3}AIDER \textbar\ AI-Driven Energy Research}
-\fancyhead[R]{\footnotesize\sffamily\color{ink3}DOAJ Readiness Briefing \textbar\ 1 August 2026}
+\fancyhead[R]{\footnotesize\sffamily\color{ink3}Second Editors' Meetup \textbar\ 1 August 2026}
 \fancyfoot[C]{\footnotesize\sffamily\color{ink3}\thepage}
 
 % ─────────────────────────── helpers ────────────────────────────
 \newcommand{\stat}[1]{{\sffamily\bfseries\color{accent}#1}}
 \newcommand{\src}[1]{{\footnotesize\color{ink3}[#1]}}
-
-% status chips for the readiness scorecard
 \newcommand{\met}{\colorbox{greenbg}{\textcolor{green}{\sffamily\scriptsize\bfseries MET}}}
 \newcommand{\partialx}{\colorbox{amberbg}{\textcolor{amber}{\sffamily\scriptsize\bfseries PARTIAL}}}
 \newcommand{\todo}{\colorbox{graybg}{\textcolor{ink3}{\sffamily\scriptsize\bfseries TO DO}}}
-\newcommand{\atrisk}{\colorbox{amberbg}{\textcolor{redx}{\sffamily\scriptsize\bfseries AT RISK}}}
+\newcommand{\atrisk}{\colorbox{amberbg}{\textcolor{redx}{\sffamily\scriptsize\bfseries BLOCKER}}}
 
-% callout boxes
 \newtcolorbox{takeaway}{
   colback=accentbg, colframe=accent, boxrule=0.8pt, arc=2pt,
   left=8pt, right=8pt, top=6pt, bottom=6pt, fontupper=\small}
@@ -79,217 +73,210 @@
 % ═════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ─────────────────────────── title block ────────────────────────
 \begin{tcolorbox}[colback=darkbg, colframe=darkbg, arc=3pt, left=18pt, right=18pt, top=14pt, bottom=14pt]
-  {\sffamily\footnotesize\color{accent}\bfseries DIAMOND OPEN ACCESS \textbullet\ EDITORIAL BRIEFING}\\[4pt]
-  {\sffamily\LARGE\bfseries\color{white} Getting AIDER into DOAJ}\\[5pt]
-  {\sffamily\small\color{white!75} What it takes, why it matters, and where we stand --- now that the ISSN is in hand.}\\[8pt]
+  {\sffamily\footnotesize\color{accent}\bfseries DECISIONS \textbullet\ DOAJ \textbullet\ PARTNERSHIPS}\\[4pt]
+  {\sffamily\LARGE\bfseries\color{white} From Proposals to Action}\\[5pt]
+  {\sffamily\small\color{white!75} Vote on the first meetup's proposals, agree the DOAJ route, and open the next proposal cycle.}\\[8pt]
   {\sffamily\footnotesize\color{white!60} Second editors' online meetup \textbullet\ Saturday 1 August 2026 \textbullet\ 9:00--9:30 pm Beijing (UTC+8) \textbullet\ ISSN 2979-8639 (Online)}
 \end{tcolorbox}
 
 \vspace{4pt}
+{\small\color{ink2} This is the pre-read and working paper for a \textbf{30-minute decision meeting}. The first meetup generated proposals; this meetup votes on them. A passed proposal gives its proposer a clear mandate to carry it out within the boundaries printed here. We will then review the real DOAJ path, introduce a possible partnership with an established journal, and hear new proposals for a vote at the third meetup. Facts and links were rechecked on 1 August 2026.}
 
-{\small\color{ink2} We now hold our \textbf{ISSN (2979-8639, Online)}. The next credibility gate is the \textbf{Directory of Open Access Journals (DOAJ)}. This briefing explains what DOAJ is, why it is the single highest-value listing we can pursue right now, exactly what it requires, and an honest scorecard of where AIDER already qualifies and where we have work to do --- plus the other issues on today's agenda. \textbf{Every criterion cited is sourced to DOAJ's own materials}; references are on the final page.}
-
-% ─────────────────────── agenda ───────────────────────
-\section*{Today's Agenda \textnormal{\footnotesize\color{ink3}($\sim$30 minutes)}}
-\vspace{-2pt}
-\renewcommand{\arraystretch}{1.15}
+\section*{Agenda \textnormal{\footnotesize\color{ink3}(30 minutes, hard stop)}}
+\renewcommand{\arraystretch}{1.14}
 \begin{center}\small
-\begin{tabular}{@{}p{1.5cm} p{12.6cm}@{}}
+\begin{tabular}{@{}p{1.45cm} p{12.7cm}@{}}
 \toprule
-\textbf{Time} & \textbf{Item} \\
+\textbf{Time} & \textbf{Item and intended output} \\
 \midrule
-3 min  & Welcome; the ISSN is assigned --- what it unlocks and what comes next. \\
-6 min  & \textbf{DOAJ 101:} what it is and why it is our next gate (\S1). \\
-8 min  & \textbf{The readiness scorecard:} requirements vs.\ where AIDER stands (\S2--\S3). \\
-5 min  & \textbf{The AI-review question:} DOAJ's new AI guidance vs.\ our five-agent model (\S4). \\
-6 min  & \textbf{Other issues:} Crossref DOIs \& preservation, publishing cadence \& the 5th paper, post-ISSN promotion (\S5). \\
-2 min  & Next steps \& owners (\S6). \\
+0--2 min & Confirm the voting rule, quorum and authority created by a pass (\S1). \\
+2--13 min & Call seven votes on proposals from the first meetup; record owner and first deliverable (\S2). \\
+13--21 min & Walk through DOAJ eligibility, the corrected blockers and the fast/safe timeline (\S3). \\
+21--26 min & Introduce the AIDER--JGPPS collaboration proposal for the \emph{next} vote (\S4). \\
+26--29 min & Hear other new proposals; capture each in the standard format for the third meetup (\S5). \\
+29--30 min & Read back passed motions, owners, deadlines and the next-meeting docket. \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 % ═════════════════════════════════════════════════════════════════
-\section{What DOAJ Is --- and Why It Is Our Next Gate}
-
-The \textbf{Directory of Open Access Journals} (\href{https://doaj.org}{doaj.org}) is the community-curated, independent index of vetted open-access journals --- \stat{more than 20{,}000} titles from around \stat{130} countries, all screened against a public set of criteria. \src{1} It is not a paywall database and it charges nothing; it is the sector's \emph{whitelist}. In our own first-meetup briefing we already named DOAJ ``the credibility floor'' --- this is the meeting where we go and stand on it.
-
-Four reasons it is the highest-value move available to us today:
-
-\begin{itemize}
-\item \textbf{It is the trust signal.} For a young, independent journal, \emph{being in DOAJ} is the fastest way to say ``we are legitimate, not predatory.'' Being \emph{absent} is a red flag librarians and authors actively screen for. DOAJ inclusion certifies verified ownership, a real editorial process, and genuine open access. \src{1,2}
-\item \textbf{It makes our work findable everywhere.} DOAJ metadata is openly harvestable and flows into library discovery systems, aggregators, and downstream indexes. A listed journal's articles are pulled into the places researchers actually search --- for free. \src{2}
-\item \textbf{It is the on-ramp to everything above it.} Scopus, Web of Science, and funders treat DOAJ membership as a baseline. Under \textbf{Plan S / cOAlition S}, a journal must be registered in DOAJ to count as a compliant open-access venue --- so DOAJ listing is what lets grant-funded authors publish with us at all. \src{3}
-\item \textbf{It is free, and we finally clear the entry gate.} DOAJ requires an ISSN before it will even review an application. We now have one. The one thing that blocked us is gone. \src{1}
-\end{itemize}
+\section{How Decisions Work}
 
 \begin{takeaway}
-\textbf{In one line.} DOAJ is the free, independent whitelist that turns ``a website with papers'' into ``an indexed, fundable, discoverable journal.'' The ISSN was the key to the door; DOAJ is the room we walk into next.
+\textbf{Decision rule requested for this meeting.} Let $N$ be the number of eligible editors participating in a vote and $A$ the number voting \textbf{against}. The motion \textbf{passes when $A\leq N/2$}; it fails only when \textbf{more than half} vote against. Abstentions are not votes against, so a tie passes. A recused editor is removed from $N$ for that motion.
 \end{takeaway}
 
-% ═════════════════════════════════════════════════════════════════
-\section{What DOAJ Requires}
+For every motion, the chair reads the exact wording below; the proposer has 20 seconds to clarify it; questions are limited to 30 seconds; then each participating editor votes \textbf{for}, \textbf{against}, or \textbf{abstain}. The public minutes record $N$, all three totals, the result, owner, deadline and evidence link.
 
-DOAJ publishes its full criteria in the \emph{Guide to Applying}, revised on a quarterly schedule since 2025. \src{1,4} They fall into five groups. The first two are hard eligibility gates; the last (the \emph{Seal}) is best-practice that only $\sim$10\% of listed journals achieve --- and it maps almost exactly onto AIDER's design goals. \src{5}
+\textbf{Authority after a pass.} The named proposer becomes the owner and may, on AIDER's behalf, make the website/GitHub changes, contact people and organise the work expressly described in the motion. A pass does \emph{not} authorise contracts, expenditure, fees, sharing private data, promising publication or authorship, changing the journal's legal/publisher identity, or committing another organisation. Any such step returns for a separate vote.
 
-\subsection{Eligibility gates (must be met to be listed)}
-\begin{itemize}
-\item \textbf{A valid online ISSN}, registered and confirmed with the ISSN organisation. \src{1}
-\item \textbf{Fully open access}: immediate, free-to-read, no embargo, under an open license --- and \emph{fully} OA, not hybrid. \src{1}
-\item \textbf{A track record}: a \stat{1+ year} history of fully-OA publishing \emph{or} at least \stat{10} OA research articles already published. \src{1}
-\item \textbf{A sustained cadence}: consistently \stat{$\ge$5} scholarly research articles per year, aimed at researchers or practitioners. \src{1}
-\end{itemize}
-
-\subsection{Editorial \& peer-review requirements}
-\begin{itemize}
-\item \textbf{Quality control before publication}: every article passes peer review, and the \emph{type} of review (e.g.\ anonymous, double-anonymous, editorial) is stated plainly on the site. For STEM, at least \stat{two} qualified external referees per article. \src{1}
-\item \textbf{A named editorial board} of at least five members with appropriate qualifications, each listed with \textbf{name and institutional affiliation}. \src{1}
-\item \textbf{Low endogeny}: papers authored by the journal's own editors/board \textbf{must not exceed 25\%} of content. \src{1}
-\end{itemize}
-
-\subsection{Website disclosures (specific pages DOAJ checks)}
-Aims \& scope; author instructions; a described peer-review process; a dedicated \textbf{open-access statement}; \textbf{licensing terms}; a dedicated \textbf{copyright policy}; a clear statement of \textbf{author fees} (or that there are none); a \textbf{plagiarism/screening} policy; publication ethics; and a typical \textbf{time from submission to publication}. \src{1,2}
-
-\subsection{Licensing \& author rights}
-An open license (Creative Commons recommended); the license \textbf{embedded or displayed in every article}; and authors \textbf{retaining their rights}. \src{1}
-
-\subsection{The DOAJ Seal --- seven best-practice criteria}
-The Seal is awarded only when \emph{all seven} are met; roughly one journal in ten qualifies. \src{5}
-\begin{enumerate}[leftmargin=1.5em]
-\item External long-term \textbf{preservation} arrangement (CLOCKSS, LOCKSS, Portico, or equivalent).
-\item \textbf{Persistent article identifiers} (DOI, ARK, or Handle) that resolve correctly.
-\item \textbf{Article-level metadata supplied to DOAJ}, regularly.
-\item \textbf{Machine-readable CC licensing} embedded in that metadata.
-\item A qualifying license --- \textbf{CC BY, CC BY-SA, or CC BY-NC} (derivatives allowed).
-\item A \textbf{self-archiving / deposit policy} registered in a directory such as SHERPA/RoMEO.
-\item Authors \textbf{hold copyright without restriction}.
-\end{enumerate}
-
-\begin{warnbox}
-\textbf{New in 2025 --- and it points straight at us.} DOAJ has added AI best-practices (advisory now, ``under review to become requirements''): journals \emph{should publish an AI policy}; authors must disclose generative-AI use beyond routine language editing; AI tools may not be listed as authors or cited as sources; and, pointedly, \textbf{``peer reviewers and editors should not use generative AI for assessments,''} while any automated tooling must operate under transparent \textbf{human oversight}. \src{6} AIDER's whole model is five AI reviewer agents --- so this is not a footnote for us; it is \S4.
-\end{warnbox}
+\textbf{Proposal cycle.} Proposals are normally introduced at one meetup and voted at the next. This gives everyone the same text and time to assess consequences. Today's V1--V7 motions come from the 13 June discussion record. \src{1} New proposals introduced today, including P8 in \S4, enter the third-meetup ballot.
 
 % ═════════════════════════════════════════════════════════════════
-\section{Where AIDER Stands --- The Readiness Scorecard}
+\section{Today's Ballot: Proposals from the First Meetup}
 
-An honest audit against every criterion above. \textbf{Green} = already satisfied; \textbf{amber} = partially there, small work to finish; \textbf{grey} = not started; \textbf{at risk} = a real threat to acceptance we must actively manage.
+Each motion is written as an executable mandate. The right-hand column prevents a pass being interpreted more broadly than intended.
 
-{\footnotesize\renewcommand{\arraystretch}{1.3}
-\begin{longtable}{@{}p{5.4cm} >{\centering\arraybackslash}p{1.7cm} p{7.4cm}@{}}
+{\footnotesize\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}p{0.65cm} p{8.25cm} p{2.15cm} p{3.35cm}@{}}
 \toprule
-\textbf{DOAJ requirement} & \textbf{Status} & \textbf{Where we are / what closes it} \\
+\textbf{ID} & \textbf{Motion to be voted} & \textbf{Proposer / owner} & \textbf{Boundary and first evidence} \\
 \midrule
 \endhead
 \bottomrule
 \endlastfoot
-\multicolumn{3}{@{}l}{\textit{\color{accent} Eligibility gates}}\\
-Valid online ISSN & \met & \textbf{2979-8639 (Online)}, assigned June 2026. Done. \\
-Fully OA, immediate, no embargo & \met & All content free on GitHub Pages under CC-BY 4.0; no paywall, no APC. \\
-1+ yr history \emph{or} $\ge$10 articles & \todo & 4 published + a 5th in review. One-year mark lands $\sim$Mar 2027; or reach 10 articles sooner. \emph{This is our binding gate.} \\
-Consistently $\ge$5 articles/year & \partialx & Vol.~1 reaches 5 the moment paper \#5 publishes; the task is to \emph{sustain} it into 2027. \\
-\midrule
-\multicolumn{3}{@{}l}{\textit{\color{accent} Editorial \& review}}\\
-Peer review before publication, type stated & \partialx & AI-assisted screening + a human-editor accept/reject gate exists; we must state the review \emph{type} explicitly on the site (see \S4). \\
-Editorial board $\ge$5, names + affiliations & \met & 9 founding editors listed with institutions. \\
-Editor-authored content $\le$25\% & \atrisk & All 4 current papers are editor-authored ($\sim$100\%). Must recruit \textbf{external authors} before applying. \\
-\midrule
-\multicolumn{3}{@{}l}{\textit{\color{accent} Website disclosures}}\\
-Aims \& scope, author \& reviewer guidelines & \met & Pages already live. \\
-Open-access statement (dedicated URL) & \todo & Add a formal OA-policy page (DOAJ gives boilerplate wording). \\
-Copyright policy (dedicated URL) & \todo & Add a standalone copyright-policy page. \\
-Author-fees / ``no charges'' statement & \todo & Add an explicit ``diamond --- no author or reader fees'' page. \\
-Plagiarism / ethics policy & \partialx & Ethics page exists; add an explicit screening statement. \\
-Typical submission$\to$publication time & \todo & Publish a typical timeline figure. \\
-\midrule
-\multicolumn{3}{@{}l}{\textit{\color{accent} Licensing, rights \& Seal}}\\
-Open CC license (BY / BY-SA / BY-NC) & \met & CC-BY 4.0 throughout --- Seal-qualifying. \\
-License shown in every article & \partialx & Add a CC-BY notice to each paper's page/PDF. \\
-Authors retain copyright, unrestricted & \met & CC-BY: authors keep copyright. \\
-Persistent identifiers (DOI) & \met & Zenodo DOIs on published articles (Crossref optional --- \S5). \\
-External preservation arrangement & \partialx & Zenodo (CERN-backed) archives our record; document it as our preservation arrangement. \\
-Deposit policy in SHERPA/RoMEO & \todo & Register a self-archiving policy. \\
-Article metadata to DOAJ & \todo & Supplied after acceptance (machine-readable CC). \\
-\midrule
-\multicolumn{3}{@{}l}{\textit{\color{accent} AI-era best practice (2025)}}\\
-Published AI-use policy & \todo & Publish one --- our transparency becomes a selling point, not a liability (\S4). \\
-Human oversight of automated review & \partialx & Human editor is the accountable gate; we must document it that way. \\
+V1 & \textbf{Create a two-tier research incubator.} Welcome early work in a clearly labelled, non-journal incubator; only work that completes AIDER's full quality process enters the published journal record. & Jianou Jiang & Incubator items are not AIDER articles and carry no promise of later acceptance. Publish the distinction on the site. \\
+\addlinespace
+V2 & \textbf{Test an institution-paid support model.} Develop a concrete option in which independent authors remain free while funded institutions make a modest contribution, and compare it with voluntary institutional sponsorship. & Raul Adriaensen & Deliver a feasibility/options note; no APC, submission fee or sponsorship scheme starts without a later policy vote. \\
+\addlinespace
+V3 & \textbf{Build university and funder relationships.} Approach supervisors, professors and institutional contacts to recruit external research, postgraduate work and infrastructure support. & Jianou Jiang & No funding, publication or authorship promise. Log contacts and outcomes for the board. \\
+\addlinespace
+V4 & \textbf{Build reviewer community through personal outreach.} Run regular small meetings, invite senior researchers and recognise strong reviewers; avoid mass or spam-style solicitation. & Raul Adriaensen & Produce an invite list and a format for the next open session; respect consent and conflicts of interest. \\
+\addlinespace
+V5 & \textbf{Reduce submission and reproducibility friction.} Audit the full author journey, fix GitHub workflow defects, and simplify documentation without weakening scientific or reproducibility requirements. & Jingda Wu & Open a tracked issue/PR with a before/after test; changes remain reviewable and reversible. \\
+\addlinespace
+V6 & \textbf{Invite reproducible extensions of senior researchers' back-catalogues.} Work with established professors and their students; offer workshops that turn valuable unpublished or follow-on work into reproducible new submissions. & Feng Wei & No duplicate publication. Every submission must contain a genuinely new contribution and receive normal independent review. \\
+\addlinespace
+V7 & \textbf{Adopt a quality-first publication gate.} Before any new research article is published, require successful reproducibility checks and reports from at least two independent, qualified human reviewers, followed by a conflict-free editor's decision. & Raul Adriaensen & AI tools may support integrity checks but do not replace the two human reports. Publish the workflow and reviewer criteria. \\
 \end{longtable}}
 
-\begin{takeaway}
-\textbf{Readiness at a glance.} The \emph{hard} blockers are few: (1) the \textbf{track-record gate} --- reach 10 articles or the one-year mark; (2) \textbf{endogeny} --- get real external authors; and (3) frame the \textbf{AI-review model} correctly. Everything else is a handful of website pages and metadata housekeeping we can finish in a weekend. \textbf{We are closer than we look.}
-\end{takeaway}
-
-% ═════════════════════════════════════════════════════════════════
-\section{The AI-Review Question --- Our Sharpest Issue}
-
-DOAJ's 2025 guidance says, in plain words, that \emph{``peer reviewers and editors should not use generative AI for assessments,''} and that any automated tooling must run under transparent human oversight. \src{6} AIDER's core mechanism is \textbf{five AI reviewer agents}. On the surface this looks like a collision. It is actually our opportunity --- if we frame and document it deliberately.
-
-\begin{itemize}
-\item \textbf{The human editor is the ``quality control system,'' not the AI.} DOAJ requires that peer review happen before publication and that a human editorial gate makes the accept/reject call. Our agents produce a \emph{structured report} --- reproducibility checks, claim auditing, reference verification --- that a human editor then adjudicates. We should state exactly this on the reviewer-guidelines page: \textbf{agents assist; a named human decides}.
-\item \textbf{We are \emph{more} transparent than the norm, not less.} DOAJ's worry is undisclosed, unaccountable AI. We publish the entire AI review log for every paper. Radical transparency is precisely the posture DOAJ's ``human oversight + transparency'' language rewards --- we just have to say so.
-\item \textbf{Publish an AI-use policy now} (it is on DOAJ's list anyway). It should spell out: what the agents do; that they never make the final decision; that AI is not credited as an author or reviewer-of-record; and how a human editor signs off. This one document turns our biggest question mark into a compliance \emph{asset}.
-\end{itemize}
-
-\begin{warnbox}
-\textbf{Decision for today.} Do we (a) present the human editor as the formal reviewer and the agents as disclosed tooling, and (b) commit to writing and publishing an AIDER AI-use policy before we apply? Recommended: \textbf{yes to both}. It costs us one page and removes the only criterion where a reviewer might hesitate.
-\end{warnbox}
-
-% ═════════════════════════════════════════════════════════════════
-\section{The Other Issues on the Table}
-
-\subsection{Crossref DOIs \& digital preservation}
-Zenodo already gives every article a free, permanent DOI and CERN-backed archival --- which satisfies the Seal's persistent-identifier and preservation criteria today. The optional upgrade is a \textbf{Crossref membership} ($\sim$\$275/yr) to mint DOIs \emph{under our own prefix} rather than Zenodo's, which reads as more journal-native and feeds Crossref's citation graph. \textbf{Question:} do we spend the \$275 now, or stay on free Zenodo DOIs until after DOAJ acceptance? (Recommended: stay on Zenodo for the application; revisit Crossref once cadence is proven.) We should also \textbf{register a SHERPA/RoMEO deposit policy} --- free, and it closes a Seal criterion.
-
-\subsection{Publishing cadence \& the fifth paper}
-The binding eligibility gate is the track record: \textbf{10 articles or a one-year history, plus $\ge$5/year sustained}. Two moves: \textbf{(i)} Raul completes the review so paper \#5 publishes and closes Volume~1 at five; \textbf{(ii)} we open the pipeline to \textbf{external authors} --- which simultaneously fixes the 25\% endogeny risk (\S3) and pushes us toward 10 articles. These are the same task viewed twice: \emph{recruit non-editor authors now.}
-
-\subsection{Post-ISSN promotion}
-With the ISSN assigned, the June-13 hold on wider outreach is lifted. Low-risk, high-value first steps: verify our articles surface in \textbf{Google Scholar} and \textbf{OpenAlex}; announce the ISSN through the board's personal networks (not mass email); and line up external submissions from those networks. The DOAJ application itself becomes a promotion milestone we can announce.
-
-% ═════════════════════════════════════════════════════════════════
-\section{Proposed Next Steps \& Owners}
-
-\renewcommand{\arraystretch}{1.25}
-\begin{center}\small
-\begin{tabular}{@{}p{9.7cm} p{2.6cm} p{1.5cm}@{}}
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{1.1cm}p{2cm}p{2cm}p{2cm}p{2cm}p{3.4cm}@{}}
 \toprule
-\textbf{Action} & \textbf{Owner} & \textbf{When} \\
+\textbf{Motion} & \textbf{For} & \textbf{Against} & \textbf{Abstain} & \textbf{Result} & \textbf{First deadline} \\
 \midrule
-Finish review of paper \#5 so Vol.~1 closes at five articles & Raul & This month \\
-Recruit external (non-editor) authors --- cut endogeny \& push to 10 articles & All editors & Ongoing \\
-Add website pages: OA policy, copyright policy, ``no fees'' statement, review-type + timing & Jianou & 1--2 weeks \\
-Draft \& publish the AIDER AI-use policy (\S4) & Jianou + board & 2 weeks \\
-Embed a CC-BY notice + DOI on every article page/PDF & Jianou & 1--2 weeks \\
-Register a SHERPA/RoMEO deposit policy & Jianou & 2 weeks \\
-Decide on Crossref membership (\$275/yr) vs.\ staying on Zenodo DOIs & Board vote & Today \\
-File the DOAJ application once the track-record gate clears ($\ge$10 articles or $\sim$Mar 2027) & Jianou & Q4 2026 / Q1 2027 \\
-Reconvene to review the application draft before submission & All & Next meetup \\
+V1 & & & & & \\[7pt]
+V2 & & & & & \\[7pt]
+V3 & & & & & \\[7pt]
+V4 & & & & & \\[7pt]
+V5 & & & & & \\[7pt]
+V6 & & & & & \\[7pt]
+V7 & & & & & \\[7pt]
 \bottomrule
 \end{tabular}
 \end{center}
 
+% ═════════════════════════════════════════════════════════════════
+\section{DOAJ: Requirements, Reality and Timeline}
+
+The Directory of Open Access Journals is free to apply to. AIDER now has several foundations DOAJ expects: an online ISSN, immediate CC BY open access, five research articles, a dedicated website, a named editorial board and public author guidance. But an ISSN plus five papers is \textbf{not} enough. The current DOAJ Guide to Applying (v2.9) creates three binding gaps. \src{2}
+
+\subsection{The three gates that control our application date}
+
+{\small\renewcommand{\arraystretch}{1.22}
+\begin{tabular}{@{}p{4.1cm} p{1.6cm} p{8.4cm}@{}}
+\toprule
+\textbf{Requirement} & \textbf{Status} & \textbf{What it means for AIDER} \\
+\midrule
+Publishing history $>1$ year \emph{or} $\geq10$ OA research articles; at least 5 per year & \partialx & First publication was March 2026 and five articles are live. Five more clear the article-count gate, but do not solve the next two gates. \\
+\addlinespace
+At least two independent reviewers for every article; peer reviewers should be outside the journal's editorial team & \atrisk & Public issue records show the five papers received one or two human reports, but those reviewers were AIDER board members. Automated/AI reports are explicitly labelled ``not peer review.'' The process must change before the next article. \src{2,3,4} \\
+\addlinespace
+Editor/board/reviewer-authored papers $\leq25\%$ (latest two issues, or last calendar year for continuous publication) & \atrisk & All five current papers have at least one AIDER editor/board author: \textbf{5/5 = 100\%}. Reaching ten with five external papers would still be 50\%. If assessed across 2026, five internal papers require at least \textbf{20 total papers}---15 additional eligible external-author papers---to reach 25\%. \src{2} \\
+\bottomrule
+\end{tabular}}
+
+\begin{warnbox}
+\textbf{The main correction to the earlier briefing.} A human editor who reads AI-generated reports is not a substitute for DOAJ's two independent reviewers. DOAJ currently treats its detailed AI section as best practice rather than a basic criterion, but it says reviewers and editors should not use generative AI to create assessments. The defensible AIDER model is: \textbf{automated reproducibility and integrity checks + two external human reports + a human editorial decision}. \src{2,4}
+\end{warnbox}
+
+\subsection{Website and operating work that can start immediately}
+
+Before applying, AIDER must make the following easy to reach from the homepage: open-access policy; aims and scope; board names and affiliations; author instructions; exact editorial/peer-review process; licensing and copyright terms; an explicit statement that all author charges are zero; and publisher name, address, contact person and dedicated journal email. Licensing should appear in every article. A plagiarism/similarity process, archiving, repository policy, persistent identifiers and metadata deposits strengthen the application even where DOAJ labels them recommendations rather than basic criteria. \src{2}
+
+Publish an AI-use policy that separates permitted automated checks from confidential human assessment. Recruit a real external reviewer pool before accepting more papers. For board-authored submissions, use a handling editor and reviewers with no conflict. Do not try to cure endogeny by creating artificial issues or by lowering quality to hit a number.
+
+\subsection{A credible application timeline}
+
+{\small\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}p{2.4cm} p{8.9cm} p{3.0cm}@{}}
+\toprule
+\textbf{When} & \textbf{Milestone} & \textbf{Go/no-go evidence} \\
+\midrule
+1--31 Aug 2026 & Publish the missing policies; implement the two-external-reviewer workflow; build a reviewer register; ask DOAJ in writing how it will treat the five legacy papers and AIDER's continuous/issue structure. & Policies live; test submission; DOAJ reply logged. \\
+Sep--Dec 2026 & Publish only under the new process and prioritise genuinely external authors. The numerical 2026 endogeny fast path is 15 additional non-board/non-reviewer-authored papers, but quality must not be sacrificed to reach it. & Two reports/article; author mix ledger; $\leq25\%$ endogeny. \\
+When article 10 is live & The 10-article history gate is cleared. \textbf{Do not apply automatically}: peer review, endogeny and all website disclosures must also pass. & Full pre-application audit. \\
+After Mar 2027 & The more-than-one-year history route becomes available. Apply only if DOAJ confirms the review record and assessed endogeny period are acceptable. & Written clarification + board sign-off. \\
+Early 2028 fallback & If 2026 cannot be made compliant, build a clean 2027 record ($\geq5$ articles, $\leq25\%$ endogeny, two independent reviews each), then apply. & Clean calendar-year ledger. \\
+After submission & DOAJ says most applications are processed in about 3 months and decisions are generally reached within 6 months. Answer queries promptly; a non-response for one month can cause rejection. \src{2,5} & Expected decision: 3--6 months. \\
+\bottomrule
+\end{tabular}}
+
 \begin{solvebox}
-\textbf{The through-line.} Almost every gap collapses into one action --- \textbf{publish more papers by more (external) authors}. That single push clears the track-record gate, fixes endogeny, and proves cadence. The rest is a weekend of website pages and one AI-use policy. DOAJ is genuinely within reach this cycle.
+\textbf{Immediate DOAJ decision.} The next high-value action is not ``submit the form.'' It is to make every \emph{new} paper unquestionably compliant, obtain DOAJ's written view on the five legacy papers, and recruit external authors and reviewers. Ten articles solves only one of three gates.
 \end{solvebox}
 
 % ═════════════════════════════════════════════════════════════════
-\section*{References}
+\section{New Proposal for the Third Meetup: Collaborate with JGPPS}
+
+The journal remembered from the supervisor discussion is most likely the \textbf{Journal of the Global Power and Propulsion Society (JGPPS)}. Prof. Budimir Rosic is listed on its editorial board. JGPPS began publishing open access in 2017, entered DOAJ in August 2018, is preserved in Portico, and reports Web of Science/ESCI coverage for articles from 2020 and Scopus coverage from 2021. \src{6,7,8}
+
+This makes JGPPS a strong potential mentor and collaborator in AIDER's overlapping area of AI, energy, turbomachinery and propulsion. It does \textbf{not} create an indexing shortcut: DOAJ and Clarivate evaluate AIDER itself. JGPPS cannot transfer its DOAJ, Scopus or Web of Science status to AIDER, and the same paper cannot be presented as independently published in both journals. Clarivate applies 24 journal-level quality criteria before entry to ESCI. \src{9}
+
+\subsection*{P8 --- motion to circulate now and vote at the third meetup}
+
+\begin{takeaway}
+\textbf{Proposer/owner: Jianou Jiang.} Authorise Jianou to ask Prof. Rosic for a warm introduction to the JGPPS Editor-in-Chief or journal administrator and hold one non-binding exploratory conversation. Explore: DOAJ/WoS mentorship; peer-review and metadata workflow lessons; a jointly hosted reproducibility workshop; reciprocal, conflict-managed reviewer referrals; and a possible collaboration in the journals' overlapping scope. Jianou will return with written options, benefits, obligations, costs and conflicts before any commitment is made.
+\end{takeaway}
+
+Questions the exploratory meeting must answer:
+\begin{itemize}
+\item Is JGPPS willing to mentor a new diamond-OA journal on policies, external peer review, Crossref metadata and Portico-style preservation?
+\item Would a co-hosted AI-for-energy reproducibility workshop benefit both communities without confusing the two publication records?
+\item Can reviewers or authors be referred under explicit consent and conflict-of-interest rules?
+\item If a special issue or co-publication is suggested, which journal is the publisher of record, where is it indexed, what fees apply, and who owns the metadata and editorial decision?
+\item What evidence from JGPPS's 2017--2020 path was decisive for DOAJ, Scopus and ESCI?
+\end{itemize}
+
+\textbf{Recommended scope:} begin with mentorship and one joint workshop, not a merger, journal transfer or promise of shared indexing.
+
+% ═════════════════════════════════════════════════════════════════
+\section{New Proposals Heard Today}
+
+Each proposer has up to 45 seconds. To enter the third-meetup ballot, record one sentence for each field: \textbf{problem; proposed action; owner; authority/boundaries; first deliverable and date; success measure}. Circulate the exact motion within 48 hours; no execution mandate exists until it passes at the next vote.
+
+{\small\renewcommand{\arraystretch}{1.35}
+\begin{tabular}{@{}p{0.8cm} p{3cm} p{7cm} p{3.4cm}@{}}
+\toprule
+\textbf{ID} & \textbf{Proposer / owner} & \textbf{One-sentence motion} & \textbf{Deliverable / measure} \\
+\midrule
+P8 & Jianou Jiang & Explore an AIDER--JGPPS collaboration as specified in \S4. & Written options after one exploratory meeting. \\[10pt]
+P9 & & & \\[18pt]
+P10 & & & \\[18pt]
+P11 & & & \\[18pt]
+\bottomrule
+\end{tabular}}
+
+\section*{What Must Be True at 9:30 pm}
+
+\begin{enumerate}
+\item V1--V7 each have a recorded result; every passed motion has an owner and first deadline.
+\item Everyone understands that DOAJ's binding gaps are independent external peer review, endogeny, and the publication-history gate---not merely the ISSN or five-paper count.
+\item P8 and every other new proposal are written clearly enough to circulate and vote at the third meetup.
+\item The public meeting record is updated within 48 hours with the vote totals and action tracker.
+\end{enumerate}
+
+% ═════════════════════════════════════════════════════════════════
+\section*{Sources}
 {\footnotesize\color{ink2}\raggedright
 \begin{enumerate}[leftmargin=1.6em, itemsep=1.5pt]
-\item DOAJ. \emph{Guide to Applying} (journal eligibility criteria: ISSN, full OA, 1-yr / 10-article history, $\ge$5 articles/yr, peer review, editorial board, $\le$25\% endogeny, required website disclosures, licensing). \href{https://doaj.org/apply/guide/}{doaj.org/apply/guide}.
-\item Scholastica. \emph{How to get OA journals indexed in the DOAJ: an updated guide} (detailed walk-through of DOAJ's required website content and application questions). \href{https://blog.scholasticahq.com/post/doaj-indexing-criteria-how-to-apply-guide-journals/}{blog.scholasticahq.com}.
-\item cOAlition S. \emph{Plan S Principles \& the Journal Checker Tool} --- fully-OA journals must be registered in DOAJ to be Plan~S compliant. \href{https://www.coalition-s.org/}{coalition-s.org}.
-\item DOAJ Blog (10 Jul 2025). \emph{Quarterly updates to DOAJ Criteria from 2025}. \href{https://blog.doaj.org/2025/07/10/quarterly-updates-to-doaj-criteria-from-2025/}{blog.doaj.org}.
-\item DOAJ. \emph{The DOAJ Seal} --- the seven best-practice criteria (preservation, persistent IDs, metadata to DOAJ, machine-readable CC, CC BY/BY-SA/BY-NC, SHERPA/RoMEO deposit policy, unrestricted author copyright); held by $\sim$10\% of listed journals. \href{https://doaj.org/apply/seal/}{doaj.org/apply/seal}.
-\item DOAJ Blog (3 Nov 2025). \emph{Updates to the Guide to Applying --- flipped journals, AI, quality criteria, and OA exceptions} (AI best-practice: publish an AI policy; disclose GenAI use; no AI authors or cited AI sources; reviewers/editors should not use GenAI for assessments; transparent human oversight). \href{https://blog.doaj.org/2025/11/03/updates-to-the-guide-to-applying-flipped-journals-ai-quality-criteria-and-oa-exceptions/}{blog.doaj.org}.
-\end{enumerate}
-}
+\item AIDER. \emph{First Editors' Meetup: Meeting Record \& Strategy Briefing}, 13 June 2026. \href{https://ai-driven-energy-research.github.io/aider-editors-briefing-2026-06-13.pdf}{ai-driven-energy-research.github.io/aider-editors-briefing-2026-06-13.pdf}.
+\item DOAJ. \emph{Guide to Applying}, version 2.9 (eligibility, website, peer review, endogeny, AI best practice and application process). \href{https://doaj.org/apply/guide/}{doaj.org/apply/guide}.
+\item DOAJ. \emph{Transparency \& best practice} (peer review by subject experts who are not part of the journal's editorial team). \href{https://doaj.org/apply/transparency/}{doaj.org/apply/transparency}.
+\item DOAJ Blog (3 Nov 2025). \emph{Updates to the Guide to Applying: AI and automated tools}. \href{https://blog.doaj.org/2025/11/03/updates-to-the-guide-to-applying-flipped-journals-ai-quality-criteria-and-oa-exceptions/}{blog.doaj.org/2025/11/03/...}.
+\item DOAJ. \emph{Thank you for your application} (typical processing statement). \href{https://doaj.org/en/apply/thank-you}{doaj.org/en/apply/thank-you}.
+\item JGPPS. \emph{Editorial Board} (Prof. Budimir Rosic listed). \href{https://journal.gpps.global/Editorial-Board,1801.html}{journal.gpps.global/Editorial-Board}.
+\item DOAJ. \emph{Journal of the Global Power and Propulsion Society} record, ISSN 2515-3080 (OA since 2017; added 13 Aug 2018; Portico; DOI). \href{https://doaj.org/toc/2515-3080}{doaj.org/toc/2515-3080}.
+\item JGPPS. \emph{Indexing and Archiving} (Web of Science/ESCI, Scopus, Portico). \href{https://journal.gpps.global/Indexing-and-Archiving,1813.html}{journal.gpps.global/Indexing-and-Archiving}.
+\item Clarivate. \emph{Web of Science Journal Evaluation Process and Selection Criteria} (24 quality + 4 impact criteria; new journals enter ESCI after quality evaluation). \href{https://clarivate.com/academia-government/scientific-and-academic-research/research-discovery-and-referencing/web-of-science/web-of-science-core-collection/editorial-selection-process/journal-evaluation-process-selection-criteria/}{clarivate.com/journal-evaluation-process-selection-criteria}.
+\end{enumerate}}
 
-\vspace{6pt}
+\vspace{5pt}
 \begin{center}
 {\footnotesize\color{ink3} Prepared for the second AIDER editors' meetup --- 1 August 2026.\\
-Published by AI-Driven Energy Research (AIDER), Oxford, United Kingdom. ISSN 2979-8639 (Online). All content CC-BY 4.0.\\ \href{https://ai-driven-energy-research.github.io/}{ai-driven-energy-research.github.io}}
+Published by AI-Driven Energy Research (AIDER), Oxford, United Kingdom. ISSN 2979-8639 (Online). CC BY 4.0.\\
+\href{https://ai-driven-energy-research.github.io/}{ai-driven-energy-research.github.io}}
 \end{center}
 
 \end{document}
