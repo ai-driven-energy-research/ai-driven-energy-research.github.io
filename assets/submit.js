@@ -12,8 +12,8 @@
   'use strict';
 
   var CONFIG = {
-    SUBMIT_ENDPOINT: '',            // e.g. Google Apps Script web-app URL
-    EDITORIAL_EMAIL: 'jianou.jiang@eng.ox.ac.uk',
+    SUBMIT_ENDPOINT: window.AIDER_API || '',   // set in assets/aider-api.js
+    EDITORIAL_EMAIL: window.AIDER_EMAIL || 'jianou.jiang@eng.ox.ac.uk',
     MAX_MAIN_MB: 20,
     MAX_TOTAL_MB: 25,
     STORE_KEY: 'aider-submission-draft-v1'
@@ -451,8 +451,8 @@
         }
         var r = await fetch(CONFIG.SUBMIT_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(p) });
         var j = null; try { j = await r.json(); } catch (e) { /* opaque or non-JSON */ }
-        if (j && j.ok === false) throw new Error(j.error || 'rejected');
-        done(p, true);
+        if (!j || j.ok !== true) throw new Error((j && j.error) || 'no confirmation received');
+        done(p, j);
         return;
       } catch (e) {
         area.innerHTML = '<div class="notice warn"><p>The upload did not complete (' + esc(e.message) + '). You can submit by email instead:</p></div>';
@@ -473,8 +473,16 @@
     store({});
   }
 
-  function done(p) {
-    $('#submit-area').innerHTML = '<div class="notice"><p><b>Thank you. Your manuscript has been submitted.</b></p><p>Reference: <b>' + esc(p.reference) + '</b>. The corresponding author will receive an acknowledgement from the editorial office. Please quote the reference in any correspondence.</p></div>';
+  function done(p, j) {
+    var link = 'dashboard.html#ref=' + encodeURIComponent(p.reference) + '&key=' + encodeURIComponent(j.author_key || '');
+    try {
+      var saved = JSON.parse(localStorage.getItem('aider-author-manuscripts') || '[]').filter(function (m) { return m.ref !== p.reference; });
+      saved.unshift({ ref: p.reference, key: j.author_key, title: p.title });
+      localStorage.setItem('aider-author-manuscripts', JSON.stringify(saved.slice(0, 20)));
+    } catch (e) { /* storage unavailable */ }
+    $('#submit-area').innerHTML = '<div class="notice"><p><b>Thank you. Your manuscript has been submitted.</b></p><p>Reference: <b>' + esc(p.reference) + '</b>. ' +
+      'The corresponding author will receive an acknowledgement email containing a private link to the author dashboard.</p>' +
+      (j.author_key ? '<p><a class="btn" href="' + link + '">Go to your author dashboard</a></p>' : '') + '</div>';
     $('#prev').style.visibility = 'hidden';
     store({});
   }

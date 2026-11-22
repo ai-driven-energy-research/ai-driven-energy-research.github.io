@@ -1,251 +1,120 @@
-# Integration guide: connecting the Codex + Google Drive workflow to the new AIDER website
+# Integration guide: connecting the Codex + Google Drive workflow to the AIDER editorial system
 
 **For:** Jingda Wu
 **From:** Jianou Jiang (prepared with Claude Code), 22 November 2026
-**Status:** ready to implement; nothing goes live until the endpoint URL below is set
+**Status:** website, dashboards and backend code are finished and tested locally. Going live needs one deployment on a Google account (steps A–D below).
 
 ---
 
-## 1. What we decided, and what this guide asks you to build
+## 1. What we decided, and the whole flow in one picture
 
 At the 22 November meeting we agreed that the website should look and work like a traditional journal. AI agents stay, but **only for basic tasks**:
 
-1. **Metadata extraction:** read the title, authors, affiliations, abstract and keywords from the uploaded manuscript, so authors don't type them twice.
-2. **Initial technical screening:** checks a journal office would normally do by hand, for example whether references exist, length and abstract limits, whether required statements are present and whether files are complete.
+1. **Metadata extraction:** title, authors, affiliations, abstract and keywords.
+2. **Initial technical screening:** the checks a journal office does by hand, for example whether references exist, length and abstract limits, whether required statements are present and whether files are complete.
 
-The agent must **not** write an end-to-end peer review, score the science, or recommend accept or reject. Those stay with human editors and reviewers.
+The agent must **not** write a peer review, score the science, or recommend accept or reject.
 
-Your Drive workflow (drop files in a folder, wait 5 minutes, Codex runs, output appears in "completed" about 30 minutes later) is the right engine for this. This guide connects it to the new website in four steps:
+The new website (already live) now has three parts that share one small backend:
 
-| # | What | Who | Effort |
-|---|------|-----|--------|
-| A | Deploy a small Google Apps Script that receives submissions from the website and saves them into your Drive upload folder | Jingda | about 30 min |
-| B | Adapt your watcher so that each submission arrives as a **subfolder** and the job starts when `submission.json` appears | Jingda | small change |
-| C | Replace the full-review prompt with the **basic-tasks prompt** in section 6, which writes `metadata.json` and `screening.md` | Jingda | small change |
-| D | Send me the web-app URL; I set it on the website and we run a test submission together | Jingda → Jianou | 10 min |
+| Part | Who uses it | Page |
+|---|---|---|
+| Submission system (7 steps; the last step is **Submit manuscript**) | Authors | `submit.html` |
+| **Author dashboard**: status, history, review progress, decision letter and reports; upload revision; withdraw | Authors (private link emailed at submission) | `dashboard.html` |
+| **Reviewer dashboard**: accept or decline, download files, submit report or answer a targeted question | Reviewers (private link in the invitation email) | `review.html` |
+| **Editor console**: a Google Sheet with an "AIDER" menu | Editors | Google Sheets |
+
+```
+AUTHOR                 BACKEND (Google Apps Script + Sheet)          DRIVE                     YOUR CODEX WORKFLOW
+──────                 ────────────────────────────────────          ─────                     ───────────────────
+clicks "Submit"  ───►  submit: save files + row in Sheet      ───►  upload/<ref>/            watcher sees submission.json
+                       status = Submitted                            main__*.pdf               │
+                       emails author a dashboard link                submission.json (last)    ├─► agent_update "initial_checks"
+                                                                                               │     status → Initial checks in progress
+                                                                                               │   Codex: metadata.json + screening.md
+                                                                     completed/<ref>/  ◄───────┤
+                                                                                               └─► agent_update "checks_complete"
+                                                                                                     status → Initial checks complete
+                                                                                                     (editor emailed)
+EDITOR (Sheet menu): Assign to me → With editor; add reviewer rows → "Send invitations"
+REVIEWER (dashboard): Agree → status Under review; submit report → when all agreed reviewers (≥2) have reported → Reviews complete
+EDITOR (Sheet menu): Record decision → author emailed; dashboard shows letter + anonymised reports
+AUTHOR (dashboard): upload revision ───► upload/<ref>-R1/ … the same Codex job runs again (agent_update with "<ref>-R1")
+```
+
+**Your agent's actions are linked to the author's status** through two HTTP calls, `initial_checks` and `checks_complete`, described in section 5. They are the only change your workflow needs beyond swapping the prompt.
 
 ---
 
-## 2. How it fits together
+## 2. Files
 
-```
-Author's browser                         Google (AIDER account)                  Codex (your workflow)
-────────────────                         ──────────────────────                  ─────────────────────
-submit.html (7-step form)
-  │ the browser pre-fills title/abstract/
-  │ authors/keywords (pdf.js, mammoth)
-  │ the author checks and edits them
-  ▼
-POST JSON (metadata + files as base64) ──► Apps Script web app (doPost)
-                                           │ validates, rate-limits
-                                           │ creates  upload/AIDER-20261122-ABC123/
-                                           │   main__manuscript.pdf
-                                           │   supp__data.zip
-                                           │   submission.json   ← written LAST (job marker)
-                                           │ emails the editorial office + an
-                                           │ acknowledgement to the corresponding author
-                                           ▼
-                                         upload/<reference>/  ───────────────►  watcher sees submission.json,
-                                                                                 waits 5 min, runs Codex with
-                                                                                 the basic-tasks prompt
-                                                                                        │
-                                         completed/<reference>/  ◄──────────────────────┘
-                                           metadata.json   (machine-readable)
-                                           screening.md    (checklist for the handling editor)
-```
+All in the website repository `ai-driven-energy-research.github.io` (they are also attached to the email):
 
-The website is static (GitHub Pages). It has no server, so the Apps Script is the smallest free piece of cloud infrastructure that can accept uploads. It runs in Google's cloud, not on anyone's laptop. Until the endpoint is set, the form falls back to: "download the submission form and email it with your manuscript to the editorial office".
+| File | What it is |
+|---|---|
+| `_docs/apps-script/Code.gs` | **The whole backend.** Paste it into Apps Script. |
+| `_docs/apps-script/mock_server.js` | Local emulator of Google's services, used to test the full loop (`node _docs/apps-script/mock_server.js`). It is optional and not needed to deploy. |
+| `assets/aider-api.js` | Website setting `window.AIDER_API = ''`. I put the web-app URL here when you send it. |
+| `assets/submit.js`, `dashboard.js`, `review.js` | Website front-end. Nothing for you to change. |
 
 ---
 
-## 3. Data contract: what the website sends (`aider-submission/1`)
+## 3. Step A: deploy the backend (about 30 minutes)
 
-`assets/submit.js` POSTs one JSON object as `Content-Type: text/plain`. The `text/plain` type avoids a CORS pre-flight that Apps Script cannot answer.
+1. Use the **AIDER Google account** if we have one; otherwise use yours for the pilot. It can be moved later.
+2. In Drive, create `AIDER/upload` and `AIDER/completed`. Share them **only** with the editors. Copy the ID of `upload` (the string after `/folders/` in its URL).
+3. Create a Google Sheet called **"AIDER editorial system"** and open **Extensions → Apps Script**. Delete the sample code, paste in `Code.gs`, and save.
+4. **Project Settings → Script properties**: add
+    - `UPLOAD_FOLDER_ID` = the folder ID from step 2
+    - `EDITORIAL_EMAIL` = `jianou.jiang@eng.ox.ac.uk` (or the shared editorial address)
+    - `AGENT_KEY` = a long random secret, for example the output of `openssl rand -hex 24`. **Only your Codex workflow knows this.**
+    - `SITE_URL` = `https://ai-driven-energy-research.github.io`
+    - `SHEET_ID` = the Sheet's ID (the string after `/d/` in its URL). The script finds the Sheet without it when bound, but setting it is safer for web-app calls.
+5. Back in the Sheet, reload. An **AIDER** menu appears. Run **AIDER → Set up sheets** once and authorise the script. It creates three tabs: `submissions`, `reviews` and `reviewers`.
+6. In Apps Script, click **Deploy → New deployment → Web app**, with *Execute as:* **Me** and *Who has access:* **Anyone**. Copy the URL (`https://script.google.com/macros/s/…/exec`).
+7. Send me the URL. **Don't** send `AGENT_KEY` through the group chat.
 
-```json
-{
-  "schema": "aider-submission/1",
-  "reference": "AIDER-20261122-ABC123",
-  "submitted_at": "2026-11-22T15:04:05.000Z",
-  "article_type": "Research Article",
-  "title": "…",
-  "abstract": "…",
-  "keywords": ["…", "…", "…"],
-  "subject_area": "Renewable energy forecasting",
-  "authors": [
-    {"name": "…", "email": "…", "affiliation": "…", "country": "…", "orcid": "", "corresponding": true}
-  ],
-  "suggested_reviewers": "free text, one per line",
-  "opposed_reviewers": "free text",
-  "cover_letter": "…",
-  "data_availability": "…",
-  "repository_url": "https://…",
-  "ai_statement": "…",
-  "funding": "…",
-  "competing_interests": "…",
-  "previous_submission": "No",
-  "confirmations": {"original": true, "authors_approved": true, "licence_cc_by": true, "privacy": true},
-  "extraction": {"source_file": "manuscript.pdf", "method": "browser-heuristic-v1", "found": ["title", "abstract", "keywords", "authors"]},
-  "files": [
-    {"name": "manuscript.pdf", "role": "main", "mime": "application/pdf", "size": 912345, "base64": "JVBERi0…"},
-    {"name": "data.zip", "role": "supplementary", "mime": "application/zip", "size": 120000, "base64": "UEsDB…"}
-  ]
-}
-```
-
-Notes:
-- `title`, `abstract`, `keywords` and `authors` are what the **author confirmed**. The browser pre-fill is a heuristic. Your Codex extraction is the independent second reading, and differences between the two are worth flagging (section 6).
-- Total upload is capped at 25 MB in the browser. Base64 adds about 33%, so the request body stays under about 35 MB, within Apps Script's limit.
-- The website expects the JSON reply `{"ok": true, "reference": "…"}` or `{"ok": false, "error": "…"}`.
+When you change `Code.gs` later, use **Deploy → Manage deployments → Edit → New version**. That keeps the same URL.
 
 ---
 
-## 4. Step A: deploy the Apps Script receiver
+## 4. Step B: watcher changes
 
-1. Use the **AIDER Google account** if we have one. Otherwise use your own account for the pilot; we can move it later by redeploying under another account and changing one URL on the website.
-2. In Drive, create (or reuse) the folders `AIDER/upload` and `AIDER/completed`. Share them **only** with the editors. Copy the ID of `upload`: it is the long string in the folder's URL after `/folders/`.
-3. Go to <https://script.google.com>, create a **New project** named "AIDER submission receiver", and paste in the code below. Set `UPLOAD_FOLDER_ID` and `EDITORIAL_EMAIL`.
-4. Click **Deploy → New deployment → type "Web app"**:
-   - *Execute as:* **Me**
-   - *Who has access:* **Anyone**. The website's visitors are anonymous; the script itself validates every request.
-   - Authorise the requested scopes: Drive, to create files, and Gmail/MailApp, to send emails.
-5. Copy the **Web app URL** (`https://script.google.com/macros/s/…/exec`) and send it to me.
+1. **One job per subfolder** of `upload/`. New submissions are named `AIDER-YYYYMMDD-XXXXXX`, and revisions `AIDER-YYYYMMDD-XXXXXX-R1`, `-R2`, and so on.
+2. **Start a job when `submission.json` exists in that folder.** The backend writes it last, so it means "upload complete". You can keep your 5-minute quiet period as a safety margin.
+3. Write the outputs to `completed/<same folder name>/`.
+4. `submission.json` contains what the author typed. For revisions it has `"type": "revision"`, `"revision": n` and the author's `response_letter`.
 
-```javascript
-/**
- * AIDER submission receiver — Google Apps Script web app.
- * Receives aider-submission/1 JSON from https://ai-driven-energy-research.github.io/submit.html,
- * stores files + submission.json in UPLOAD_FOLDER/<reference>/, and sends two emails.
- */
-const UPLOAD_FOLDER_ID = 'PASTE_UPLOAD_FOLDER_ID_HERE';
-const EDITORIAL_EMAIL  = 'jianou.jiang@eng.ox.ac.uk';
-const MAX_BYTES        = 30 * 1024 * 1024;   // decoded size of all files
-const MAX_PER_10_MIN   = 20;                 // crude abuse limit
+---
 
-function doPost(e) {
-  try {
-    const p = JSON.parse(e.postData.contents);
-    validate_(p);
-    throttle_();
+## 5. Step C: link the agent to the status (two calls) and swap the prompt
 
-    const files = p.files || [];
-    const total = files.reduce((s, f) => s + (Number(f.size) || 0), 0);
-    if (total > MAX_BYTES) throw new Error('Files exceed the size limit');
-
-    const root = DriveApp.getFolderById(UPLOAD_FOLDER_ID);
-    if (root.getFoldersByName(p.reference).hasNext()) throw new Error('Duplicate reference');
-    const folder = root.createFolder(p.reference);
-
-    files.forEach(f => {
-      const safe = String(f.name || 'file').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').slice(0, 150);
-      const prefix = f.role === 'main' ? 'main__' : 'supp__';
-      const blob = Utilities.newBlob(Utilities.base64Decode(f.base64), f.mime || 'application/octet-stream', prefix + safe);
-      folder.createFile(blob);
-    });
-
-    // submission.json is written LAST: the Codex watcher uses it as the "upload complete" marker.
-    const record = Object.assign({}, p, {
-      files: files.map(f => ({ name: f.name, role: f.role, mime: f.mime, size: f.size })),
-      received_at: new Date().toISOString()
-    });
-    folder.createFile('submission.json', JSON.stringify(record, null, 2), MimeType.PLAIN_TEXT);
-
-    notify_(p, folder);
-    return json_({ ok: true, reference: p.reference });
-  } catch (err) {
-    console.error(err);
-    return json_({ ok: false, error: String(err && err.message || err) });
-  }
-}
-
-function doGet() { return json_({ ok: true, service: 'AIDER submission receiver' }); }
-
-function validate_(p) {
-  if (!p || p.schema !== 'aider-submission/1') throw new Error('Unknown schema');
-  if (!/^AIDER-\d{8}-[A-Z0-9]{6}$/.test(p.reference || '')) throw new Error('Bad reference');
-  if (!p.title || !p.abstract) throw new Error('Missing title or abstract');
-  if (!Array.isArray(p.authors) || !p.authors.length) throw new Error('Missing authors');
-  if (!Array.isArray(p.files) || !p.files.some(f => f.role === 'main')) throw new Error('Missing main document');
-  const c = p.confirmations || {};
-  if (!(c.original && c.authors_approved && c.licence_cc_by && c.privacy)) throw new Error('Confirmations missing');
-}
-
-function throttle_() {
-  const cache = CacheService.getScriptCache();
-  const n = Number(cache.get('count') || 0) + 1;
-  if (n > MAX_PER_10_MIN) throw new Error('Too many submissions; please try again later');
-  cache.put('count', String(n), 600);
-}
-
-function notify_(p, folder) {
-  const corr = p.authors.find(a => a.corresponding) || p.authors[0];
-  const names = p.authors.map(a => a.name).join(', ');
-  MailApp.sendEmail({
-    to: EDITORIAL_EMAIL,
-    subject: `[AIDER] New submission ${p.reference}: ${p.title.slice(0, 80)}`,
-    body: `Reference: ${p.reference}\nType: ${p.article_type}\nTitle: ${p.title}\nAuthors: ${names}\n` +
-          `Corresponding: ${corr.name} <${corr.email}>\nSubject area: ${p.subject_area}\n\nFolder: ${folder.getUrl()}\n\n` +
-          `Automated metadata extraction and initial screening will appear in completed/${p.reference}/ when the Codex job finishes.`
-  });
-  if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(corr.email || '')) {
-    MailApp.sendEmail({
-      to: corr.email,
-      replyTo: EDITORIAL_EMAIL,
-      name: 'AI-Driven Energy Research',
-      subject: `Submission received: ${p.reference}`,
-      body: `Dear ${corr.name},\n\nThank you for submitting your manuscript "${p.title}" to AI-Driven Energy Research.\n\n` +
-            `Your reference is ${p.reference}. Please quote it in any correspondence. The editorial office will carry out ` +
-            `initial checks and contact you about the next steps.\n\nEditorial Office\nAI-Driven Energy Research (ISSN 2979-8639)\n` +
-            `https://ai-driven-energy-research.github.io`
-    });
-  }
-}
-
-function json_(o) {
-  return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON);
-}
-```
-
-**Quotas to know about:** a consumer Gmail account can send about 100 emails a day through MailApp, which is plenty. Each script run may take up to 6 minutes; a 25 MB upload takes a few seconds.
-
-**Test the deployment** before sending me the URL. This posts a tiny fake submission with a one-line text file as the "manuscript":
+At the **start** and **end** of each job, call the backend. `$AIDER_API` is the web-app URL and `$AIDER_AGENT_KEY` is the secret from step A4; keep them in environment variables, not in code you commit.
 
 ```bash
-URL='https://script.google.com/macros/s/XXXX/exec'
-B64=$(printf 'test manuscript' | base64)
-curl -sL -H 'Content-Type: text/plain' --data-binary @- "$URL" <<EOF
-{"schema":"aider-submission/1","reference":"AIDER-20261122-TEST01","title":"Test","abstract":"Test abstract",
- "authors":[{"name":"Test Author","email":"YOUR_EMAIL","affiliation":"X","country":"Y","corresponding":true}],
- "confirmations":{"original":true,"authors_approved":true,"licence_cc_by":true,"privacy":true},
- "files":[{"name":"test.txt","role":"main","mime":"text/plain","size":15,"base64":"$B64"}]}
-EOF
+# job started  ->  author dashboard shows "Initial checks in progress"
+curl -sL -H 'Content-Type: text/plain' "$AIDER_API" \
+  -d "{\"action\":\"agent_update\",\"agent_key\":\"$AIDER_AGENT_KEY\",\"reference\":\"$JOB\",\"status\":\"initial_checks\"}"
+
+# job finished ->  "Initial checks complete"; the editor is emailed. editor_note is shown to EDITORS ONLY.
+curl -sL -H 'Content-Type: text/plain' "$AIDER_API" \
+  -d "{\"action\":\"agent_update\",\"agent_key\":\"$AIDER_AGENT_KEY\",\"reference\":\"$JOB\",\"status\":\"checks_complete\",\"editor_note\":\"5/5 statements present; 2 references not found\"}"
+
+# job failed   ->  editor emailed; the author's status is unchanged
+curl -sL -H 'Content-Type: text/plain' "$AIDER_API" \
+  -d "{\"action\":\"agent_update\",\"agent_key\":\"$AIDER_AGENT_KEY\",\"reference\":\"$JOB\",\"status\":\"failed\",\"editor_note\":\"Main file is password-protected\"}"
 ```
 
-You should get `{"ok":true,"reference":"AIDER-20261122-TEST01"}`, a new folder in `upload/`, and two emails. Delete the test folder afterwards.
+`$JOB` is the folder name (`AIDER-…` or `AIDER-…-R1`); the backend strips the `-R1` suffix itself. Every reply is JSON: `{"ok":true,"status":"…"}` or `{"ok":false,"error":"…"}`.
 
----
-
-## 5. Step B: watcher changes
-
-Your current trigger is "no new files in `upload/` for 5 minutes". Two small changes:
-
-1. **One job per subfolder.** Each submission is a folder named `AIDER-YYYYMMDD-XXXXXX`. Treat every new subfolder as one job, and write the outputs to `completed/<same name>/`.
-2. **Start when `submission.json` exists.** The receiver writes it last, so it means "upload complete". You can keep the 5-minute quiet period as a safety margin.
-
-Files dropped directly into `upload/` by hand, the way you do now, can keep working as before. Treat a loose file as its own job named after the file.
-
----
-
-## 6. Step C: the basic-tasks prompt (replaces the full-review prompt)
-
-Give Codex the job folder (manuscript, supplementary files and `submission.json`) and the prompt below. It must produce exactly two files in the output folder.
+**Prompt.** Replace the full-review prompt with the one below. It must produce exactly two files: `metadata.json` and `screening.md`.
 
 ````markdown
 # AIDER editorial-office assistant — basic tasks only
 
 You are assisting the editorial office of AI-Driven Energy Research (AIDER), a peer-reviewed journal.
 Input folder: the manuscript (main__*), supplementary files (supp__*), and submission.json (what the
-author typed into the submission form).
+author typed into the submission form; for revisions it also contains the response letter).
 
 ## Strict limits
 - Do NOT review the science. Do NOT judge novelty, significance or correctness of results.
@@ -279,40 +148,57 @@ A short checklist for the handling editor, using one of PASS / FLAG / N/A for ea
    understandable (flag only if serious).
 9. Anything the editor should know before sending to reviewers (e.g. manuscript appears to be a duplicate or already published:
    search the exact title).
+10. For revisions only: does the response letter address each reviewer comment? List any that appear unanswered (facts only).
 
 End screening.md with: "Automated administrative checks only; not a peer review."
 ````
 
-**What happens to the full-review mode you already built?** Keep it, but internal only. It is switched off for authors. The editors can decide later whether to give reviewers an AI-prepared report as a starting point; Raul raised that "head start" idea at the meeting, and it isn't decided yet.
+Use a one-line summary of `screening.md` as the `editor_note` of the `checks_complete` call.
+
+**Your existing full-review mode** stays internal and switched off for authors. The editors may later decide to give reviewers an AI-prepared report as a starting point (Raul's suggestion at the meeting). That is not decided yet.
 
 ---
 
-## 7. Step D: going live
+## 6. How editors run the process (for reference)
 
-1. You send me the web-app URL.
-2. I set `SUBMIT_ENDPOINT` at the top of `assets/submit.js` in the website repository and publish.
-3. We make one test submission through <https://ai-driven-energy-research.github.io/submit.html> using one of the Volume 1 PDFs, then check that the `upload/` folder is created, both emails arrive, and `metadata.json` and `screening.md` appear in `completed/`.
-4. We delete the test folder.
+Everything happens in the **"AIDER editorial system"** Sheet:
 
----
-
-## 8. Confidentiality and privacy
-
-- Unpublished manuscripts are confidential. Keep `upload/` and `completed/` shared with editors only, never "anyone with the link".
-- Codex sends manuscript content to OpenAI for processing. The journal's privacy statement has been updated to say that submissions "may be processed by automated tools, including third-party AI services operated on the journal's behalf, solely for administrative checks". Please use an account or plan whose data is **not used for training**, and tell me if that isn't possible.
-- Don't commit manuscripts, outputs or the web-app URL's deployment credentials to any public repository. The URL itself is not secret: it will appear in the website's JavaScript.
+| Step | Editor action | What the author/reviewer sees |
+|---|---|---|
+| Triage | Select the row in `submissions` → **AIDER → Assign selected submission to me** | Status "With editor" |
+| Invite | In `reviews`, add a row: `reference`, `reviewer_name`, `reviewer_email`; optionally `scope` = `question`, a `question`, and `due_date`. Then **AIDER → Send invitations for new reviewer rows** | Reviewer receives an email with a dashboard link (a targeted question if `scope=question`) |
+| Review | Nothing to do | Reviewer agrees → status "Under review". When all reviewers who agreed (at least 2) have reported → "Reviews complete" |
+| Decide | Select the row → **AIDER → Record decision…** (`minor_revision`, `major_revision`, `accepted` or `rejected`, then the letter) | Author emailed; the dashboard shows the letter and anonymised reports |
+| Revise | Nothing to do | Author uploads in the dashboard → `upload/<ref>-R1/` → your agent runs again |
+| Publish | **AIDER → Mark selected submission as published** | Status "Published" |
 
 ---
 
-## 9. Later (not yet approved): targeted-question review
+## 7. Step D: going live and testing together
 
-The meeting supported trialling invitations in which each expert answers one specific question about one section. When the editors approve a pilot, the same pipeline can add a third, editor-facing output: a list of the manuscript's key sections or claims, candidate experts found from the cited literature, and one draft question per expert. Every invitation would still be approved and sent by an editor. Please don't build this until the board agrees the pilot.
+1. You send me the web-app URL. I set `window.AIDER_API` in `assets/aider-api.js` and publish the website.
+2. We submit a test manuscript, for example a Volume 1 PDF, through `submit.html`, then check:
+    - the folder in `upload/`, the row in the Sheet, and both emails;
+    - that the author dashboard link works;
+    - that your agent's two calls change the dashboard status, and that `metadata.json` and `screening.md` appear in `completed/`;
+    - that inviting one of us as a reviewer works, and the reviewer dashboard can accept, download and submit.
+3. We delete the test row and folders.
+
+I tested the complete loop locally against `mock_server.js`, from submission and agent updates through invitations, two reviewers (one full review, one targeted question), the decision, and a revision that the agent picks up again. All 17 checks passed.
 
 ---
 
-**Website files involved** (repository `ai-driven-energy-research.github.io`):
-- `_src/pages/submit.html`: the form
-- `assets/submit.js`: browser extraction, form logic and `CONFIG.SUBMIT_ENDPOINT`
-- `tools/build_site.py`: regenerates the HTML pages from `_src/` (run `python3 tools/build_site.py`)
+## 8. Confidentiality, privacy and limits
+
+- Keep `upload/`, `completed/` and the Sheet shared with editors only. The Sheet holds the private dashboard keys.
+- Codex sends manuscript content to OpenAI. The journal's privacy statement already discloses that third-party AI services may process submissions for administrative checks. Please use a plan or setting whose data is **not used for training**.
+- The web-app URL is not secret; it appears in the website's JavaScript. `AGENT_KEY` is secret.
+- Limits: 25 MB of files per submission; about 100 emails a day on a consumer Gmail account; at most 20 submissions per 10 minutes, as a simple abuse brake.
+
+---
+
+## 9. Later (not yet approved): AI-assisted targeted-question outreach
+
+The backend already supports targeted questions (`scope = question`). When the board approves a pilot, your pipeline could add a third, editor-facing output: the manuscript's key sections or claims, candidate experts from the cited literature, and one draft question per expert. Editors would paste the approved ones into the `reviews` sheet. Please don't build this until the board agrees the pilot.
 
 Questions: message me in the group chat.
