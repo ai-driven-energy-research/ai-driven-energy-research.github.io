@@ -1,0 +1,383 @@
+<div class="section">
+    <div class="container">
+
+        <h2>About This Roadmap</h2>
+        <p>This roadmap is maintained by the AIDER editorial committee and updated quarterly. It maps the landscape of AI + energy research — what has been done, where the gaps are, and what needs work.</p>
+
+        <p>This is not an exclusive list. Unlisted topics are welcome — if your research falls within <a href="about.html#aims-and-scope">AIDER's scope</a>, we want to see it. The roadmap exists to help researchers identify high-impact opportunities, not to limit what gets published.</p>
+
+        <p class="small">Last updated: Q1 2026</p>
+
+        <h2>Research Areas at a Glance</h2>
+
+        <div class="legend">
+            <div class="legend-item"><span class="area-status status-covered">Well-Covered</span> Substantial published work exists</div>
+            <div class="legend-item"><span class="area-status status-active">Active</span> Work happening but gaps remain</div>
+            <div class="legend-item"><span class="area-status status-emerging">Emerging</span> Very little published work, major opportunity</div>
+        </div>
+
+        <div class="area-grid">
+            <div class="area-card">
+                <span class="area-status status-covered">Well-Covered</span>
+                <h4>ML for Renewable Energy Forecasting</h4>
+                <p>Wind, solar, and load forecasting using neural networks, gradient boosting, and hybrid models. Large body of existing literature.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-covered">Well-Covered</span>
+                <h4>AI for Power Grid Optimisation</h4>
+                <p>Reinforcement learning and optimisation for dispatch, demand response, and grid stability. Active research community.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-active">Active</span>
+                <h4>Physics-Informed Neural Networks for Energy</h4>
+                <p>PINNs applied to fluid dynamics, heat transfer, and structural analysis in energy systems. Growing rapidly but reproducibility is poor.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-active">Active</span>
+                <h4>ML-Augmented CFD for Energy</h4>
+                <p>Surrogate models, turbulence closures, and mesh-free methods for wind turbines, combustion, and thermal systems.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-active">Active</span>
+                <h4>AI for Building Energy Management</h4>
+                <p>HVAC control, occupancy prediction, retrofit optimisation. Practical applications exist but benchmarks are fragmented.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-active">Active</span>
+                <h4>Generative Models for Materials Discovery</h4>
+                <p>Diffusion models and VAEs for battery materials, catalysts, and photovoltaics. Fast-moving but limited to a few research groups.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-emerging">Emerging</span>
+                <h4>LLM-Assisted Research Workflows</h4>
+                <p>Using large language models to design experiments, write code, and accelerate the research process itself. Almost no published work with reproducible process logs.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-emerging">Emerging</span>
+                <h4>Foundation Models for Energy Systems</h4>
+                <p>Pre-trained models for time series, sensor data, and multi-physics. No established benchmarks. Major opportunity.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-emerging">Emerging</span>
+                <h4>AI for Energy Policy Analysis</h4>
+                <p>NLP for regulatory text, scenario modelling with AI, automated policy impact assessment. Very little published work.</p>
+            </div>
+            <div class="area-card">
+                <span class="area-status status-emerging">Emerging</span>
+                <h4>Multi-Agent Systems for Energy</h4>
+                <p>Coordinated AI agents for grid management, market simulation, and distributed energy resources. Theoretical work exists but practical studies are rare.</p>
+            </div>
+        </div>
+
+        <h2>Detailed Gap Analysis</h2>
+        <p class="section-lead">Click on each area to see what exists, what's missing, and suggested research questions.</p>
+
+        <!-- Well-Covered Areas -->
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-covered">Well-Covered</span> ML for Renewable Energy Forecasting</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>Thousands of papers on wind speed/power forecasting using LSTMs, CNNs, Transformers</li>
+                    <li>Solar irradiance prediction with satellite imagery and ground sensors</li>
+                    <li>Hybrid models combining NWP with ML post-processing</li>
+                    <li>Probabilistic forecasting with quantile regression and ensemble methods</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Standardised benchmarks — most papers use private datasets, making comparison impossible</li>
+                    <li>Reproducible code — fewer than 10% of forecasting papers publish working code</li>
+                    <li>Multi-site and transfer learning studies at scale</li>
+                    <li>Integration of forecasting uncertainty into downstream decision-making</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can a single pre-trained forecasting model generalise across wind farms without fine-tuning?</li>
+                    <li>What is the actual value of deep learning over gradient boosting when both are properly tuned?</li>
+                    <li>How should forecast uncertainty propagate into energy trading or grid dispatch decisions?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-covered">Well-Covered</span> AI for Power Grid Optimisation</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>RL for real-time dispatch and demand response</li>
+                    <li>Graph neural networks for power flow analysis</li>
+                    <li>ML-based fault detection and predictive maintenance</li>
+                    <li>Optimisation of EV charging and battery storage scheduling</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Real-world deployment studies (most work is simulation-only)</li>
+                    <li>Safety guarantees for RL-based control in critical infrastructure</li>
+                    <li>Open grid simulation environments with realistic dynamics</li>
+                    <li>Studies at distribution level (most focus on transmission)</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can safe RL maintain grid stability guarantees while optimising for cost?</li>
+                    <li>What is the gap between simulation-trained agents and real-world deployment?</li>
+                    <li>How should heterogeneous DERs be coordinated at the distribution level?</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- Active Areas -->
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-active">Active</span> Physics-Informed Neural Networks for Energy</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>PINNs for solving forward and inverse problems in fluid mechanics</li>
+                    <li>Applications to heat transfer, structural mechanics, and electromagnetics</li>
+                    <li>Several benchmark problems (Navier-Stokes, Burgers equation)</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Reproducible PINN implementations for real energy systems (not toy problems)</li>
+                    <li>Fair comparison with traditional solvers on computation time and accuracy</li>
+                    <li>PINNs for turbulent flows at realistic Reynolds numbers</li>
+                    <li>Multi-physics coupling (thermal-structural, fluid-structure)</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Under what conditions do PINNs outperform classical numerical methods for energy applications?</li>
+                    <li>Can PINNs be used for real-time digital twins of wind turbines or heat exchangers?</li>
+                    <li>How do training strategies affect PINN convergence for stiff multi-physics problems?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-active">Active</span> ML-Augmented CFD for Energy</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>Neural network surrogate models for aerodynamic design</li>
+                    <li>ML turbulence closures (learned Reynolds stress models)</li>
+                    <li>Graph-based and mesh-free neural operators (DeepONet, FNO)</li>
+                    <li>Data-driven reduced-order models for parametric studies</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Open datasets of high-fidelity CFD results for training</li>
+                    <li>Studies on generalisation — do ML models trained on one geometry transfer to others?</li>
+                    <li>Uncertainty quantification for ML-augmented CFD predictions</li>
+                    <li>End-to-end workflows combining ML with traditional solvers</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can neural operators replace mesh generation for complex energy system geometries?</li>
+                    <li>What training data volume is needed for reliable ML turbulence models?</li>
+                    <li>How should ML-CFD uncertainty be communicated to engineering decision-makers?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-active">Active</span> AI for Building Energy Management</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>RL-based HVAC control showing 15-30% energy savings in simulation</li>
+                    <li>Occupancy prediction using sensor fusion and computer vision</li>
+                    <li>Building energy modelling with neural networks (EnergyPlus surrogate models)</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Standardised building simulation benchmarks for RL comparison</li>
+                    <li>Long-term field studies (beyond lab/simulation environments)</li>
+                    <li>Scalable approaches that work across building types without re-training</li>
+                    <li>Integration of comfort, energy, and cost objectives with formal guarantees</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can a pre-trained RL controller transfer across buildings with minimal adaptation?</li>
+                    <li>What is the real-world energy saving gap between simulation and deployment?</li>
+                    <li>How should occupant comfort constraints be learned rather than hard-coded?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-active">Active</span> Generative Models for Materials Discovery</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>VAEs and diffusion models for crystal structure generation</li>
+                    <li>Graph neural networks for molecular property prediction</li>
+                    <li>Active learning for high-throughput screening of battery materials</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Experimental validation of AI-discovered materials (most work is computational)</li>
+                    <li>Open datasets linking computational predictions to experimental outcomes</li>
+                    <li>Synthesisability constraints in generative models</li>
+                    <li>Standardised evaluation metrics for generated materials</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>What fraction of AI-generated candidate materials are actually synthesisable?</li>
+                    <li>Can generative models incorporate manufacturing constraints end-to-end?</li>
+                    <li>How should the search space be bounded to produce practically useful materials?</li>
+                </ul>
+            </div>
+        </details>
+
+        <!-- Emerging Areas -->
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-emerging">Emerging</span> LLM-Assisted Research Workflows</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>Anecdotal reports and blog posts on using LLMs for research</li>
+                    <li>A few papers on AI-assisted literature review and hypothesis generation</li>
+                    <li>Tools like Claude Code, Aider, and Copilot used widely but rarely documented</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Formal studies on how LLM-assisted research compares to traditional workflows in quality and speed</li>
+                    <li>Reproducible process logs showing the full AI-human interaction during research</li>
+                    <li>Best practices for prompt engineering in scientific contexts</li>
+                    <li>Evaluation of AI agent reliability for different research tasks</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Does LLM-assisted coding produce more or fewer bugs than manual coding in research contexts?</li>
+                    <li>How does the quality of AI-assisted literature reviews compare to manual reviews?</li>
+                    <li>What is the optimal human-AI task division for different types of energy research?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-emerging">Emerging</span> Foundation Models for Energy Systems</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>General-purpose time series foundation models (TimesFM, Chronos) with limited energy domain testing</li>
+                    <li>Pre-trained models for weather/climate (Pangu-Weather, FourCastNet)</li>
+                    <li>Small-scale transfer learning studies between energy datasets</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Energy-specific foundation models trained on diverse operational data</li>
+                    <li>Benchmark datasets spanning multiple energy sub-domains</li>
+                    <li>Studies on when fine-tuning a foundation model beats training from scratch</li>
+                    <li>Multi-modal models that combine sensor data, images, and text</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can a single foundation model serve wind forecasting, load prediction, and fault detection?</li>
+                    <li>What pre-training data composition produces the best energy domain generalisation?</li>
+                    <li>How do energy foundation models handle distribution shift from climate change?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-emerging">Emerging</span> AI for Energy Policy Analysis</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>NLP for extracting structured data from energy regulations</li>
+                    <li>Agent-based models for energy market simulation</li>
+                    <li>A few studies using LLMs to summarise policy documents</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Automated policy impact assessment tools</li>
+                    <li>Cross-country comparative analysis using NLP at scale</li>
+                    <li>Integration of energy system models with policy scenario generators</li>
+                    <li>Reproducible policy analysis pipelines</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can LLMs reliably extract compliance requirements from energy regulations?</li>
+                    <li>How can AI scenario modelling inform carbon pricing policy design?</li>
+                    <li>What is the accuracy of AI-generated policy summaries compared to expert analysis?</li>
+                </ul>
+            </div>
+        </details>
+
+        <details class="roadmap-details">
+            <summary class="roadmap-summary"><span class="area-status status-emerging">Emerging</span> Multi-Agent Systems for Energy</summary>
+            <div class="roadmap-body">
+                <h4>What exists</h4>
+                <ul>
+                    <li>Theoretical frameworks for multi-agent reinforcement learning in power systems</li>
+                    <li>Small-scale simulations of peer-to-peer energy trading</li>
+                    <li>Game-theoretic models for competitive energy markets</li>
+                </ul>
+                <h4>What is missing</h4>
+                <ul>
+                    <li>Scalable multi-agent simulations with realistic grid dynamics</li>
+                    <li>Coordination protocols for heterogeneous agents (EVs, batteries, solar, wind)</li>
+                    <li>Real-world pilot studies of AI-coordinated microgrids</li>
+                    <li>Communication-efficient multi-agent algorithms for bandwidth-limited settings</li>
+                </ul>
+                <h4>Suggested research questions</h4>
+                <ul>
+                    <li>Can decentralised multi-agent control match centralised optimisation for microgrid management?</li>
+                    <li>How should agents handle adversarial behaviour in peer-to-peer energy markets?</li>
+                    <li>What communication topology minimises coordination overhead while maintaining performance?</li>
+                </ul>
+            </div>
+        </details>
+
+        <h2>Cross-Cutting Gaps</h2>
+        <p>These gaps span multiple research areas and represent structural challenges in the field:</p>
+
+        <div class="highlight-box">
+            <strong>Reproducibility tooling</strong>
+            <span>Most AI + energy papers lack working code. We need standardised reproducibility frameworks — containerised environments, automated testing, and benchmark suites that make it easy to reproduce and compare results.</span>
+        </div>
+        <div class="highlight-box">
+            <strong>Benchmark datasets</strong>
+            <span>The field lacks shared, high-quality benchmark datasets. Most researchers use private data, making fair comparison impossible. We need open datasets with standardised train/test splits, preprocessing pipelines, and evaluation metrics.</span>
+        </div>
+        <div class="highlight-box">
+            <strong>Multi-physics coupling</strong>
+            <span>Energy systems involve coupled physics — thermal, structural, fluid, electrical. Most ML work addresses each domain in isolation. Methods for learning coupled multi-physics systems are largely unexplored.</span>
+        </div>
+        <div class="highlight-box">
+            <strong>Uncertainty quantification</strong>
+            <span>AI predictions in energy systems need calibrated uncertainty estimates to support engineering decisions. Most papers report point predictions only. Conformal prediction, Bayesian methods, and ensemble approaches are underused.</span>
+        </div>
+        <div class="highlight-box">
+            <strong>Real-world deployment studies</strong>
+            <span>The gap between simulation and deployment is vast. We need more studies that test AI methods on real hardware, real data, and real constraints — not just cleaner versions of the same simulation environments.</span>
+        </div>
+
+        <h2>How to Claim a Gap</h2>
+
+        <p>See a gap that matches your expertise? Here's how to start:</p>
+
+        <ol>
+            <li><strong>Fork the template.</strong> Create your repository from the <a href="https://github.com/ai-driven-energy-research/paper-template">AIDER paper template</a>.</li>
+            <li><strong>Reference the gap in your submission.</strong> When you open a <a href="https://github.com/ai-driven-energy-research/submissions/issues/new/choose">submission issue</a>, mention which roadmap gap your work addresses. This helps editors assign appropriate reviewers.</li>
+            <li><strong>Work collaboratively.</strong> Many gaps are best addressed by teams. See the <a href="collaborative-research.html">Collaborative Research Guide</a> for how to set up a team project.</li>
+        </ol>
+
+        <p>You don't need to "reserve" a gap. Multiple teams can work on the same topic — different approaches to the same problem are valuable.</p>
+
+        <h2>Suggest a Gap</h2>
+
+        <p>If you see a research gap that isn't listed here, we want to know about it:</p>
+
+        <ul>
+            <li><strong>GitHub issue:</strong> Open an issue on the <a href="https://github.com/ai-driven-energy-research/ai-driven-energy-research.github.io/issues">website repository</a> with the title "Roadmap suggestion: [your topic]"</li>
+            <li><strong>Email:</strong> Send a brief description to <a href="mailto:jianou.jiang@eng.ox.ac.uk">jianou.jiang@eng.ox.ac.uk</a></li>
+        </ul>
+
+        <p>Include: the research area, what exists, what's missing, and why it matters. The editorial committee reviews suggestions quarterly.</p>
+
+    </div>
+</div>
+

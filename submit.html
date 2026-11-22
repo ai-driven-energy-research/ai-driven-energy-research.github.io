@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit a manuscript | AI-Driven Energy Research</title>
+<meta name="description" content="AI-Driven Energy Research (ISSN 2979-8639) is a diamond open-access, peer-reviewed journal for research at the intersection of artificial intelligence and energy systems.">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js" defer></script><script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script><script src="assets/submit.js" defer></script>
+</head>
+<body>
+<div class="utility"><div class="wrap">
+<span>AI-Driven Energy Research &middot; ISSN 2979-8639 (Online)</span>
+<span class="links"><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="join.html">Join the board</a></span>
+</div></div>
+<header class="masthead"><div class="wrap">
+<a href="index.html" aria-label="Journal home"><svg class="cover" viewBox="0 0 74 98" role="img" aria-label="AIDER journal cover">
+<rect width="74" height="98" fill="#1b365d"/><rect y="70" width="74" height="28" fill="#8a1c1c"/>
+<text x="37" y="30" fill="#fff" font-family="Georgia,serif" font-size="15" text-anchor="middle">AIDER</text>
+<text x="37" y="44" fill="#d9e1ec" font-family="Arial,sans-serif" font-size="5.2" text-anchor="middle">AI-DRIVEN</text>
+<text x="37" y="51" fill="#d9e1ec" font-family="Arial,sans-serif" font-size="5.2" text-anchor="middle">ENERGY RESEARCH</text>
+<text x="37" y="82" fill="#fff" font-family="Arial,sans-serif" font-size="5.6" text-anchor="middle">Volume 1</text>
+<text x="37" y="90" fill="#fff" font-family="Arial,sans-serif" font-size="5.6" text-anchor="middle">2026</text>
+</svg></a>
+<div class="title-block">
+<p class="journal-title"><a href="index.html">AI-Driven Energy Research</a></p>
+<p class="meta">ISSN 2979-8639 (Online) &middot; Diamond open access &middot; <strong>Founding Editor:</strong> Jianou Jiang</p>
+<p class="meta">Published by AI-Driven Energy Research (AIDER), Oxford, United Kingdom</p>
+</div>
+<div class="actions"><a class="btn-submit" href="submit.html">Submit manuscript</a><br><a href="author-guidelines.html">Instructions for authors</a></div>
+</div></header>
+<nav class="tabs" aria-label="Main"><ul>
+<li><a href="index.html">Journal home</a></li>
+<li><a href="issues.html">Latest volume</a></li>
+<li><a href="issues.html#all-volumes">All volumes</a></li>
+<li><a href="about.html">Journal information</a></li>
+<li><a href="editorial-board.html">Editorial board</a></li>
+<li><a href="author-guidelines.html" class="active">Instructions for authors</a></li>
+<li><a href="reviewer-guidelines.html">Peer review</a></li>
+<li><a href="ethics.html">Journal policies</a></li>
+<li><a href="news.html">News</a></li>
+</ul></nav>
+<div class="wrap">
+<div class="crumbs"><a href="index.html">Home</a><span class="sep">&rsaquo;</span>Submit a manuscript</div>
+<div class="page plain"><main class="content"><h1>Submit a manuscript</h1>
+<p>Please read the <a href="author-guidelines.html">instructions for authors</a> before you begin. No account is needed. Fields marked <span style="color:#8a1c1c">*</span> are required. Your answers are kept in this browser until you submit, so you can leave and return to this page.</p>
+
+<ol class="steps" id="steps">
+<li data-step="1"><b>Step 1</b>Upload manuscript</li>
+<li data-step="2"><b>Step 2</b>Type, title &amp; abstract</li>
+<li data-step="3"><b>Step 3</b>Keywords</li>
+<li data-step="4"><b>Step 4</b>Authors &amp; institutions</li>
+<li data-step="5"><b>Step 5</b>Reviewers</li>
+<li data-step="6"><b>Step 6</b>Details &amp; declarations</li>
+<li data-step="7"><b>Step 7</b>Review &amp; submit</li>
+</ol>
+
+<form id="subform" novalidate>
+
+<!-- STEP 1 -->
+<section class="step-panel" data-step="1">
+<h2>Step 1: Upload manuscript</h2>
+<p>Upload your main document as a Word (.docx) or PDF file. LaTeX users may upload the PDF, or a .zip archive containing the source and PDF. The title, abstract, authors and keywords are read from the file to pre-fill the following steps; pre-filled fields are highlighted, and you can edit them.</p>
+<div class="form-row">
+<span class="label">Main document <span class="req">*</span></span>
+<div class="dropzone" id="dz-main">
+<p style="margin:0 0 8px">Drag and drop the file here, or</p>
+<input type="file" id="file-main" accept=".pdf,.docx,.zip,.tex">
+<div class="hint">Accepted: .docx, .pdf, .zip, .tex &middot; maximum 20 MB</div>
+</div>
+<div class="status-line" id="extract-status" hidden></div>
+</div>
+<div class="form-row">
+<span class="label">Supplementary files (optional)</span>
+<input type="file" id="file-supp" multiple>
+<div class="hint">For example supplementary information, code or data archives (.zip), or videos. Large datasets should be linked from a repository in Step 6 instead. Total upload limit 25 MB.</div>
+<ul class="filelist" id="filelist"></ul>
+</div>
+</section>
+
+<!-- STEP 2 -->
+<section class="step-panel" data-step="2">
+<h2>Step 2: Type, title and abstract</h2>
+<div class="form-row">
+<label for="f-type">Article type <span class="req">*</span></label>
+<select id="f-type" name="article_type" required>
+<option value="">Select&hellip;</option>
+<option>Research Article</option>
+<option>Review Article</option>
+</select>
+</div>
+<div class="form-row">
+<label for="f-title">Title <span class="req">*</span></label>
+<input type="text" id="f-title" name="title" required>
+</div>
+<div class="form-row">
+<label for="f-abstract">Abstract <span class="req">*</span></label>
+<textarea id="f-abstract" name="abstract" rows="10" required></textarea>
+<div class="hint"><span id="abs-count">0</span> words (maximum 300)</div>
+</div>
+</section>
+
+<!-- STEP 3 -->
+<section class="step-panel" data-step="3">
+<h2>Step 3: Keywords and subject area</h2>
+<div class="form-row">
+<label for="f-keywords">Keywords <span class="req">*</span></label>
+<input type="text" id="f-keywords" name="keywords" required>
+<div class="hint">Three to six keywords, separated by commas.</div>
+</div>
+<div class="form-row">
+<label for="f-subject">Subject area <span class="req">*</span></label>
+<select id="f-subject" name="subject_area" required>
+<option value="">Select&hellip;</option>
+<option>Machine learning for fluid dynamics, turbulence and heat transfer</option>
+<option>Power grids: optimisation, operation and planning</option>
+<option>Reinforcement learning and control for energy systems</option>
+<option>Energy materials, catalysis and batteries</option>
+<option>Physics-informed and surrogate models</option>
+<option>Renewable energy forecasting</option>
+<option>Energy demand, data centres and electrification</option>
+<option>AI-assisted research workflows in energy science</option>
+<option>Other</option>
+</select>
+</div>
+</section>
+
+<!-- STEP 4 -->
+<section class="step-panel" data-step="4">
+<h2>Step 4: Authors and institutions</h2>
+<p class="small">List all authors in the order in which they appear on the manuscript and select one corresponding author.</p>
+<div id="authors"></div>
+<p><button type="button" class="btn secondary" id="add-author">Add another author</button></p>
+</section>
+
+<!-- STEP 5 -->
+<section class="step-panel" data-step="5">
+<h2>Step 5: Suggested and opposed reviewers</h2>
+<p class="small">Optional. The editor is not obliged to use suggested reviewers. Do not suggest recent collaborators or colleagues at your own institution.</p>
+<div class="form-row">
+<label for="f-sugg">Suggested reviewers</label>
+<textarea id="f-sugg" name="suggested_reviewers" rows="4" placeholder="One per line: name, affiliation, email, area of expertise"></textarea>
+</div>
+<div class="form-row">
+<label for="f-opp">Opposed reviewers</label>
+<textarea id="f-opp" name="opposed_reviewers" rows="3" placeholder="One per line: name, affiliation, reason"></textarea>
+</div>
+</section>
+
+<!-- STEP 6 -->
+<section class="step-panel" data-step="6">
+<h2>Step 6: Details and declarations</h2>
+<div class="form-row">
+<label for="f-cover">Cover letter <span class="req">*</span></label>
+<textarea id="f-cover" name="cover_letter" rows="6" required></textarea>
+<div class="hint">Briefly explain the main contribution and why it suits the journal.</div>
+</div>
+<div class="form-row">
+<label for="f-data">Data and code availability statement <span class="req">*</span></label>
+<textarea id="f-data" name="data_availability" rows="4" required></textarea>
+</div>
+<div class="form-row">
+<label for="f-repo">Repository link (code and data)</label>
+<input type="url" id="f-repo" name="repository_url" placeholder="https://">
+</div>
+<div class="form-row">
+<label for="f-ai">Use of AI tools <span class="req">*</span></label>
+<textarea id="f-ai" name="ai_statement" rows="3" required placeholder="Tools and versions, what they were used for, and how outputs were checked; or 'No AI tools were used.'"></textarea>
+</div>
+<div class="form-grid">
+<div class="form-row">
+<label for="f-funding">Funding <span class="req">*</span></label>
+<textarea id="f-funding" name="funding" rows="3" required placeholder="Funders and grant numbers, or 'None.'"></textarea>
+</div>
+<div class="form-row">
+<label for="f-coi">Competing interests <span class="req">*</span></label>
+<textarea id="f-coi" name="competing_interests" rows="3" required placeholder="Or 'The authors declare no competing interests.'"></textarea>
+</div>
+</div>
+<div class="form-row">
+<label for="f-prev">Has this manuscript been submitted to this journal before?</label>
+<select id="f-prev" name="previous_submission"><option>No</option><option>Yes, this is a resubmission</option></select>
+</div>
+<div class="form-row check"><label><input type="checkbox" name="c_original" required> The manuscript is original, has not been published and is not under consideration elsewhere (preprints excepted). <span class="req">*</span></label></div>
+<div class="form-row check"><label><input type="checkbox" name="c_authors" required> All authors have approved the manuscript and agree to its submission. <span class="req">*</span></label></div>
+<div class="form-row check"><label><input type="checkbox" name="c_licence" required> If accepted, the article will be published open access under CC BY 4.0, with copyright retained by the authors. <span class="req">*</span></label></div>
+<div class="form-row check"><label><input type="checkbox" name="c_privacy" required> I agree that the information provided is used for editorial purposes, as described in the <a href="ethics.html">journal policies</a>. <span class="req">*</span></label></div>
+</section>
+
+<!-- STEP 7 -->
+<section class="step-panel" data-step="7">
+<h2>Step 7: Review and submit</h2>
+<p>Please check the details below. Use <b>Previous</b> to correct anything.</p>
+<div class="table-scroll"><table class="summary-table" id="summary"></table></div>
+<div id="missing" class="notice warn" hidden></div>
+<div id="submit-area"></div>
+</section>
+
+<div class="form-nav">
+<button type="button" class="btn secondary" id="prev">Previous</button>
+<span class="small" id="savestate"></span>
+<button type="button" class="btn" id="next">Save and continue</button>
+</div>
+</form>
+
+<noscript><div class="notice warn"><p>The submission system requires JavaScript. Alternatively, email your manuscript and the information listed in the <a href="author-guidelines.html#submitting">instructions for authors</a> to <a href="mailto:jianou.jiang@eng.ox.ac.uk">jianou.jiang@eng.ox.ac.uk</a>.</p></div></noscript>
+</main></div>
+</div>
+<footer class="site-footer"><div class="wrap">
+<div class="cols">
+<div><h4>Journal</h4><ul>
+<li><a href="about.html">About the journal</a></li><li><a href="about.html#aims-and-scope">Aims and scope</a></li>
+<li><a href="editorial-board.html">Editorial board</a></li><li><a href="news.html">News</a></li></ul></div>
+<div><h4>Authors</h4><ul>
+<li><a href="author-guidelines.html">Instructions for authors</a></li><li><a href="submit.html">Submit a manuscript</a></li>
+<li><a href="author-guidelines.html#fees">Fees and licensing</a></li><li><a href="collaborative-research.html">Code repositories</a></li></ul></div>
+<div><h4>Reviewers and policies</h4><ul>
+<li><a href="reviewer-guidelines.html">Peer review</a></li><li><a href="ethics.html">Publishing ethics</a></li>
+<li><a href="ethics.html#ai">Use of AI tools</a></li><li><a href="ethics.html#corrections">Corrections and retractions</a></li></ul></div>
+<div><h4>Contact</h4><ul>
+<li><a href="mailto:jianou.jiang@eng.ox.ac.uk">jianou.jiang@eng.ox.ac.uk</a></li><li><a href="https://github.com/ai-driven-energy-research">GitHub organisation</a></li>
+<li><a href="join.html">Join the editorial board</a></li></ul></div>
+</div>
+<div class="legal">&copy; 2026 AI-Driven Energy Research (AIDER), Oxford, United Kingdom. ISSN 2979-8639 (Online). Articles are published under the Creative Commons Attribution 4.0 International licence (CC BY 4.0) unless otherwise stated.</div>
+</div></footer>
+</body>
+</html>
