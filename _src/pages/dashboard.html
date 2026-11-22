@@ -1,0 +1,19 @@
+<!-- title: Author dashboard -->
+<!-- layout: plain -->
+<!-- tab: authors -->
+<!-- crumb: Author dashboard -->
+<!-- head: <script src="assets/aider-api.js"></script><script src="assets/dashboard.js" defer></script> -->
+<h1>Author dashboard</h1>
+<div id="offline" class="notice warn" hidden><p>The online editorial system is being connected. Until then, please contact the editorial office at <a href="mailto:jianou.jiang@eng.ox.ac.uk">jianou.jiang@eng.ox.ac.uk</a> for the status of your manuscript, quoting its reference.</p></div>
+
+<div id="login">
+<p>Enter the manuscript reference and the access key from your acknowledgement email. The link in that email opens this page directly.</p>
+<div class="form-grid" style="max-width:720px">
+<div class="form-row"><label for="d-ref">Manuscript reference</label><input type="text" id="d-ref" placeholder="AIDER-20261122-ABC123"></div>
+<div class="form-row"><label for="d-key">Access key</label><input type="text" id="d-key"></div>
+</div>
+<p><button type="button" class="btn" id="d-open">View manuscript</button> <span class="small" id="d-msg"></span></p>
+<div id="saved"></div>
+</div>
+
+<div id="view" hidden></div>

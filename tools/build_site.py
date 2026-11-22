@@ -119,12 +119,14 @@ SUBNAV = [
         ("author-guidelines.html", "Instructions for authors"),
         ("author-guidelines.html#preparing", "Preparing your manuscript"),
         ("submit.html", "Submit a manuscript"),
+        ("dashboard.html", "Author dashboard"),
         ("collaborative-research.html", "Code repositories and team submissions"),
         ("author-guidelines.html#fees", "Fees and licensing"),
     ]),
     ("Peer review information", [
         ("reviewer-guidelines.html", "Review process"),
         ("reviewer-guidelines.html#instructions", "Instructions for reviewers"),
+        ("review.html", "Reviewer dashboard"),
         ("join.html", "Join the editorial board or reviewer pool"),
     ]),
     ("Journal policies", [
@@ -153,7 +155,7 @@ SIDEBAR = f'''<aside class="sidebar">
 <div class="box"><h2>Submit your article</h2><div class="inner">
 <p>{JOURNAL} welcomes original research and review articles at the intersection of artificial intelligence and energy systems.</p>
 <p><a class="btn-submit" href="submit.html">Submit manuscript</a></p>
-<p><a href="author-guidelines.html">Instructions for authors</a></p>
+<p><a href="author-guidelines.html">Instructions for authors</a><br><a href="dashboard.html">Author dashboard</a> &middot; <a href="review.html">Reviewer dashboard</a></p>
 </div></div>
 <div class="box"><h2>Journal information</h2><div class="inner"><dl>
 <dt>ISSN</dt><dd>{ISSN} (Online)</dd>
@@ -181,7 +183,7 @@ def header(tab):
         tabs.append(f'<li><a href="{href}"{active}>{label}</a></li>')
     return f'''<div class="utility"><div class="wrap">
 <span>{JOURNAL} &middot; ISSN {ISSN} (Online)</span>
-<span class="links"><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="join.html">Join the board</a></span>
+<span class="links"><a href="dashboard.html">Author dashboard</a><a href="review.html">Reviewer dashboard</a><a href="about.html#contact">Contact</a><a href="join.html">Join the board</a></span>
 </div></div>
 <header class="masthead"><div class="wrap">
 <a href="index.html" aria-label="Journal home">{COVER_SVG}</a>

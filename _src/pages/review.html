@@ -1,0 +1,13 @@
+<!-- title: Reviewer dashboard -->
+<!-- layout: plain -->
+<!-- tab: review -->
+<!-- crumb: Reviewer dashboard -->
+<!-- head: <script src="assets/aider-api.js"></script><script src="assets/review.js" defer></script> -->
+<h1>Reviewer dashboard</h1>
+<div id="offline" class="notice warn" hidden><p>The online editorial system is being connected. Reviewers currently receive manuscripts directly from the editorial office.</p></div>
+<div id="login">
+<p>Open this page from the link in your invitation email, or paste your reviewer access key below. Please read the <a href="reviewer-guidelines.html#instructions">instructions for reviewers</a>.</p>
+<div class="form-row" style="max-width:480px"><label for="v-key">Reviewer access key</label><input type="text" id="v-key"></div>
+<p><button type="button" class="btn" id="v-open">Open dashboard</button> <span class="small" id="v-msg"></span></p>
+</div>
+<div id="view" hidden></div>
