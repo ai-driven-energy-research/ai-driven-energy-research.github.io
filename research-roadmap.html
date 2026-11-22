@@ -1,200 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research Roadmap — AIDER</title>
-    <meta name="description" content="A living document of research gaps and opportunities at the intersection of AI and energy systems.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* ─── Status badges ─── */
-        .area-status {
-            display: inline-block;
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.72em;
-            font-weight: 600;
-            letter-spacing: 0.02em;
-            white-space: nowrap;
-            vertical-align: middle;
-        }
-        .status-covered {
-            background: #dcfce7;
-            color: #166534;
-        }
-        .status-active {
-            background: #fef3c7;
-            color: #92400e;
-        }
-        .status-emerging {
-            background: #dbeafe;
-            color: #1e40af;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research priorities | AI-Driven Energy Research</title>
+<meta name="description" content="AI-Driven Energy Research (ISSN 2979-8639) is a diamond open-access, peer-reviewed journal for research at the intersection of artificial intelligence and energy systems.">
+<link rel="stylesheet" href="style.css">
 
-        /* ─── Research area grid ─── */
-        .area-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin: 24px 0;
-        }
-        .area-card {
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 20px;
-            background: var(--bg-primary);
-        }
-        .area-card h4 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95em;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-        .area-card p {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.82em;
-            color: var(--text-secondary);
-            margin: 0;
-            line-height: 1.5;
-        }
-        .area-card .area-status {
-            margin-bottom: 10px;
-        }
-
-        /* ─── Collapsible details ─── */
-        .roadmap-details {
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            margin: 16px 0;
-            overflow: hidden;
-        }
-        .roadmap-summary {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95em;
-            font-weight: 600;
-            padding: 18px 20px;
-            cursor: pointer;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            list-style: none;
-        }
-        .roadmap-summary::-webkit-details-marker { display: none; }
-        .roadmap-summary::before {
-            content: '\25B6';
-            font-size: 0.7em;
-            color: var(--text-tertiary);
-            transition: transform 0.2s;
-            flex-shrink: 0;
-        }
-        details[open] > .roadmap-summary::before {
-            transform: rotate(90deg);
-        }
-        .roadmap-body {
-            padding: 20px;
-        }
-        .roadmap-body h4 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.88em;
-            font-weight: 600;
-            margin: 16px 0 8px 0;
-            color: var(--text-primary);
-        }
-        .roadmap-body h4:first-child { margin-top: 0; }
-        .roadmap-body ul {
-            margin: 8px 0 12px 20px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.88em;
-            color: var(--text-secondary);
-        }
-        .roadmap-body li {
-            margin-bottom: 6px;
-            line-height: 1.6;
-        }
-        .roadmap-body p {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.88em;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* ─── Highlight box ─── */
-        .highlight-box {
-            background: var(--bg-secondary);
-            border-left: 3px solid var(--accent);
-            padding: 16px 20px;
-            margin: 16px 0;
-        }
-        .highlight-box strong {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.95em;
-            display: block;
-            margin-bottom: 4px;
-        }
-        .highlight-box span {
-            font-size: 0.92em;
-            color: var(--text-secondary);
-        }
-
-        /* ─── Legend ─── */
-        .legend {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin: 16px 0 28px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.85em;
-            color: var(--text-secondary);
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        @media (max-width: 640px) {
-            .area-grid { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
 <body>
-
-<div class="header">
-    <div class="header-inner">
-        <div class="header-label">AIDER</div>
-        <h1>Research Roadmap</h1>
-        <p class="subtitle">A living document of research gaps and opportunities at the intersection of AI and energy systems.</p>
-    </div>
+<div class="utility"><div class="wrap">
+<span>AI-Driven Energy Research &middot; ISSN 2979-8639 (Online)</span>
+<span class="links"><a href="about.html">About</a><a href="about.html#contact">Contact</a><a href="join.html">Join the board</a></span>
+</div></div>
+<header class="masthead"><div class="wrap">
+<a href="index.html" aria-label="Journal home"><svg class="cover" viewBox="0 0 74 98" role="img" aria-label="AIDER journal cover">
+<rect width="74" height="98" fill="#1b365d"/><rect y="70" width="74" height="28" fill="#8a1c1c"/>
+<text x="37" y="30" fill="#fff" font-family="Georgia,serif" font-size="15" text-anchor="middle">AIDER</text>
+<text x="37" y="44" fill="#d9e1ec" font-family="Arial,sans-serif" font-size="5.2" text-anchor="middle">AI-DRIVEN</text>
+<text x="37" y="51" fill="#d9e1ec" font-family="Arial,sans-serif" font-size="5.2" text-anchor="middle">ENERGY RESEARCH</text>
+<text x="37" y="82" fill="#fff" font-family="Arial,sans-serif" font-size="5.6" text-anchor="middle">Volume 1</text>
+<text x="37" y="90" fill="#fff" font-family="Arial,sans-serif" font-size="5.6" text-anchor="middle">2026</text>
+</svg></a>
+<div class="title-block">
+<p class="journal-title"><a href="index.html">AI-Driven Energy Research</a></p>
+<p class="meta">ISSN 2979-8639 (Online) &middot; Diamond open access &middot; <strong>Founding Editor:</strong> Jianou Jiang</p>
+<p class="meta">Published by AI-Driven Energy Research (AIDER), Oxford, United Kingdom</p>
 </div>
+<div class="actions"><a class="btn-submit" href="submit.html">Submit manuscript</a><br><a href="author-guidelines.html">Instructions for authors</a></div>
+</div></header>
+<nav class="tabs" aria-label="Main"><ul>
+<li><a href="index.html">Journal home</a></li>
+<li><a href="issues.html">Latest volume</a></li>
+<li><a href="issues.html#all-volumes">All volumes</a></li>
+<li><a href="about.html" class="active">Journal information</a></li>
+<li><a href="editorial-board.html">Editorial board</a></li>
+<li><a href="author-guidelines.html">Instructions for authors</a></li>
+<li><a href="reviewer-guidelines.html">Peer review</a></li>
+<li><a href="ethics.html">Journal policies</a></li>
+<li><a href="news.html">News</a></li>
+</ul></nav>
+<div class="wrap">
+<div class="crumbs"><a href="index.html">Home</a><span class="sep">&rsaquo;</span>Research priorities</div>
+<div class="page info"><nav class="subnav" aria-label="Journal information">
+<div class="group"><h3>About this journal</h3><ul>
+<li><a href="about.html">About the journal</a></li>
+<li><a href="about.html#aims-and-scope">Aims and scope</a></li>
+<li><a href="editorial-board.html">Editorial board</a></li>
+<li><a href="research-roadmap.html" class="active">Research priorities</a></li>
+<li><a href="news.html">News and announcements</a></li>
+<li><a href="founders-remarks.html">Founding editor's remarks</a></li>
+<li><a href="about.html#contact">Contact details</a></li>
+</ul></div>
+<div class="group"><h3>Author instructions</h3><ul>
+<li><a href="author-guidelines.html">Instructions for authors</a></li>
+<li><a href="author-guidelines.html#preparing">Preparing your manuscript</a></li>
+<li><a href="submit.html">Submit a manuscript</a></li>
+<li><a href="collaborative-research.html">Code repositories and team submissions</a></li>
+<li><a href="author-guidelines.html#fees">Fees and licensing</a></li>
+</ul></div>
+<div class="group"><h3>Peer review information</h3><ul>
+<li><a href="reviewer-guidelines.html">Review process</a></li>
+<li><a href="reviewer-guidelines.html#instructions">Instructions for reviewers</a></li>
+<li><a href="join.html">Join the editorial board or reviewer pool</a></li>
+</ul></div>
+<div class="group"><h3>Journal policies</h3><ul>
+<li><a href="ethics.html">Publishing ethics</a></li>
+<li><a href="ethics.html#ai">Use of AI tools</a></li>
+<li><a href="ethics.html#open-access">Open access and copyright</a></li>
+<li><a href="ethics.html#corrections">Corrections and retractions</a></li>
+<li><a href="ethics.html#appeals">Complaints and appeals</a></li>
+</ul></div>
+</nav><main class="content"><h1>Research priorities</h1>
+<p class="lead">Topics the editors particularly wish to receive, with an assessment of what has been done and what is missing. The list does not limit the journal's scope.</p>
 
-<div class="nav">
-    <a href="index.html">Home</a>
-    <a href="index.html#principles">Principles</a>
-    <a href="index.html#scope">Scope</a>
-    <a href="author-guidelines.html">Author Guidelines</a>
-    <a href="collaborative-research.html">Collaborate</a>
-    <a href="reviewer-guidelines.html">Reviewer Guidelines</a>
-    <a href="ethics.html">Ethics</a>
-    <a href="research-roadmap.html" class="highlight">Roadmap</a>
-    <a href="news.html">News</a>
-    <a href="founders-remarks.html">Founder's Remarks</a>
-    <a href="join.html">Join</a>
-</div>
-
-<div class="section">
-    <div class="container">
 
         <h2>About This Roadmap</h2>
         <p>This roadmap is maintained by the AIDER editorial committee and updated quarterly. It maps the landscape of AI + energy research — what has been done, where the gaps are, and what needs work.</p>
 
-        <p>This is not an exclusive list. Unlisted topics are welcome — if your research falls within <a href="index.html#scope">AIDER's scope</a>, we want to see it. The roadmap exists to help researchers identify high-impact opportunities, not to limit what gets published.</p>
+        <p>This is not an exclusive list. Unlisted topics are welcome — if your research falls within <a href="about.html#aims-and-scope">AIDER's scope</a>, we want to see it. The roadmap exists to help researchers identify high-impact opportunities, not to limit what gets published.</p>
 
-        <p style="font-family:'Inter',sans-serif; font-size:0.85em; color:var(--text-tertiary);">Last updated: Q1 2026</p>
+        <p class="small">Last updated: Q1 2026</p>
 
         <h2>Research Areas at a Glance</h2>
 
@@ -566,25 +452,25 @@
 
         <p>Include: the research area, what exists, what's missing, and why it matters. The editorial committee reviews suggestions quarterly.</p>
 
-    </div>
+    
+</main></div>
 </div>
-
-<div class="cta">
-    <h2>Start addressing a research gap</h2>
-    <p>Fork the template, reference a gap, and submit your work.</p>
-    <div class="cta-buttons">
-        <a href="https://github.com/ai-driven-energy-research/paper-template" class="btn btn-primary">Fork the Template</a>
-        <a href="author-guidelines.html" class="btn btn-secondary">Author Guidelines</a>
-    </div>
+<footer class="site-footer"><div class="wrap">
+<div class="cols">
+<div><h4>Journal</h4><ul>
+<li><a href="about.html">About the journal</a></li><li><a href="about.html#aims-and-scope">Aims and scope</a></li>
+<li><a href="editorial-board.html">Editorial board</a></li><li><a href="news.html">News</a></li></ul></div>
+<div><h4>Authors</h4><ul>
+<li><a href="author-guidelines.html">Instructions for authors</a></li><li><a href="submit.html">Submit a manuscript</a></li>
+<li><a href="author-guidelines.html#fees">Fees and licensing</a></li><li><a href="collaborative-research.html">Code repositories</a></li></ul></div>
+<div><h4>Reviewers and policies</h4><ul>
+<li><a href="reviewer-guidelines.html">Peer review</a></li><li><a href="ethics.html">Publishing ethics</a></li>
+<li><a href="ethics.html#ai">Use of AI tools</a></li><li><a href="ethics.html#corrections">Corrections and retractions</a></li></ul></div>
+<div><h4>Contact</h4><ul>
+<li><a href="mailto:jianou.jiang@eng.ox.ac.uk">jianou.jiang@eng.ox.ac.uk</a></li><li><a href="https://github.com/ai-driven-energy-research">GitHub organisation</a></li>
+<li><a href="join.html">Join the editorial board</a></li></ul></div>
 </div>
-
-<div class="footer">
-    <p>AIDER — AI-Driven Energy Research &copy; 2026. ISSN 2979-8639 (Online). All content CC-BY 4.0.</p>
-    <p style="margin-top:8px;">
-        <a href="https://github.com/ai-driven-energy-research">GitHub</a>
-        <a href="mailto:jianou.jiang@eng.ox.ac.uk">Contact</a>
-    </p>
-</div>
-
+<div class="legal">&copy; 2026 AI-Driven Energy Research (AIDER), Oxford, United Kingdom. ISSN 2979-8639 (Online). Articles are published under the Creative Commons Attribution 4.0 International licence (CC BY 4.0) unless otherwise stated.</div>
+</div></footer>
 </body>
 </html>
