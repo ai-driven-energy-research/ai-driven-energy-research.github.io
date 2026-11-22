@@ -1,0 +1,206 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{charter}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{darkbg}{HTML}{0A0F1A}
+\definecolor{ink}{HTML}{111827}
+\definecolor{ink2}{HTML}{4B5563}
+\definecolor{ink3}{HTML}{6B7280}
+\definecolor{rule}{HTML}{E5E7EB}
+\definecolor{green}{HTML}{047857}
+\definecolor{amber}{HTML}{B45309}
+\definecolor{redx}{HTML}{B91C1C}
+\definecolor{accentbg}{HTML}{EFF6FF}
+\definecolor{greenbg}{HTML}{ECFDF5}
+\definecolor{amberbg}{HTML}{FFFBEB}
+\definecolor{graybg}{HTML}{F3F4F6}
+
+\hypersetup{colorlinks=true,linkcolor=accent,urlcolor=accent,citecolor=accent}
+
+\titleformat{\section}{\sffamily\large\bfseries\color{ink}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\sffamily\normalsize\bfseries\color{accent}}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{15pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{rule}\hrule height 0.4pt}
+\fancyhead[L]{\footnotesize\sffamily\color{ink3}AIDER \textbar\ AI-Driven Energy Research}
+\fancyhead[R]{\footnotesize\sffamily\color{ink3}Fourth Editors' Meetup \textbar\ 22 November 2026}
+\fancyfoot[C]{\footnotesize\sffamily\color{ink3}\thepage}
+
+\newcommand{\src}[1]{{\footnotesize\color{ink3}[#1]}}
+\newcommand{\passed}{\colorbox{greenbg}{\textcolor{green}{\sffamily\scriptsize\bfseries PASSED}}}
+\newcommand{\openitem}{\colorbox{amberbg}{\textcolor{amber}{\sffamily\scriptsize\bfseries OPEN}}}
+\newcommand{\blocked}{\colorbox{amberbg}{\textcolor{redx}{\sffamily\scriptsize\bfseries BLOCKER}}}
+
+\newtcolorbox{takeaway}{
+  colback=accentbg,colframe=accent,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+\newtcolorbox{solvebox}{
+  colback=greenbg,colframe=green,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+\newtcolorbox{warnbox}{
+  colback=amberbg,colframe=amber,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=2pt,topsep=2pt}
+
+\begin{document}
+
+\begin{tcolorbox}[colback=darkbg,colframe=darkbg,arc=3pt,left=18pt,right=18pt,top=14pt,bottom=14pt]
+  {\sffamily\footnotesize\color{accent}\bfseries UPDATE \textbullet\ PRESENTATION \textbullet\ OUTREACH}\\[4pt]
+  {\sffamily\LARGE\bfseries\color{white} Look Like a Journal, Review Like a Network}\\[5pt]
+  {\sffamily\small\color{white!75} A conventional public face with AI kept in the back office, and a targeted-question model of peer review.}\\[8pt]
+  {\sffamily\footnotesize\color{white!60} Fourth editors' online meetup \textbullet\ Sunday 22 November 2026 \textbullet\ 8:00--8:30 pm Beijing (UTC+8) / 12:00--12:30 UK (GMT) \textbullet\ ISSN 2979-8639 (Online)}
+\end{tcolorbox}
+
+\vspace{4pt}
+{\small\color{ink2}This is the pre-read and note-taking paper for a \textbf{30-minute meeting}. It has three items. Jingda Wu will share an update on something he has tried. The founding editor then raises two proposals for \textbf{discussion before any decision}: (A) make the website look and read like a traditional journal, keeping AI agents only for basic submission tasks; and (B) cold-email outreach for submissions and reviews, in which each expert answers one specific question about one part of a paper instead of writing a full review. Draft motion text is included so that the meeting can vote if it is ready. Otherwise the wording will be revised and carried to the fifth meetup. No change to the website design will be made before this discussion. The meeting link will be circulated separately.}
+
+\section*{Agenda \textnormal{\footnotesize\color{ink3}(30 minutes, hard stop)}}
+\renewcommand{\arraystretch}{1.14}
+\begin{center}\small
+\begin{tabular}{@{}p{1.95cm}p{12.15cm}@{}}
+\toprule
+\textbf{Time} & \textbf{Item and intended output} \\
+\midrule
+0--2 min & Open; confirm note-taker and that the voting rule of 1 August still applies. \\
+2--10 min & Jingda Wu: update on what he tried, what happened, and what he needs from the board (\S1). \\
+10--19 min & Discussion A: a traditional journal presentation, with AI limited to metadata extraction (\S2). \\
+19--28 min & Discussion B: targeted-question review through AI-assisted expert outreach (\S3). \\
+28--30 min & Read back owners, next steps and what returns to the fifth meetup (\S4). \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Update from Jingda Wu}
+
+Jingda will present one thing he has tried for AIDER. To keep the record useful, please cover: \textbf{what was tried; what happened, with a link or demonstration if possible; what you learned; and whether you propose to continue, scale or stop it.}
+
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{center}
+\begin{tabular}{@{}p{5.2cm}p{8.9cm}@{}}
+\toprule
+\textbf{Record} & \textbf{Notes} \\
+\midrule
+What was tried & \\[9pt]
+Result and evidence link & \\[9pt]
+Lesson for AIDER & \\[9pt]
+Proposed next step / owner / date & \\[9pt]
+Decision needed from the board & \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}}
+
+\section{Discussion A: Look Like a Traditional Journal}
+
+\textbf{The problem.} The current website looks like a new technology product: modern colours, cards and badges, and a front page built around AI agents reviewing papers. Our experience with prospective authors and reviewers is that this does not help. For most researchers today, prominent AI review is not yet an attractive feature; it reads as a \emph{weakness}, raising doubts about rigour, confidentiality and whether a submission will be read by a qualified person. A journal's authority comes partly from looking like a journal.
+
+\begin{takeaway}
+\textbf{Proposal.} Redesign the website to follow the restrained conventions of established academic journals, and move AI from the public face of the journal to the back office.
+\begin{itemize}
+  \item \textbf{Presentation:} plain layout and typography; a masthead with title, ISSN and publisher; aims and scope; editorial board; current volume and article list; instructions for authors and reviewers; and policies (peer review, ethics, licensing, corrections, AI use). Fewer graphics, gradients, cards and slogans.
+  \item \textbf{Human peer review as the visible process:} named human editors and reviewers are the decision-makers. The AI reviewer agents are removed from the editorial-board pages.
+  \item \textbf{AI for basic functions only:} when an author uploads a manuscript, an agent extracts the title, abstract, keywords, authors, affiliations and references, and pre-fills the submission form so the author does not type the same information twice. The author checks and confirms every field.
+  \item \textbf{Honest disclosure:} a short AI-use policy page states what AI is used for. The record of the five published papers, including how they were reviewed, stays unchanged and truthful.
+\end{itemize}
+\end{takeaway}
+
+This also lines up with the DOAJ readiness work: DOAJ's current guidance discourages generative AI in editorial assessments, and an application will be judged on a human, independent review record.
+
+\textbf{Questions for discussion.}
+\begin{enumerate}
+  \item Do we agree with the diagnosis that the AI-review identity is a net negative for recruiting authors and reviewers today?
+  \item Which two or three established journals should serve as the visual and structural reference?
+  \item Do we keep GitHub-issue submission behind a conventional submission form, or replace it?
+  \item What happens to the existing AI-reviewer and ``AI-native'' content: archive it, move it to an ``About our tools'' page, or remove it?
+  \item Who owns the redesign, and what is the review step before it goes live?
+\end{enumerate}
+
+\begin{solvebox}
+\textbf{Draft motion A.} Authorise a named owner to prepare a traditional-journal redesign of the website and submission page, with AI limited to pre-filling submission metadata for author confirmation. The owner returns a preview link for the editors to review before anything goes live. The motion does not authorise changing the record of published papers or removing required disclosures.
+\end{solvebox}
+
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{1.6cm}p{1.8cm}p{1.8cm}p{1.8cm}p{2cm}p{4cm}@{}}
+\toprule
+\textbf{Motion} & \textbf{For} & \textbf{Against} & \textbf{Abstain} & \textbf{Result} & \textbf{Owner / preview date} \\
+\midrule
+A & & & & & \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Discussion B: Targeted-Question Review}
+
+\textbf{The problem.} Like every journal, AIDER needs to invite people to submit and to review, and that means cold emails. A standard invitation asks a busy researcher for a full review, which takes several hours, so most invitations are declined or ignored. We also need a genuinely external reviewer record for DOAJ.
+
+\textbf{The idea.} Ask for less, and ask more people. Instead of three experts each writing a full review, invite around \textbf{ten experts each to answer one specific question about one specific part of the paper}. For example: \emph{``Is the boundary condition in Section 3 appropriate for this turbine?''}, \emph{``Does Figure 4 support the stated forecasting gain?''}, or \emph{``Is there an important dataset missing from Table 2?''} A focused question should take minutes rather than hours, and it reaches the person best placed to answer it.
+
+\begin{takeaway}
+\textbf{Where an AI agent helps.} For each manuscript, an agent (1) splits the paper into checkable claims and parts; (2) searches the literature for researchers who have published on each part; (3) drafts one precise question per expert, with the relevant excerpt; and (4) drafts a short, personal invitation. \textbf{An editor approves every recipient, question and email before it is sent}, collects the answers, and writes the decision.
+\end{takeaway}
+
+\textbf{Points to settle before any trial.}
+\begin{itemize}
+  \item \textbf{Does it count as peer review?} DOAJ expects at least two independent reviewers per article. Options: use targeted questions to complement two full reviews, or have the editor combine the answers into a documented, multi-reviewer report. We need to agree which one we can defend.
+  \item \textbf{Author consent and confidentiality:} authors must agree before excerpts of an unpublished manuscript are sent to people outside the editorial team.
+  \item \textbf{Conflicts of interest:} every respondent declares conflicts; the agent excludes co-authors and same-institution colleagues.
+  \item \textbf{Responsible emailing:} send from an editor's own address, in small batches, to professional addresses, with a clear explanation of who we are, why this person was chosen and an easy opt-out; keep a do-not-contact list.
+  \item \textbf{Credit:} acknowledge respondents by name (with permission) in the published review record, so that a short answer still earns visible credit.
+  \item \textbf{Submissions too:} the same outreach can invite submissions by naming a specific, relevant open question for the recipient's own work, rather than sending a generic call for papers.
+\end{itemize}
+
+\textbf{What a trial would measure:} response rate and time to answer compared with full-review invitations; usefulness of the answers as judged by the editor and author; coverage of the paper's main claims; and the number of complaints or opt-outs.
+
+\begin{solvebox}
+\textbf{Draft motion B.} Authorise a named owner to run a small pilot of targeted-question review on one or two manuscripts whose authors consent, with no more than twenty invitations per manuscript, every email approved by an editor, and a short written evaluation against the measures above. Submission outreach may be tested alongside. The pilot does not replace the two-reviewer requirement unless the board later votes that it does.
+\end{solvebox}
+
+\begin{center}\small\sffamily
+\begin{tabular}{@{}p{1.6cm}p{1.8cm}p{1.8cm}p{1.8cm}p{2cm}p{4cm}@{}}
+\toprule
+\textbf{Motion} & \textbf{For} & \textbf{Against} & \textbf{Abstain} & \textbf{Result} & \textbf{Owner / report date} \\
+\midrule
+B & & & & & \\[9pt]
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Wrap-up and Next Steps}
+{\small\textbf{What must be true at 8:30 pm:} Jingda's next step; a clear view on A and B (vote result, or revised wording carried to the fifth meetup); a named owner and date for each; and any new proposals for the next ballot.}
+
+{\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{longtable}{@{}p{4.2cm}p{4.3cm}p{2.4cm}p{3cm}@{}}
+\toprule
+\textbf{Item} & \textbf{Outcome (decided / revised / carried)} & \textbf{Owner} & \textbf{Next date} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Jingda's update & & & \\[9pt]
+A: traditional journal & & & \\[9pt]
+B: targeted-question review & & & \\[9pt]
+New proposals for 5th meetup & & & \\[9pt]
+\end{longtable}}
+
+
+\end{document}
