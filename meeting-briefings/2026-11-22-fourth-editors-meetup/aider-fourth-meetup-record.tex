@@ -1,0 +1,142 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage{charter}
+\usepackage[scaled=0.92]{helvet}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage[most]{tcolorbox}
+\usepackage{parskip}
+\usepackage[hidelinks]{hyperref}
+
+\definecolor{accent}{HTML}{2563EB}
+\definecolor{darkbg}{HTML}{0A0F1A}
+\definecolor{ink}{HTML}{111827}
+\definecolor{ink2}{HTML}{4B5563}
+\definecolor{ink3}{HTML}{6B7280}
+\definecolor{rule}{HTML}{E5E7EB}
+\definecolor{green}{HTML}{047857}
+\definecolor{amber}{HTML}{B45309}
+\definecolor{redx}{HTML}{B91C1C}
+\definecolor{accentbg}{HTML}{EFF6FF}
+\definecolor{greenbg}{HTML}{ECFDF5}
+\definecolor{amberbg}{HTML}{FFFBEB}
+\definecolor{graybg}{HTML}{F3F4F6}
+
+\hypersetup{colorlinks=true,linkcolor=accent,urlcolor=accent,citecolor=accent}
+
+\titleformat{\section}{\sffamily\large\bfseries\color{ink}}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\sffamily\normalsize\bfseries\color{accent}}{\thesubsection}{0.6em}{}
+\titlespacing*{\section}{0pt}{15pt}{6pt}
+\titlespacing*{\subsection}{0pt}{10pt}{3pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{rule}\hrule height 0.4pt}
+\fancyhead[L]{\footnotesize\sffamily\color{ink3}AIDER \textbar\ AI-Driven Energy Research}
+\fancyhead[R]{\footnotesize\sffamily\color{ink3}Fourth Editors' Meetup Record \textbar\ 22 November 2026}
+\fancyfoot[C]{\footnotesize\sffamily\color{ink3}\thepage}
+
+\newcommand{\src}[1]{{\footnotesize\color{ink3}[#1]}}
+\newcommand{\passed}{\colorbox{greenbg}{\textcolor{green}{\sffamily\scriptsize\bfseries PASSED}}}
+\newcommand{\openitem}{\colorbox{amberbg}{\textcolor{amber}{\sffamily\scriptsize\bfseries OPEN}}}
+\newcommand{\blocked}{\colorbox{amberbg}{\textcolor{redx}{\sffamily\scriptsize\bfseries BLOCKER}}}
+
+\newtcolorbox{takeaway}{
+  colback=accentbg,colframe=accent,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+\newtcolorbox{solvebox}{
+  colback=greenbg,colframe=green,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+\newtcolorbox{warnbox}{
+  colback=amberbg,colframe=amber,boxrule=0.8pt,arc=2pt,
+  left=8pt,right=8pt,top=6pt,bottom=6pt,fontupper=\small}
+
+\setlist[itemize]{leftmargin=1.2em,itemsep=2pt,topsep=2pt}
+\setlist[enumerate]{leftmargin=1.4em,itemsep=2pt,topsep=2pt}
+
+\begin{document}
+
+\begin{tcolorbox}[colback=darkbg,colframe=darkbg,arc=3pt,left=18pt,right=18pt,top=14pt,bottom=14pt]
+  {\sffamily\footnotesize\color{accent}\bfseries MEETING RECORD}\\[4pt]
+  {\sffamily\LARGE\bfseries\color{white} Simpler Submission, Traditional Look, Targeted Review}\\[5pt]
+  {\sffamily\small\color{white!75} Summary of the fourth editors' online meetup and the agreed next steps.}\\[8pt]
+  {\sffamily\footnotesize\color{white!60} Fourth editors' online meetup \textbullet\ Sunday 22 November 2026 \textbullet\ 8:00 pm Beijing (UTC+8) / 12:00 UK (GMT) \textbullet\ ISSN 2979-8639 (Online)}
+\end{tcolorbox}
+
+\vspace{4pt}
+{\small\color{ink2}\textbf{Present:} Jianou Jiang (chair), Jingda Wu, Raul Adriaensen and Feng Wei. \textbf{Record:} curated from the chair's phone recording; the raw recording and verbatim transcript are not published. The agenda followed the \href{https://ai-driven-energy-research.github.io/aider-fourth-editors-meetup-pre-read-2026-11-22.pdf}{pre-read}. The meeting was a discussion: \textbf{no formal vote was called} on draft motions A or B. Nobody objected to the chair proceeding with the website redesign.}
+
+\begin{solvebox}
+\textbf{Outcomes at a glance.}
+\begin{enumerate}
+  \item \textbf{Submission without GitHub.} Jingda has built a working prototype: authors drop files into a Google Drive folder and an AI review report comes back about 30 minutes later. Editors will test it.
+  \item \textbf{Traditional journal design.} Jianou will redesign the website and submission process to look and work like an established journal over the next few days. AI stays for basic tasks: pre-filling title, authors, abstract and keywords, and initial screening.
+  \item \textbf{Targeted-question review.} The idea was supported: invite many experts, each to answer a specific question on one section. Invitations will encourage responsible AI use and ask reviewers, optionally, to share how they used it.
+  \item \textbf{New ideas recorded:} AI pre-screening before human review, experiments on who our target authors are, and an industry partner to test the workflow.
+\end{enumerate}
+\end{solvebox}
+
+\section{Jingda Wu: Google Drive Submission and AI Review}
+
+Jingda presented an AI review workflow connected to Google Drive. An author or editor places a manuscript in an upload folder in \textbf{any format}: Word, PDF, a zip archive, or even a text file containing a GitHub link. Once no new material has been added for five minutes, the workflow starts automatically, and after about 30 minutes an AI review report appears in a ``completed'' folder.
+
+The workflow currently runs on Jingda's own Google Drive. It could later move to an AIDER-owned account. Jingda will share detailed instructions in the editors' group chat; editors are asked to try it and send comments so he can keep improving it.
+
+\textbf{Why it matters.} AIDER's original submission route required authors to create a GitHub repository in AIDER's format before the AI agents could run. That works well for some researchers, but many authors do not use GitHub. Uploading files to a portal is the conventional route that most researchers already know.
+
+\section{A Traditional Journal Presentation}
+
+\textbf{Jianou's case.} Jianou reported three observations: established senior researchers, who carry the most authority in the field, tend to view AI review and automated research negatively; despite large gains in AI capability, there has been no visible uptake of AI review by other journals over the past eight months; and the journal editors he has spoken to leave AI use, and the responsibility for it, to individual reviewers rather than deploying AI themselves. He therefore proposed that AIDER adopt the design and submission conventions of established journals, such as the \emph{Journal of Fluid Mechanics}, from end to end. Their sites and multi-step submission forms are plain and text-heavy, but researchers read them as credibility, not inconvenience. AI should do basic tasks, such as extracting the title, authors, abstract and keywords so that authors need not retype them, as \emph{Wind Energy}'s submission system already does with author editing. AI should not act as an end-to-end reviewer.
+
+\textbf{Discussion.}
+\begin{itemize}
+  \item \textbf{Raul} agreed that converging on a traditional design is right, and suggested that editors each list journals whose design they like (for example \emph{Nature} or \emph{JFM}) and combine the best elements. He cautioned against losing AIDER's core value: an automated workflow that improves with every use. He saw a middle ground: give human reviewers a ready-made AI report as a starting point, which saves time while they still write their own review. Wider acceptance may come in three to five years, and AIDER would then hold the established workflow and data.
+  \item \textbf{Jianou} noted that established journals' submission systems are very similar to one another, so AIDER will follow the common pattern.
+  \item \textbf{Feng} described counter-measures that machine-learning conferences have adopted as submissions grew from thousands to tens of thousands: AI screening as a first round before human review, and author-eligibility rules (for example, at least one author holding a PhD or having published in the field). \textbf{Jianou} agreed that AI pre-screening suits AIDER, for example to catch fabricated references, length violations and other basic problems.
+\end{itemize}
+
+\section{Targeted-Question Review and Outreach}
+
+\textbf{Jianou's proposal.} Like other journals, AIDER should actively invite people to submit and to review. Generic invitations are usually ignored: authors send their best work to the best journals, and busy researchers decline full reviews. AIDER can differentiate itself by asking each reviewer to assess only one section matched to their expertise (for example, Section 3.5), with a specific question. AI can identify suitable experts and draft good questions, which makes it practical to send a hundred or more invitations per paper.
+
+\textbf{Additions from the discussion.}
+\begin{itemize}
+  \item \textbf{Disclosed AI use.} Jianou proposed that invitations encourage reviewers to use AI for assistance, but ask them to share how they used it, including their prompts. Accumulated over many responses, these records could help build a much stronger AIDER AI reviewer over time.
+  \item \textbf{A markdown instruction file.} Raul suggested attaching a short markdown file that reviewers can give to their preferred AI assistant. It would instruct the assistant to keep a full record of the session and remind the reviewer to send it back, because otherwise people forget. Jianou agreed to include this as an \emph{optional} step; it could become a requirement only once AIDER has greater standing.
+  \item \textbf{Know your authors.} Feng asked who AIDER's target authors are: senior researchers or early-career researchers. He suggested running experiments with different groups (professors, PhD students, undergraduates). Jianou agreed that the answer must come from real invitations and responses. Because AI makes outreach inexpensive, AIDER can find out who responds and serve that community while protecting quality.
+\end{itemize}
+
+\section{Other Ideas}
+
+\textbf{Industry partners.} Raul suggested finding one or more industry partners to test AIDER's AI paper-writing and review workflow. Many companies want such tools in-house, some produce papers as a core activity, and a company partner would give feedback and visibility. Jianou noted that Feng works with several industry partners and could advise.
+
+\clearpage
+\section{Actions}
+
+{\small\renewcommand{\arraystretch}{1.25}
+\begin{longtable}{@{}p{3.1cm}p{8.3cm}p{2.7cm}@{}}
+\toprule
+\textbf{Owner} & \textbf{Action} & \textbf{When} \\
+\midrule
+\endhead
+\bottomrule
+\endlastfoot
+Jianou Jiang & Redesign the website and submission process to follow traditional journal conventions, with AI for metadata pre-fill and initial screening; tell the group when done. & Next few days \\
+Jingda Wu & Share Google Drive workflow instructions in the group chat; collect feedback and iterate. & After the meeting \\
+All editors & Test Jingda's workflow and send comments; optionally name journals whose design you like. & Ongoing \\
+Jianou Jiang & Develop the targeted-question invitation (section-specific questions, AI-use disclosure, optional markdown file) for a first trial. & Next meetup \\
+Feng Wei & Advise on possible industry partners and on AI pre-screening and eligibility measures. & Next meetup \\
+\end{longtable}}
+
+{\small\color{ink2}Draft motions A and B from the pre-read were not voted on. Any trial that sends unpublished manuscript content to external experts will still need author consent and editor approval of each invitation, as set out in the pre-read.}
+
+\end{document}
